@@ -6,6 +6,8 @@ import { Company } from "./views/Company";
 import { Features } from "./views/Features";
 import { Contact } from "./views/Contact";
 import { Team } from "./views/Team";
+import { redirect } from "react-router-dom";
+import supabase from "./clients/supabase";
 
 function App() {
   const router = createBrowserRouter([
@@ -37,6 +39,11 @@ function App() {
               path: "/contact",
               element: <Contact />,
             },
+            {
+              path: "/profile",
+              loader: protectedLoader,
+              element: <Contact />,
+            },
           ],
         },
         {
@@ -52,5 +59,12 @@ function App() {
     </>
   );
 }
+const protectedLoader = async ({ request }) => {
+  const auth = await supabase.auth.getSession();
+  if (!auth?.data?.session) {
+    return redirect("/");
+  }
+  return { auth };
+};
 
 export default App;
