@@ -59,7 +59,7 @@ function App() {
     </>
   );
 }
-const protectedLoader = async ({ request }) => {
+const protectedLoader = async () => {
   const auth = await supabase.auth.getSession();
   if (!auth?.data?.session) {
     return redirect("/");
