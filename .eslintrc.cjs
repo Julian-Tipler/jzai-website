@@ -15,11 +15,21 @@ module.exports = {
     "postcss.config.js",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "@stylistic/ts"],
   rules: {
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
+    ],
+    "@stylistic/ts/padding-line-between-statements": [
+      "warn",
+      { blankLine: "always", prev: "*", next: "return" },
+      { blankLine: "always", prev: ["const", "let", "var"], next: "*" },
+      {
+        blankLine: "any",
+        prev: ["const", "let", "var"],
+        next: ["const", "let", "var"],
+      },
     ],
   },
   parserOptions: {

@@ -53,6 +53,7 @@ function App() {
       ],
     },
   ]);
+
   return (
     <>
       <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
@@ -61,9 +62,11 @@ function App() {
 }
 const protectedLoader = async () => {
   const auth = await supabase.auth.getSession();
+
   if (!auth?.data?.session) {
     return redirect("/");
   }
+
   return { auth };
 };
 

@@ -7,4 +7,5 @@ const supabaseAnonKey: string = (import.meta.env.VITE_SUPABASE_ANON_TOKEN ||
   "") as string;
 
 const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+
 export default supabase;
