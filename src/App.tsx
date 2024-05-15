@@ -60,6 +60,7 @@ function App() {
     </>
   );
 }
+
 const protectedLoader = async () => {
   const auth = await supabase.auth.getSession();
 

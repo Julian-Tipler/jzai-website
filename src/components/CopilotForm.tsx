@@ -38,9 +38,19 @@ export const CopilotForm = () => {
   //   };
 
   return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="flex py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+    <section className="bg-white dark:bg-gray-900 border-b border-primary-border">
+      <div className="flex py-24 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:grid-cols-12">
         <div className="place-self-center mr-auto lg:col-span-7">
+          <div className="mb-12">
+            <h1 className="mb-6 text-5xl font-semibold text-light dark:text-white">
+              Build your copilot
+            </h1>
+            <p className="font-light text-gray-500">
+              Customize your copilot blah blah blah blah blah blah blah blah
+              blah
+            </p>
+          </div>
+          <script type="module" src="./copilot.js"></script>
           <form className="flex flex-col gap-2">
             <input
               type="url"
@@ -112,27 +122,8 @@ export const CopilotForm = () => {
               </button>
             )}
           </form>
-          {/* <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">
-              Bring your company into the future
-            </h1>
-            <p className="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-              A-Z AI helps small and medium size businesses harness the power of
-              Artificial Intelligence.
-            </p> */}
-          {/* <a
-              href="#"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-            >
-              Speak to Sales
-            </a> */}
         </div>
         <Copilot />
-        {/* <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-          <img
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
-            alt="mockup"
-          />
-        </div> */}
       </div>
     </section>
   );
