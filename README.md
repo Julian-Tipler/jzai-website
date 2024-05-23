@@ -17,3 +17,6 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Creating Copilot
+/copilots to create the documents

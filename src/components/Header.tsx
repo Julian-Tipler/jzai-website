@@ -7,6 +7,8 @@ import {
   FiSmartphone,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { LoginModal } from "./LoginModal";
 
 const url = "https://jzai.com/";
 
@@ -25,6 +27,8 @@ const linkItems: Array<LinkItemProps> = [
 ];
 
 export const Header = () => {
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  
   return (
     <header>
       <nav className="bg-white border-primary-border px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b">
@@ -41,8 +45,8 @@ export const Header = () => {
           </a>
           <div className="flex items-center lg:order-2">
             <button
-              onClick={() => {}}
-              className="text-white shadow-md bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 outline-none"
+              onClick={() => setLoginModalOpen(true)}
+              className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 outline-none"
             >
               Login
             </button>
@@ -85,13 +89,14 @@ export const Header = () => {
             id="mobile-menu-2"
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              {linkItems.map((item) => (
-                <LinkItem key={item.name} {...item} />
+              {linkItems.map((item, i) => (
+                <LinkItem key={`link-item-${i}`} {...item} />
               ))}
             </ul>
           </div>
         </div>
       </nav>
+      <LoginModal loginModalOpen={loginModalOpen} />
     </header>
   );
 };

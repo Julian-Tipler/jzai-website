@@ -51,7 +51,6 @@ export const Copilot = () => {
         if (error) {
           console.error("Error fetching copilot", error);
         }
-
         if (data) {
           setCopilot(data);
         }
@@ -74,6 +73,4 @@ export const Copilot = () => {
       </div>
     );
   }
-
-  return <div>Copilot ID:{copilot.id}</div>;
 };
