@@ -28,9 +28,10 @@ const linkItems: Array<LinkItemProps> = [
 
 export const Header = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+      <nav className="bg-white border-primary-border px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <a href={url} className="flex items-center">
             <img
