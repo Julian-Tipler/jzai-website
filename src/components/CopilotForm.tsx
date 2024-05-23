@@ -5,7 +5,7 @@ import { Copilot } from "./Copilot";
 
 export const CopilotForm = () => {
   const [url, setUrl] = useState("");
-  const [primaryColor, setPrimaryColor] = useState("blue");
+  const [primaryColor, setPrimaryColor] = useState("#0000FF");
   const [title, setTitle] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ export const CopilotForm = () => {
       setErrors(errors);
       return;
     } else {
+      setErrors([]);
       const { data, error } = await supabase.functions.invoke("copilots", {
         method: "POST",
         body: {
@@ -29,6 +30,11 @@ export const CopilotForm = () => {
       });
       if (error) {
         console.error(error);
+      }
+      if (data.errorType === "USER_OWNS") {
+        setErrors([
+          "You already own a copilot for this url. Please login to view it",
+        ]);
       }
       if (data && data.id) {
         const queryParams = new URLSearchParams();
@@ -61,9 +67,9 @@ export const CopilotForm = () => {
               onChange={(e) => setPrimaryColor(e.target.value)}
               className="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             >
-              <option value="blue">Blue</option>
-              <option value="red">Red</option>
-              <option value="yellow">Yellow</option>
+              <option value="#0000FF">Blue</option>
+              <option value="#FF0000 ">Red</option>
+              <option value="#FFFF00">Yellow</option>
             </select>
             {/* Error Container */}
             <div className="min-h-8">
@@ -74,7 +80,7 @@ export const CopilotForm = () => {
             {copilotId ? (
               <button
                 type="submit"
-                className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+                className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
               >
                 Generate my script
                 <svg
@@ -91,24 +97,27 @@ export const CopilotForm = () => {
                 </svg>
               </button>
             ) : (
-              <button
-                // onClick={() => }
-                className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
-              >
-                Generate my Copilot
-                <svg
-                  className="ml-2 -mr-1 w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+              <>
+                <button
+                  // onClick={() => }
+                  className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
+                  Demo my Copilot
+                  <svg
+                    className="ml-2 -mr-1 w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                <p>No Login Required!</p>
+              </>
             )}
           </form>
           {/* <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">
