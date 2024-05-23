@@ -10,7 +10,6 @@ export const Copilot = () => {
   useEffect(() => {
     if (copilotId) {
       const fetchCopilot = async () => {
-        console.log(supabase);
         const { data, error } = await supabase
           .from("copilots")
           .select("*")
