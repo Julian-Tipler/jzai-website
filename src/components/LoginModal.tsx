@@ -2,14 +2,14 @@ import supabase from "../clients/supabase";
 
 export const LoginModal = ({ loginModalOpen }: { loginModalOpen: boolean }) => {
   const signInWithGoogle = async () => {
-    const { data, errors } = await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       // options: {
       //   redirectTo,
       // },
     });
 
-    console.log(data, errors);
+    console.log(data, error);
   };
 
   if (!loginModalOpen) {
