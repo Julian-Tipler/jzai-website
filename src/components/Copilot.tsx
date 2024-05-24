@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 
 export const Copilot = () => {
   const [copilot, setCopilot] = useState<Tables<"copilots"> | null>(null);
+
+  console.log(copilot);
   const [searchParams] = useSearchParams();
   const copilotId = searchParams.get("copilot-id");
   const hostId = copilotId
@@ -16,38 +18,35 @@ export const Copilot = () => {
   const { isPending, error } = useQuery({
     queryKey: ["copilotBundle", copilotId],
     queryFn: async () => {
+      console.log("HERE");
       const bundleId = copilotId ? `${copilotId}.js` : "copilot.js";
       const file = await productionSupabase.storage
         .from("bundles")
         .download(bundleId);
       const text = await file.data?.text();
 
-      const existingScript = document.querySelector(
-        'script[id="copilot-script"]',
-      );
-
-      if (existingScript) {
-        existingScript.parentNode?.removeChild(existingScript);
-      }
-
       if (text) {
-        // Create a <script> element
-        const script = document.createElement("script");
+        const existingScript = document.querySelector(
+          `script[id="${bundleId}"]`,
+        );
 
-        script.id = "copilot-script";
+        if (existingScript) {
+          existingScript.textContent = text;
+        } else {
+          // Create a <script> element
+          const script = document.createElement("script");
 
-        // script.src = "copilot.js";
+          script.id = bundleId;
+          script.type = "text/javascript";
+          script.textContent = text;
 
-        script.type = "text/javascript";
-        script.textContent = text;
-
-        // Append the <script> element to the document body
-        document.body.appendChild(script);
+          // Append the <script> element to the document body
+          document.body.appendChild(script);
+        }
       }
 
       return null;
     },
-    enabled: !copilotId || !copilot,
   });
 
   useEffect(() => {
@@ -73,15 +72,13 @@ export const Copilot = () => {
     }
   }, [copilotId]);
 
-  if (!copilotId || !copilot) {
-    if (isPending) return "Loading...";
+  if (isPending) return "Loading...";
 
-    if (error) return "An error has occurred: " + error.message;
+  if (error) return "An error has occurred: " + error.message;
 
-    return (
-      <div id={hostId} style={{ position: "relative" }}>
-        Example Copilot Here
-      </div>
-    );
-  }
+  return (
+    <div id={hostId} style={{ position: "relative" }}>
+      Example Copilot Hereeeee
+    </div>
+  );
 };

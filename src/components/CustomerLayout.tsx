@@ -2,10 +2,10 @@ import { useState } from "react";
 
 import {
   FiHome,
-  //   FiCompass,
-  //   FiStar,
   FiSettings,
   FiMenu,
+  //   FiStar,
+  //   FiCompass,
   //   FiSmartphone,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
@@ -84,22 +84,16 @@ const SidebarContent = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-interface NavItemProps extends FlexProps {
+interface NavItemProps {
   icon: IconType;
   href: string;
   children: ReactText;
 }
-const NavItem = ({
-  icon: IconComponent,
-  children,
-  href,
-  ...rest
-}: NavItemProps) => {
+const NavItem = ({ icon: IconComponent, children, href }: NavItemProps) => {
   return (
     <a
       href={href}
       className="group flex items-center p-4 mx-4 rounded-lg cursor-pointer no-underline focus:outline-none"
-      {...rest}
     >
       {IconComponent && (
         <IconComponent className="mr-4 text-16 group-hover:text-text-primary" />
