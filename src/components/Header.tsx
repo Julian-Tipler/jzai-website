@@ -1,8 +1,8 @@
 import { IconType } from "react-icons";
 import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { LoginModal } from "./LoginModal";
+import { useLoginModalContext } from "../contexts/LoginModalContext";
 
 const url = "https://jzai.com/";
 
@@ -19,7 +19,7 @@ const linkItems: Array<LinkItemProps> = [
 ];
 
 export const Header = () => {
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { loginModalOpen, setLoginModalOpen } = useLoginModalContext();
 
   return (
     <header>

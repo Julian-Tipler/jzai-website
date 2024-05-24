@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
 import { Copilot } from "./Copilot";
+import { Tables } from "../types/database.types";
 
 export const CopilotForm = () => {
   const [url, setUrl] = useState("");
@@ -22,7 +23,17 @@ export const CopilotForm = () => {
       return;
     } else {
       setErrors([]);
-      const { data, error } = await supabase.functions.invoke("copilots", {
+      const {
+        data,
+        error,
+      }: {
+        data: {
+          copilot: Tables<"copilots">;
+          message: string;
+          errorType: string;
+        } | null;
+        error: Error | null;
+      } = await supabase.functions.invoke("copilots", {
         method: "POST",
         body: {
           url,
@@ -33,16 +44,21 @@ export const CopilotForm = () => {
 
       if (error) {
         console.error(error);
+        if (data?.errorType === "USER_OWNS") {
+          setErrors([
+            "You already own a copilot for this url. Please login to view it",
+          ]);
+        } else {
+          setErrors(["An error occurred. Please try again later"]);
+        }
       }
-      if (data.errorType === "USER_OWNS") {
-        setErrors([
-          "You already own a copilot for this url. Please login to view it",
-        ]);
-      }
-      if (data && data.id) {
+
+      if (data?.copilot?.id) {
         const queryParams = new URLSearchParams();
-        queryParams.set("copilot-id", data.id);
+
+        queryParams.set("copilot-id", data.copilot.id);
         const queryString = queryParams.toString();
+
         navigate(`/?${queryString}`);
       }
     }
@@ -78,7 +94,9 @@ export const CopilotForm = () => {
             {/* Error Container */}
             <div className="min-h-8">
               {errors.map((error) => (
-                <p key={error} className="text-red-600">{error}</p>
+                <p key={error} className="text-red-600">
+                  {error}
+                </p>
               ))}
             </div>
             {copilotId ? (
@@ -103,7 +121,7 @@ export const CopilotForm = () => {
             ) : (
               <>
                 <button
-                  // onClick={() => }
+                  onClick={(e) => onSubmit(e)}
                   className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
                 >
                   Demo my Copilot

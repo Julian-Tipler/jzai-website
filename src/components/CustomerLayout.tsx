@@ -47,7 +47,7 @@ export const CustomerLayout = () => {
           </div>
         </div>
       )}
-      <MobileNav className="flex md:hidden" onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} />
       <div className="flex flex-col md:ml-60 h-screen main">
         <div className="min-h-[60px] p-0 m-0 topbar">
           <TopBar />
@@ -112,7 +112,7 @@ const NavItem = ({
 const MobileNav = ({ onOpen }: { onOpen: () => void }) => {
   return (
     <div
-      className={`flex items-center h-20 bg-brand-cardBackground border-b border-brand-border justify-start `}
+      className={`flex items-center h-20 bg-brand-cardBackground border-b border-brand-border justify-start md:hidden`}
     >
       <button
         onClick={onOpen}

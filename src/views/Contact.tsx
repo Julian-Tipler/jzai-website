@@ -8,7 +8,6 @@ export const Contact = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     // Handle the form submission logic here, e.g., send data to an API
-    console.log({ name, email, message });
     // Reset form fields after submission
     setName("");
     setEmail("");

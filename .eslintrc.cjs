@@ -33,6 +33,7 @@ module.exports = {
       },
     ],
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
   },
   parserOptions: {
     ecmaVersion: "latest",
