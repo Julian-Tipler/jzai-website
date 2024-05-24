@@ -15,8 +15,10 @@ export const CopilotForm = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors = validateForm({ url, primaryColor });
+
     if (errors.length > 0) {
       setErrors(errors);
+
       return;
     } else {
       setErrors([]);
@@ -28,6 +30,7 @@ export const CopilotForm = () => {
           title,
         },
       });
+
       if (error) {
         console.error(error);
       }
@@ -44,6 +47,7 @@ export const CopilotForm = () => {
       }
     }
   };
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="flex py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -74,7 +78,7 @@ export const CopilotForm = () => {
             {/* Error Container */}
             <div className="min-h-8">
               {errors.map((error) => (
-                <p className="text-red-600">{error}</p>
+                <p key={error} className="text-red-600">{error}</p>
               ))}
             </div>
             {copilotId ? (
@@ -159,5 +163,6 @@ const validateForm = ({
   if (!primaryColor) {
     return ["color is required"];
   }
+
   return [];
 };

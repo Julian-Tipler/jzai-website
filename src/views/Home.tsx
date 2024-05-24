@@ -7,10 +7,10 @@ export const Home = () => {
       {/* Splash */}
       <CopilotForm />
       {/* Unleash the potential */}
-      <section className="bg-gray-50 dark:bg-gray-800">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+      <section className="bg-primary-bg dark:bg-gray-800 border-b border-primary-border">
+        <div className="py-24 px-4 mx-auto max-w-screen-xl lg:px-6">
           <div className="mb-8 max-w-screen-md lg:mb-16">
-            <h2 className="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
               Unleash the potential of AI this quarter with AZ-AI
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400">
@@ -58,10 +58,10 @@ export const Home = () => {
         </div>
       </section>
       {/* We make AI integration easy */}
-      <section className="bg-white dark:bg-gray-900">
+      <section className="bg-white dark:bg-gray-900 border-b border-primary-border">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
           <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-            <h2 className="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
               We make AI integration easy
             </h2>
             <p className="mb-4">
@@ -88,7 +88,7 @@ export const Home = () => {
         </div>
       </section>
       {/* Custom Solutions */}
-      <section className="bg-gray-50 dark:bg-gray-900">
+      <section className="bg-primary-bg dark:bg-gray-900 border-b border-primary-border">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
           <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400 lg:order-last">
             <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
@@ -118,7 +118,7 @@ export const Home = () => {
       <section className="bg-white dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
-            <h2 className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-4xl font-semibold leading-tight text-gray-900 dark:text-white">
               Talk to an engineer today
             </h2>
             <p className="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
