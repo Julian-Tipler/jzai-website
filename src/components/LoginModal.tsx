@@ -4,11 +4,12 @@ export const LoginModal = ({ loginModalOpen }: { loginModalOpen: boolean }) => {
   const signInWithGoogle = async () => {
     const { data, errors } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo,
-      },
+      // options: {
+      //   redirectTo,
+      // },
     });
-    console.log(data,errors);
+
+    console.log(data, errors);
   };
 
   if (!loginModalOpen) {

@@ -1,12 +1,18 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  LoaderFunctionArgs,
+  RouterProvider,
+} from "react-router-dom";
 import { PublicLayout } from "./components/PublicLayout";
 import { Home } from "./views/Home";
 import { Error } from "./views/Error";
-import { Company } from "./views/Company";
 import { Features } from "./views/Features";
 import { Contact } from "./views/Contact";
 import { redirect } from "react-router-dom";
 import supabase from "./clients/supabase";
+import { CustomerProfile } from "./views/CustomerProfile";
+import { CustomerSettings } from "./views/CustomerSettings";
+import { CustomerLayout } from "./components/CustomerLayout";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,26 +29,29 @@ function App() {
               element: <Home />,
             },
             {
-              path: "/company",
-              element: <Company />,
-            },
-            {
-              path: "/features",
+              path: "features",
               element: <Features />,
             },
             {
-              path: "/contact",
-              element: <Contact />,
-            },
-            {
-              path: "/profile",
-              loader: protectedLoader,
+              path: "contact",
               element: <Contact />,
             },
           ],
         },
         {
-          path: "/",
+          path: "profile",
+          element: <CustomerLayout />,
+          loader: protectedLoader,
+          children: [
+            {
+              index: true,
+              element: <CustomerProfile />,
+            },
+            {
+              path: "settings",
+              element: <CustomerSettings />,
+            },
+          ],
         },
         {
           path: "*",
@@ -59,14 +68,24 @@ function App() {
   );
 }
 
-const protectedLoader = async () => {
+async function protectedLoader({ request }: LoaderFunctionArgs) {
+  // If the user is not logged in and tries to access `/protected`, we redirect
+  // them to `/login` with a `from` parameter that allows login to redirect back
+  // to this page upon successful authentication
+  console.log(request);
+
   const auth = await supabase.auth.getSession();
 
-  if (!auth?.data?.session) {
-    return redirect("/");
+  // something like this: const session = supabase.auth.session();
+  if (!auth.data.session) {
+    const params = new URLSearchParams();
+
+    params.set("from", new URL(request.url).pathname);
+
+    return redirect("/login?" + params.toString());
   }
 
   return { auth };
-};
+}
 
 export default App;

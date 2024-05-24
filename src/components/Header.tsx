@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { FiHome, FiCompass, FiSettings, FiSmartphone } from "react-icons/fi";
+import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LoginModal } from "./LoginModal";
@@ -14,14 +14,13 @@ type LinkItemProps = {
 
 const linkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, href: "/" },
-  { name: "Company", icon: FiSmartphone, href: "/company" },
   { name: "Features", icon: FiCompass, href: "/features" },
   { name: "Contact", icon: FiSettings, href: "/contact" },
 ];
 
 export const Header = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  
+
   return (
     <header>
       <nav className="bg-white border-primary-border px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b">

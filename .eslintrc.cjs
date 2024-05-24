@@ -32,6 +32,7 @@ module.exports = {
         next: ["const", "let", "var"],
       },
     ],
+    "@typescript-eslint/no-misused-promises": "off",
   },
   parserOptions: {
     ecmaVersion: "latest",
