@@ -88,7 +88,10 @@ export const Header = () => {
           </div>
         </div>
       </nav>
-      <LoginModal loginModalOpen={loginModalOpen} />
+      <LoginModal
+        loginModalOpen={loginModalOpen}
+        setLoginModalOpen={setLoginModalOpen}
+      />
     </header>
   );
 };

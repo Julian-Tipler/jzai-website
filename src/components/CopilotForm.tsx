@@ -74,7 +74,8 @@ export const CopilotForm = () => {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://your-url-here.com"
-              className="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className={`block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${copilotId ? "bg-gray-200 text-gray-400" : ""}`}
+              disabled={!!copilotId}
             />
             <input
               value={title}
@@ -101,7 +102,7 @@ export const CopilotForm = () => {
             </div>
             {copilotId ? (
               <button
-                type="submit"
+                onClick={() => navigate(`/profile/copilot/${copilotId}`)}
                 className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
               >
                 Generate my script
