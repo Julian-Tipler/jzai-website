@@ -1,11 +1,5 @@
 import { IconType } from "react-icons";
-import {
-  FiHome,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiSmartphone,
-} from "react-icons/fi";
+import { FiHome, FiCompass, FiSettings, FiSmartphone } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LoginModal } from "./LoginModal";
@@ -22,7 +16,6 @@ const linkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, href: "/" },
   { name: "Company", icon: FiSmartphone, href: "/company" },
   { name: "Features", icon: FiCompass, href: "/features" },
-  { name: "Team", icon: FiStar, href: "/team" },
   { name: "Contact", icon: FiSettings, href: "/contact" },
 ];
 
@@ -87,7 +80,7 @@ export const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex flex wrap-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               {linkItems.map((item, i) => (
                 <LinkItem key={`link-item-${i}`} {...item} />
               ))}

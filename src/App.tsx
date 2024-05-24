@@ -1,11 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { SidebarLayout } from "./components/SidebarLayout";
+import { PublicLayout } from "./components/PublicLayout";
 import { Home } from "./views/Home";
 import { Error } from "./views/Error";
 import { Company } from "./views/Company";
 import { Features } from "./views/Features";
 import { Contact } from "./views/Contact";
-import { Team } from "./views/Team";
 import { redirect } from "react-router-dom";
 import supabase from "./clients/supabase";
 
@@ -17,7 +16,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <SidebarLayout />,
+          element: <PublicLayout />,
           children: [
             {
               index: true,
@@ -32,10 +31,6 @@ function App() {
               element: <Features />,
             },
             {
-              path: "/team",
-              element: <Team />,
-            },
-            {
               path: "/contact",
               element: <Contact />,
             },
@@ -45,6 +40,9 @@ function App() {
               element: <Contact />,
             },
           ],
+        },
+        {
+          path: "/",
         },
         {
           path: "*",

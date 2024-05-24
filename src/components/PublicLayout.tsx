@@ -1,7 +1,7 @@
 import { Header } from "./Header";
 import { Outlet } from "react-router-dom";
 
-export const SidebarLayout = () => {
+export const PublicLayout = () => {
   return (
     <div>
       <Header />
