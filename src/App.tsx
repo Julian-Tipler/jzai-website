@@ -1,13 +1,19 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { SidebarLayout } from "./components/SidebarLayout";
+import {
+  createBrowserRouter,
+  LoaderFunctionArgs,
+  RouterProvider,
+} from "react-router-dom";
+import { PublicLayout } from "./components/PublicLayout";
 import { Home } from "./views/Home";
 import { Error } from "./views/Error";
-import { Company } from "./views/Company";
 import { Features } from "./views/Features";
 import { Contact } from "./views/Contact";
-import { Team } from "./views/Team";
 import { redirect } from "react-router-dom";
 import supabase from "./clients/supabase";
+import { CustomerProfile } from "./views/CustomerProfile";
+import { CustomerSettings } from "./views/CustomerSettings";
+import { CustomerLayout } from "./components/CustomerLayout";
+import { CustomerCopilot } from "./views/CustomerCopilot";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,32 +23,38 @@ function App() {
       children: [
         {
           path: "/",
-          element: <SidebarLayout />,
+          element: <PublicLayout />,
           children: [
             {
               index: true,
               element: <Home />,
             },
             {
-              path: "/company",
-              element: <Company />,
-            },
-            {
-              path: "/features",
+              path: "features",
               element: <Features />,
             },
             {
-              path: "/team",
-              element: <Team />,
-            },
-            {
-              path: "/contact",
+              path: "contact",
               element: <Contact />,
             },
+          ],
+        },
+        {
+          path: "profile",
+          element: <CustomerLayout />,
+          loader: protectedLoader,
+          children: [
             {
-              path: "/profile",
-              loader: protectedLoader,
-              element: <Contact />,
+              index: true,
+              element: <CustomerProfile />,
+            },
+            {
+              path: "copilots/:copilotId",
+              element: <CustomerCopilot />,
+            },
+            {
+              path: "settings",
+              element: <CustomerSettings />,
             },
           ],
         },
@@ -61,14 +73,23 @@ function App() {
   );
 }
 
-const protectedLoader = async () => {
+async function protectedLoader({ request }: LoaderFunctionArgs) {
+  // If the user is not logged in and tries to access `/protected`, we redirect
+  // them to `/login` with a `from` parameter that allows login to redirect back
+  // to this page upon successful authentication
+
   const auth = await supabase.auth.getSession();
 
-  if (!auth?.data?.session) {
-    return redirect("/");
+  // something like this: const session = supabase.auth.session();
+  if (!auth.data.session) {
+    const params = new URLSearchParams();
+
+    params.set("from", new URL(request.url).pathname);
+
+    return redirect("/login?" + params.toString());
   }
 
   return { auth };
-};
+}
 
 export default App;

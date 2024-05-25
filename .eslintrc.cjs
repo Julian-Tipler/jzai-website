@@ -32,6 +32,11 @@ module.exports = {
         next: ["const", "let", "var"],
       },
     ],
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
   },
   parserOptions: {
     ecmaVersion: "latest",

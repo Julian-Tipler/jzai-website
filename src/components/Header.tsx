@@ -1,16 +1,9 @@
 import { IconType } from "react-icons";
-import {
-  FiHome,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiSmartphone,
-} from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { LoginModal } from "./LoginModal";
-
-const url = "https://jzai.com/";
+import { useLoginModalContext } from "../contexts/LoginModalContext";
+import { LinkItem } from "./LinkItem";
+import { Link } from "react-router-dom";
 
 type LinkItemProps = {
   name: string;
@@ -20,20 +13,18 @@ type LinkItemProps = {
 
 const linkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, href: "/" },
-  { name: "Company", icon: FiSmartphone, href: "/company" },
   { name: "Features", icon: FiCompass, href: "/features" },
-  { name: "Team", icon: FiStar, href: "/team" },
   { name: "Contact", icon: FiSettings, href: "/contact" },
 ];
 
 export const Header = () => {
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
-  
+  const { loginModalOpen, setLoginModalOpen } = useLoginModalContext();
+
   return (
     <header>
       <nav className="bg-white border-primary-border px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <a href={url} className="flex items-center">
+          <Link to={"/"} className="flex items-center">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
               className="mr-3 h-6 sm:h-9"
@@ -42,7 +33,7 @@ export const Header = () => {
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               A-Z AI
             </span>
-          </a>
+          </Link>
           <div className="flex items-center lg:order-2">
             <button
               onClick={() => setLoginModalOpen(true)}
@@ -88,7 +79,7 @@ export const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex wrap-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               {linkItems.map((item, i) => (
                 <LinkItem key={`link-item-${i}`} {...item} />
               ))}
@@ -96,20 +87,10 @@ export const Header = () => {
           </div>
         </div>
       </nav>
-      <LoginModal loginModalOpen={loginModalOpen} />
+      <LoginModal
+        loginModalOpen={loginModalOpen}
+        setLoginModalOpen={setLoginModalOpen}
+      />
     </header>
-  );
-};
-
-const LinkItem = (item: LinkItemProps) => {
-  return (
-    <li>
-      <Link
-        to={item.href}
-        className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-      >
-        {item.name}
-      </Link>
-    </li>
   );
 };

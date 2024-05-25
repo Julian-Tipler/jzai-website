@@ -1,14 +1,21 @@
 import supabase from "../clients/supabase";
+import { useLoginModalContext } from "../contexts/LoginModalContext";
 
-export const LoginModal = ({ loginModalOpen }: { loginModalOpen: boolean }) => {
+export const LoginModal = ({
+  loginModalOpen,
+  setLoginModalOpen,
+}: {
+  loginModalOpen: boolean;
+  setLoginModalOpen: (open: boolean) => void;
+}) => {
+  const { redirectTo } = useLoginModalContext();
   const signInWithGoogle = async () => {
-    const { data, errors } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
         redirectTo,
       },
     });
-    console.log(data,errors);
   };
 
   if (!loginModalOpen) {
@@ -16,12 +23,15 @@ export const LoginModal = ({ loginModalOpen }: { loginModalOpen: boolean }) => {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-4 rounded-lg">
-        <h1 className="text-2xl font-bold mb-4">Login/Signup</h1>
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      onClick={() => setLoginModalOpen(false)}
+    >
+      <div className="bg-white rounded-lg p-8 flex flex-col items-center">
+        <h2 className="text-xl font-bold mb-4">Login/Signup</h2>
         <button
           onClick={signInWithGoogle}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
         >
           Login with Google
         </button>
