@@ -28,9 +28,8 @@ export const CopilotForm = () => {
         error,
       }: {
         data: {
-          copilot: Tables<"copilots">;
-          message: string;
-          errorType: string;
+          copilot: Tables<"copilots"> | null;
+          errorMessage: string | null;
         } | null;
         error: Error | null;
       } = await supabase.functions.invoke("copilots", {
@@ -43,14 +42,12 @@ export const CopilotForm = () => {
       });
 
       if (error) {
+        F;
         console.error(error);
-        if (data?.errorType === "USER_OWNS") {
-          setErrors([
-            "You already own a copilot for this url. Please login to view it",
-          ]);
-        } else {
-          setErrors(["An error occurred. Please try again later"]);
-        }
+        setErrors(["An error occurred. Please try again later"]);
+      }
+      if (data?.errorMessage) {
+        setErrors([data.errorMessage]);
       }
 
       if (data?.copilot?.id) {

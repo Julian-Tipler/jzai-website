@@ -7,7 +7,7 @@ export const Plans = ({ onSelect }: { onSelect: (plan: string) => void }) => {
         {plans.map((plan) => (
           <div
             key={plan.name}
-            onClick={() => onSelect(plan.name)}
+            onClick={() => onSelect(plan.code)}
             className={`cursor-pointer p-6 rounded-lg text-center ${plan.name === "platinum" ? "bg-red-100" : "bg-white"}`}
           >
             <h2 className="text-lg font-bold">{plan.name}</h2>
@@ -38,6 +38,7 @@ export const Plans = ({ onSelect }: { onSelect: (plan: string) => void }) => {
 const plans = [
   {
     name: "Free",
+    code: "free",
     price: "$0 / first month",
     renewal: "then €20 per month. Cancel anytime",
     features: [
@@ -55,6 +56,7 @@ const plans = [
   },
   {
     name: "Silver",
+    code: "silver",
     price: "$35 / month",
     renewal: "Cancel anytime",
     features: [
@@ -72,6 +74,7 @@ const plans = [
   },
   {
     name: "Gold",
+    code: "gold",
     price: "$100 / month",
     renewal: "Cancel anytime",
     features: [
