@@ -1,8 +1,8 @@
 import { IconType } from "react-icons";
 import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import { LoginModal } from "./LoginModal";
 import { useLoginModalContext } from "../contexts/LoginModalContext";
+import { LinkItem } from "./LinkItem";
 
 const url = "https://jzai.com/";
 
@@ -80,7 +80,7 @@ export const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex flex wrap-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex wrap-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               {linkItems.map((item, i) => (
                 <LinkItem key={`link-item-${i}`} {...item} />
               ))}
@@ -93,18 +93,5 @@ export const Header = () => {
         setLoginModalOpen={setLoginModalOpen}
       />
     </header>
-  );
-};
-
-const LinkItem = (item: LinkItemProps) => {
-  return (
-    <li>
-      <Link
-        to={item.href}
-        className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-      >
-        {item.name}
-      </Link>
-    </li>
   );
 };

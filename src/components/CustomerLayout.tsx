@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const url = "https://jzai.com/";
+
 import {
   FiHome,
   FiSettings,
@@ -70,7 +72,16 @@ const SidebarContent = ({ onClose }: { onClose: () => void }) => {
       className={`fixed h-full "bg-gray-900" border-r border-brand-border w-full md:w-60`}
     >
       <div className="flex h-20 items-center mx-8 justify-between">
-        <span className="text-2xl font-bold text-brand-primary">Logo</span>
+        <a href={url} className="flex items-center">
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            className="mr-3 h-6 sm:h-9"
+            alt="Flowbite Logo"
+          />
+          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+            A-Z AI
+          </span>
+        </a>
         <button className="flex md:hidden" onClick={onClose}>
           Close
         </button>
@@ -93,7 +104,7 @@ const NavItem = ({ icon: IconComponent, children, href }: NavItemProps) => {
   return (
     <a
       href={href}
-      className="group flex items-center p-4 mx-4 rounded-lg cursor-pointer no-underline focus:outline-none"
+      className="flex items-center py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
     >
       {IconComponent && (
         <IconComponent className="mr-4 text-16 group-hover:text-text-primary" />
