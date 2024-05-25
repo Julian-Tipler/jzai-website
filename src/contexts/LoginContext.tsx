@@ -6,24 +6,21 @@ import {
   useEffect,
 } from "react";
 
-type LoginModalContextType = {
+type LoginContextType = {
   loginModalOpen: boolean;
   setLoginModalOpen: (open: boolean) => void;
   redirectTo: string;
   setRedirectTo: (url: string) => void;
+  handleModalLogin: (destination: string) => void;
 };
 
-const LoginModalContext = createContext<LoginModalContextType>(
-  {} as LoginModalContextType,
-);
+const LoginContext = createContext<LoginContextType>({} as LoginContextType);
 
-interface LoginModalContextProviderProps {
+interface LoginContextProviderProps {
   children: ReactNode;
 }
 
-export function LoginModalContextProvider({
-  children,
-}: LoginModalContextProviderProps) {
+export function LoginContextProvider({ children }: LoginContextProviderProps) {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [redirectTo, setRedirectTo] = useState("");
 
@@ -35,18 +32,25 @@ export function LoginModalContextProvider({
     setRedirectTo(defaultRedirectTo);
   }, []);
 
+  const handleModalLogin = (destination: string) => {
+    const currentUrl = window.location.href;
+    const baseUrl = currentUrl.split("/").slice(0, 3).join("/");
+
+    setLoginModalOpen(true);
+    setRedirectTo(`${baseUrl}${destination}`);
+  };
+
   const value = {
     loginModalOpen,
     setLoginModalOpen,
     redirectTo,
     setRedirectTo,
+    handleModalLogin,
   };
 
   return (
-    <LoginModalContext.Provider value={value}>
-      {children}
-    </LoginModalContext.Provider>
+    <LoginContext.Provider value={value}>{children}</LoginContext.Provider>
   );
 }
 
-export const useLoginModalContext = () => useContext(LoginModalContext);
+export const useLoginContext = () => useContext(LoginContext);

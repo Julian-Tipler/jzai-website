@@ -9,6 +9,7 @@ export const Copilot = () => {
   const [copilot, setCopilot] = useState<Tables<"copilots"> | null>(null);
 
   console.log(copilot);
+
   const [searchParams] = useSearchParams();
   const copilotId = searchParams.get("copilot-id");
   const hostId = copilotId
@@ -18,7 +19,6 @@ export const Copilot = () => {
   const { isPending, error } = useQuery({
     queryKey: ["copilotBundle", copilotId],
     queryFn: async () => {
-      console.log("HERE");
       const bundleId = copilotId ? `${copilotId}.js` : "copilot.js";
       const file = await productionSupabase.storage
         .from("bundles")

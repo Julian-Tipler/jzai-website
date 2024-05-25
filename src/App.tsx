@@ -14,6 +14,7 @@ import { CustomerProfile } from "./views/CustomerProfile";
 import { CustomerSettings } from "./views/CustomerSettings";
 import { CustomerLayout } from "./components/CustomerLayout";
 import { CustomerCopilot } from "./views/CustomerCopilot";
+import { LoginPage } from "./views/LoginPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,10 @@ function App() {
       id: "root",
       path: "/",
       children: [
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
         {
           path: "/",
           element: <PublicLayout />,
