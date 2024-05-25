@@ -3,8 +3,7 @@ import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { LoginModal } from "./LoginModal";
 import { useLoginModalContext } from "../contexts/LoginModalContext";
 import { LinkItem } from "./LinkItem";
-
-const url = "https://jzai.com/";
+import { Link } from "react-router-dom";
 
 type LinkItemProps = {
   name: string;
@@ -25,7 +24,7 @@ export const Header = () => {
     <header>
       <nav className="bg-white border-primary-border px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <a href={url} className="flex items-center">
+          <Link to={"/"} className="flex items-center">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
               className="mr-3 h-6 sm:h-9"
@@ -34,7 +33,7 @@ export const Header = () => {
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               A-Z AI
             </span>
-          </a>
+          </Link>
           <div className="flex items-center lg:order-2">
             <button
               onClick={() => setLoginModalOpen(true)}

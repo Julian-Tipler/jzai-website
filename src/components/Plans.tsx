@@ -11,7 +11,6 @@ export const Plans = ({ onSelect }: { onSelect: (plan: string) => void }) => {
             className={`cursor-pointer p-6 rounded-lg text-center ${plan.name === "platinum" ? "bg-red-100" : "bg-white"}`}
           >
             <h2 className="text-lg font-bold">{plan.name}</h2>
-            <p className="font-semibold">{plan.start}</p>
             <p className="text-2xl font-bold my-2">{plan.price}</p>
             <p className="text-sm mb-4">{plan.renewal}</p>
             <button className="px-4 py-2 bg-yellow-500 text-white rounded">
@@ -39,9 +38,8 @@ export const Plans = ({ onSelect }: { onSelect: (plan: string) => void }) => {
 const plans = [
   {
     name: "Free",
-    price: "€0 / first month",
+    price: "$0 / first month",
     renewal: "then €20 per month. Cancel anytime",
-    start: "Start after registration",
     features: [
       { feature: "1000 credits a month", available: true },
 
@@ -56,10 +54,9 @@ const plans = [
     ],
   },
   {
-    name: "Gold",
-    price: "€35 / month",
+    name: "Silver",
+    price: "$35 / month",
     renewal: "Cancel anytime",
-    start: "Start May 21",
     features: [
       { feature: "10000 credits a month", available: true },
 
@@ -74,10 +71,9 @@ const plans = [
     ],
   },
   {
-    name: "Platinum",
-    price: "€100 / month",
+    name: "Gold",
+    price: "$100 / month",
     renewal: "Cancel anytime",
-    start: "Start May 3",
     features: [
       { feature: "100000 credits a month", available: true },
 

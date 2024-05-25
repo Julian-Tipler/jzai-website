@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-const url = "https://jzai.com/";
-
 import {
   FiHome,
   FiSettings,
@@ -12,7 +10,7 @@ import {
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { TopBar } from "./TopBar";
 
 interface LinkItemProps {
@@ -72,7 +70,7 @@ const SidebarContent = ({ onClose }: { onClose: () => void }) => {
       className={`fixed h-full "bg-gray-900" border-r border-brand-border w-full md:w-60`}
     >
       <div className="flex h-20 items-center mx-8 justify-between">
-        <a href={url} className="flex items-center">
+        <Link to={"/"} className="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             className="mr-3 h-6 sm:h-9"
@@ -81,7 +79,7 @@ const SidebarContent = ({ onClose }: { onClose: () => void }) => {
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             A-Z AI
           </span>
-        </a>
+        </Link>
         <button className="flex md:hidden" onClick={onClose}>
           Close
         </button>

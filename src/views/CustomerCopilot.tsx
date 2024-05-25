@@ -34,24 +34,24 @@ export const CustomerCopilot: React.FC = () => {
   }, [copilotId]);
 
   const claimCopilot = async (plan: string) => {
-    const { data, error } = await supabase.functions.invoke("copilots", {
-      method: "PUT",
-      body: {
-        copilotId: copilot?.id,
-        plan,
+    const { data, error } = await supabase.functions.invoke(
+      `copilots?copilotId=${copilotId}`,
+      {
+        method: "PATCH",
+        body: {
+          plan,
+        },
       },
-    });
+    );
 
     if (error) {
-      setError("An error occurred. Please try again later");
+      setError("An error with selecting plan occured. Please try again later");
     }
 
     if (data?.copilot) {
       setCopilot(data.copilot);
     }
   };
-  // Select plan which sends an "edit" copilot call
-  // hold the copilot object in state. if the copilot has a user and a plan, then show the generate button
 
   if (!copilot) {
     return <div>Loading...</div>;
