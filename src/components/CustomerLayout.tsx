@@ -19,7 +19,7 @@ interface LinkItemProps {
   href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Settings", icon: FiSettings, href: "/profile/settings" },
+  { name: "Settings", icon: FiSettings, href: "/settings" },
   { name: "Copilots", icon: FiStar, href: "/copilots" },
 ];
 const useDisclosure = () => {

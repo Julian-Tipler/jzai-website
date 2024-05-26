@@ -60,7 +60,7 @@ export const CustomerCopilot: React.FC = () => {
       {!copilot.userId ? (
         <Plans onSelect={claimCopilot} />
       ) : (
-        <div>The actual copilot</div>
+        <div>{copilot.id}</div>
       )}
 
       {error && <div className="mt-2 text-red-500 text-center">{error}</div>}
