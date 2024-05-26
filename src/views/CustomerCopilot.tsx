@@ -8,14 +8,12 @@ export const CustomerCopilot: React.FC = () => {
   const [copilot, setCopilot] = useState<Tables<"copilots"> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // ...
-
   const { copilotId } = useParams<{ copilotId: string }>();
 
   useEffect(() => {
     const fetchCopilot = async () => {
       const { data, error } = await supabase.functions.invoke(
-        `copilots?copilotId=${copilotId}`,
+        `copilots/${copilotId}`,
         {
           method: "GET",
         },

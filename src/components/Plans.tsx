@@ -1,7 +1,9 @@
 export const Plans = ({ onSelect }: { onSelect: (plan: string) => void }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center mb-8">Choose your plan</h1>
+      <h1 className="text-2xl font-bold text-center mb-8 w-64">
+        To claim your copilot, choose a plan:
+      </h1>
 
       <div className="flex justify-center space-x-4 mb-8">
         {plans.map((plan) => (
@@ -52,10 +54,18 @@ const plans = [
         feature: "customer service help",
         available: false,
       },
+      {
+        feature: "re-scrape website manually",
+        available: false,
+      },
+      {
+        feature: "max website size of 40 pages",
+        available: false,
+      },
     ],
   },
   {
-    name: "Silver",
+    name: "Gold",
     code: "silver",
     price: "$35 / month",
     renewal: "Cancel anytime",
@@ -70,10 +80,18 @@ const plans = [
         feature: "customer service help",
         available: true,
       },
+      {
+        feature: "re-scrapes your website once a day",
+        available: true,
+      },
+      {
+        feature: "max website size of 200 pages",
+        available: true,
+      },
     ],
   },
   {
-    name: "Gold",
+    name: "Silver",
     code: "gold",
     price: "$100 / month",
     renewal: "Cancel anytime",
@@ -86,6 +104,14 @@ const plans = [
       },
       {
         feature: "customer service help",
+        available: true,
+      },
+      {
+        feature: "re-scrapes your website 5x a day",
+        available: true,
+      },
+      {
+        feature: "max website size of 1000 pages",
         available: true,
       },
     ],

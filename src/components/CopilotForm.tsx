@@ -101,9 +101,7 @@ export const CopilotForm = () => {
             </div>
             {copilotId ? (
               <button
-                onClick={() =>
-                  handleModalLogin(`/profile/copilots/${copilotId}`)
-                }
+                onClick={() => handleModalLogin(`/copilots/${copilotId}`)}
                 className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
               >
                 Claim my copilot
