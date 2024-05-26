@@ -5,13 +5,15 @@ export const PlansPanels = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center mb-8">Choose your plan</h1>
+      <h1 className="text-2xl font-bold text-center mb-8 w-64">
+        To claim your copilot, choose a plan:
+      </h1>
 
       <div className="flex justify-center space-x-4 mb-8">
         {plans.map((plan) => (
           <div
             key={plan.name}
-            onClick={() => onSelect(plan.code)}
+            onClick={() => onSelect(plan)}
             className={`cursor-pointer p-6 rounded-lg text-center ${plan.name === "platinum" ? "bg-red-100" : "bg-white"}`}
           >
             <h2 className="text-lg font-bold">{plan.name}</h2>
@@ -68,6 +70,14 @@ const plans: Plan[] = [
         feature: "customer service help",
         available: false,
       },
+      {
+        feature: "re-scrape website manually",
+        available: false,
+      },
+      {
+        feature: "max website size of 40 pages",
+        available: false,
+      },
     ],
   },
   {
@@ -88,6 +98,14 @@ const plans: Plan[] = [
         feature: "customer service help",
         available: true,
       },
+      {
+        feature: "re-scrapes your website once a day",
+        available: true,
+      },
+      {
+        feature: "max website size of 200 pages",
+        available: true,
+      },
     ],
   },
   {
@@ -106,6 +124,14 @@ const plans: Plan[] = [
       },
       {
         feature: "customer service help",
+        available: true,
+      },
+      {
+        feature: "re-scrapes your website 5x a day",
+        available: true,
+      },
+      {
+        feature: "max website size of 1000 pages",
         available: true,
       },
     ],

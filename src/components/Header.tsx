@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { LoginModal } from "./LoginModal";
-import { useLoginModalContext } from "../contexts/LoginModalContext";
+import { useLoginContext } from "../contexts/LoginContext";
 import { LinkItem } from "./LinkItem";
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const linkItems: Array<LinkItemProps> = [
 ];
 
 export const Header = () => {
-  const { loginModalOpen, setLoginModalOpen } = useLoginModalContext();
+  const { loginModalOpen, setLoginModalOpen } = useLoginContext();
 
   return (
     <header>
