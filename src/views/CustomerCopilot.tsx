@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Plans } from "../components/Plans";
+import { PlansPanels, Plan } from "../components/PlansPanels";
 import supabase from "../clients/supabase";
 import { Tables } from "../types/database.types";
 import { useParams } from "react-router-dom";
@@ -33,24 +33,32 @@ export const CustomerCopilot: React.FC = () => {
     fetchCopilot();
   }, [copilotId]);
 
-  const claimCopilot = async (plan: string) => {
-    const { data, error } = await supabase.functions.invoke(
-      `copilots?copilotId=${copilotId}`,
-      {
-        method: "PATCH",
-        body: {
-          plan,
+  const selectPlan = async (plan: Plan) => {
+    if (plan.code === "free") {
+      const { data, error } = await supabase.functions.invoke(
+        `copilots?copilotId=${copilotId}`,
+        {
+          method: "PATCH",
+          body: {
+            plan: plan.code,
+          },
         },
-      },
-    );
+      );
 
-    if (error) {
-      setError("An error with selecting plan occured. Please try again later");
-    }
+      if (error) {
+        setError(
+          "An error with selecting plan occured. Please try again later",
+        );
+      }
+      if (data?.copilot) {
+        setCopilot(data.copilot);
+      }
 
-    if (data?.copilot) {
-      setCopilot(data.copilot);
+      return;
     }
+    // Open stripe tab
+
+    return;
   };
 
   if (!copilot) {
@@ -60,7 +68,7 @@ export const CustomerCopilot: React.FC = () => {
   return (
     <div className="p-8">
       {!copilot.userId ? (
-        <Plans onSelect={claimCopilot} />
+        <PlansPanels onSelect={selectPlan} />
       ) : (
         <div>The actual copilot</div>
       )}

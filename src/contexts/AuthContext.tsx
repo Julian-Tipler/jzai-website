@@ -42,6 +42,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     session,
   };
 
+  console.log(value);
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

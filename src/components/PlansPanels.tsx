@@ -1,4 +1,8 @@
-export const Plans = ({ onSelect }: { onSelect: (plan: string) => void }) => {
+export const PlansPanels = ({
+  onSelect,
+}: {
+  onSelect: (plan: Plan) => void;
+}) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-2xl font-bold text-center mb-8">Choose your plan</h1>
@@ -35,10 +39,22 @@ export const Plans = ({ onSelect }: { onSelect: (plan: string) => void }) => {
   );
 };
 
-const plans = [
+export type Plan = {
+  name: string;
+  code: string;
+  link: string | null;
+  priceId: string | null;
+  price: string;
+  renewal: string;
+  features: { feature: string; available: boolean }[];
+};
+
+const plans: Plan[] = [
   {
     name: "Free",
     code: "free",
+    link: null,
+    priceId: null,
     price: "$0 / first month",
     renewal: "then €20 per month. Cancel anytime",
     features: [
@@ -55,8 +71,10 @@ const plans = [
     ],
   },
   {
-    name: "Silver",
+    name: "Gold",
     code: "silver",
+    link: import.meta.env.VITE_GOLD_PLAN_LINK,
+    priceId: import.meta.env.VITE_GOLD_PRICE_ID,
     price: "$35 / month",
     renewal: "Cancel anytime",
     features: [
@@ -73,8 +91,10 @@ const plans = [
     ],
   },
   {
-    name: "Gold",
+    name: "Platinum",
     code: "gold",
+    link: import.meta.env.VITE_PLATINUM_PLAN_LINK,
+    priceId: import.meta.env.VITE_PLATINUM_PRICE_ID,
     price: "$100 / month",
     renewal: "Cancel anytime",
     features: [
