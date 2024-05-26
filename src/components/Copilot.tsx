@@ -8,8 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 export const Copilot = () => {
   const [copilot, setCopilot] = useState<Tables<"copilots"> | null>(null);
 
-  console.log(copilot);
-
   const [searchParams] = useSearchParams();
   const copilotId = searchParams.get("copilot-id");
   const hostId = copilotId
