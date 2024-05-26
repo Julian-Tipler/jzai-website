@@ -73,10 +73,14 @@ export const Copilot = () => {
     };
   }, [scriptContent, copilotHostId]);
 
-  if (isPending) return "Loading...";
+  if (isPending || !copilot) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
   if (copilotError) return "An error has occurred: " + copilotError.message;
 
-  return <div id={copilotHostId} style={{ position: "relative" }}></div>;
+  return (
+    <div id={copilotHostId} style={{ position: "relative" }}>
+      <div>{copilot.id}</div>
+    </div>
+  );
 };

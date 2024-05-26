@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
 import { Copilot } from "./Copilot";
 import { Tables } from "../types/database.types";
+import { useLoginContext } from "../contexts/LoginContext";
 
 export const CopilotForm = () => {
   const [url, setUrl] = useState("");
@@ -12,6 +13,8 @@ export const CopilotForm = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const copilotId = searchParams.get("copilot-id");
+
+  const { handleModalLogin } = useLoginContext();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +45,6 @@ export const CopilotForm = () => {
       });
 
       if (error) {
-        F;
         console.error(error);
         setErrors(["An error occurred. Please try again later"]);
       }
@@ -99,10 +101,10 @@ export const CopilotForm = () => {
             </div>
             {copilotId ? (
               <button
-                onClick={() => navigate(`/profile/copilot/${copilotId}`)}
+                onClick={() => handleModalLogin(`/copilots/${copilotId}`)}
                 className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
               >
-                Generate my script
+                Claim my copilot
                 <svg
                   className="ml-2 -mr-1 w-5 h-5"
                   fill="currentColor"

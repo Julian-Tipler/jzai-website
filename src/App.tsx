@@ -14,6 +14,8 @@ import { CustomerProfile } from "./views/CustomerProfile";
 import { CustomerSettings } from "./views/CustomerSettings";
 import { CustomerLayout } from "./components/CustomerLayout";
 import { CustomerCopilot } from "./views/CustomerCopilot";
+import { CustomerCopilots } from "./views/CustomerCopilots";
+import { LoginPage } from "./views/LoginPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +23,10 @@ function App() {
       id: "root",
       path: "/",
       children: [
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
         {
           path: "/",
           element: <PublicLayout />,
@@ -40,13 +46,17 @@ function App() {
           ],
         },
         {
-          path: "profile",
+          path: "/",
           element: <CustomerLayout />,
           loader: protectedLoader,
           children: [
             {
-              index: true,
+              path: "profile",
               element: <CustomerProfile />,
+            },
+            {
+              path: "copilots",
+              element: <CustomerCopilots />,
             },
             {
               path: "copilots/:copilotId",
@@ -76,11 +86,11 @@ function App() {
 async function protectedLoader({ request }: LoaderFunctionArgs) {
   // If the user is not logged in and tries to access `/protected`, we redirect
   // them to `/login` with a `from` parameter that allows login to redirect back
-  // to this page upon successful authentication
+  // to the from page upon successful authentication
 
   const auth = await supabase.auth.getSession();
 
-  // something like this: const session = supabase.auth.session();
+  // Something like this: const session = supabase.auth.session();
   if (!auth.data.session) {
     const params = new URLSearchParams();
 
