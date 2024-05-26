@@ -1,84 +1,82 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
 import productionSupabase from "../clients/productionSupabase";
-import { Tables } from "../types/database.types";
 import { useQuery } from "@tanstack/react-query";
 
 export const Copilot = () => {
-  const [copilot, setCopilot] = useState<Tables<"copilots"> | null>(null);
-
-  console.log(copilot);
   const [searchParams] = useSearchParams();
   const copilotId = searchParams.get("copilot-id");
-  const hostId = copilotId
-    ? `jzai-copilot-host-${copilotId}`
-    : "jzai-copilot-host";
+  const hostId = "jzai-copilot-host";
 
-  const { isPending, error } = useQuery({
-    queryKey: ["copilotBundle", copilotId],
+  const {
+    isPending: isCopilotPending,
+    error: copilotError,
+    data: copilot,
+  } = useQuery({
+    queryKey: ["copilot", copilotId],
+    queryFn: async () =>
+      await supabase.from("copilots").select("*").eq("id", copilotId!).single(),
+    enabled: !!copilotId,
+  });
+
+  const resolvedCopilotId = copilot?.data?.id || copilotId;
+  const copilotHostId = resolvedCopilotId
+    ? `${hostId}-${resolvedCopilotId}`
+    : hostId;
+  // If no resolvedCopilotId then just get the default copilot.js
+  const bundleId = resolvedCopilotId ? `${resolvedCopilotId}.js` : "copilot.js";
+
+  const {
+    isPending,
+    error,
+    data: scriptContent,
+  } = useQuery({
+    queryKey: ["copilot-bundle", resolvedCopilotId],
     queryFn: async () => {
-      console.log("HERE");
-      const bundleId = copilotId ? `${copilotId}.js` : "copilot.js";
       const file = await productionSupabase.storage
         .from("bundles")
         .download(bundleId);
-      const text = await file.data?.text();
 
-      if (text) {
-        const existingScript = document.querySelector(
-          `script[id="${bundleId}"]`,
-        );
-
-        if (existingScript) {
-          existingScript.textContent = text;
-        } else {
-          // Create a <script> element
-          const script = document.createElement("script");
-
-          script.id = bundleId;
-          script.type = "text/javascript";
-          script.textContent = text;
-
-          // Append the <script> element to the document body
-          document.body.appendChild(script);
-        }
-      }
-
-      return null;
+      return await file.data?.text();
     },
+    enabled: !isCopilotPending || !copilotId,
   });
 
   useEffect(() => {
-    if (copilotId) {
-      const fetchCopilot = async () => {
-        const { data, error } = await supabase
-          .from("copilots")
-          .select("*")
-          .eq("id", copilotId)
-          .single();
+    const removeOldScript = () => {
+      const currentScript = document.querySelector(
+        `script[id="${copilotHostId}"]`,
+      );
 
-        if (error) {
-          console.error("Error fetching copilot", error);
-        }
-        if (data) {
-          setCopilot(data);
-        }
-      };
+      if (currentScript) {
+        document.body.removeChild(currentScript);
+      }
+    };
 
-      fetchCopilot()
-        .then((res) => console.log(res))
-        .catch((err) => console.error(err));
+    if (scriptContent) {
+      removeOldScript();
+
+      // Create a new <script> element if it doesn't exist
+      const script = document.createElement("script");
+
+      script.type = "text/javascript";
+      script.textContent = `(function() {${scriptContent}})();`;
+      script.id = copilotHostId;
+
+      // Append the <script> element to the document body
+      document.body.appendChild(script);
     }
-  }, [copilotId]);
+
+    return () => {
+      removeOldScript();
+    };
+  }, [scriptContent, copilotHostId]);
 
   if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
+  if (copilotError) return "An error has occurred: " + copilotError.message;
 
-  return (
-    <div id={hostId} style={{ position: "relative" }}>
-      Example Copilot Hereeeee
-    </div>
-  );
+  return <div id={copilotHostId} style={{ position: "relative" }}></div>;
 };
