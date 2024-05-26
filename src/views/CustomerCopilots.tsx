@@ -33,7 +33,6 @@ export const CustomerCopilots = () => {
     <div>
       {copilots.map((copilot) => (
         <Link key={copilot.id} to={`/copilots/${copilot.id}`}>
-          <h1>{copilot.title}</h1>
           <p>{copilot.baseUrl}</p>
         </Link>
       ))}
