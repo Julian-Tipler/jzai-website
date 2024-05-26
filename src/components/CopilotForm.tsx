@@ -64,8 +64,8 @@ export const CopilotForm = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="flex py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+    <section className="bg-white dark:bg-gray-900 h-[838px]">
+      <div className="flex py-8 px-4 mx-auto max-w-screen-xl h-full lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="place-self-center mr-auto lg:col-span-7">
           <form onSubmit={onSubmit} className="flex flex-col gap-2">
             <input
