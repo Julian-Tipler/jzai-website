@@ -44,7 +44,7 @@ export const PlansPanels = ({
 export type Plan = {
   name: string;
   code: string;
-  link: string | null;
+  link: string;
   priceId: string | null;
   price: string;
   renewal: string;
@@ -55,7 +55,7 @@ const plans: Plan[] = [
   {
     name: "Free",
     code: "free",
-    link: null,
+    link: "",
     priceId: null,
     price: "$0 / first month",
     renewal: "then €20 per month. Cancel anytime",
@@ -85,7 +85,7 @@ const plans: Plan[] = [
     code: "silver",
     link: import.meta.env.VITE_GOLD_PLAN_LINK,
     priceId: import.meta.env.VITE_GOLD_PRICE_ID,
-    price: "$35 / month",
+    price: "$10 / month",
     renewal: "Cancel anytime",
     features: [
       { feature: "10000 credits a month", available: true },
@@ -113,7 +113,7 @@ const plans: Plan[] = [
     code: "gold",
     link: import.meta.env.VITE_PLATINUM_PLAN_LINK,
     priceId: import.meta.env.VITE_PLATINUM_PRICE_ID,
-    price: "$100 / month",
+    price: "$20 / month",
     renewal: "Cancel anytime",
     features: [
       { feature: "100000 credits a month", available: true },

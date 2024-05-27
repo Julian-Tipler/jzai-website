@@ -3,12 +3,15 @@ import { PlansPanels, Plan } from "../components/PlansPanels";
 import supabase from "../clients/supabase";
 import { Tables } from "../types/database.types";
 import { useParams } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
+import { CopilotDisplay } from "../components/CopilotDisplay";
 
 export const CustomerCopilot: React.FC = () => {
   const [copilot, setCopilot] = useState<Tables<"copilots"> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const { copilotId } = useParams<{ copilotId: string }>();
+  const { session } = useAuthContext();
 
   useEffect(() => {
     const fetchCopilot = async () => {
@@ -56,6 +59,11 @@ export const CustomerCopilot: React.FC = () => {
     }
     // Open stripe tab
 
+    window.open(
+      plan.link + "?prefilled_email=" + session?.user.email,
+      "_blank",
+    );
+
     return;
   };
 
@@ -68,10 +76,7 @@ export const CustomerCopilot: React.FC = () => {
       {!copilot.userId ? (
         <PlansPanels onSelect={selectPlan} />
       ) : (
-        <div>
-          <h1 className="text-2xl font-bold">{copilot.baseUrl}</h1>
-          <p className="text-lg">{copilot.plan}</p>
-        </div>
+        <CopilotDisplay copilot={copilot} />
       )}
 
       {error && <div className="mt-2 text-red-500 text-center">{error}</div>}
