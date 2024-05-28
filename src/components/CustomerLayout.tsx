@@ -40,7 +40,7 @@ export const CustomerLayout = () => {
         <div className="fixed inset-0 z-50 flex" onClick={onClose}>
           <div className="fixed inset-0 bg-black opacity-50"></div>
           <div
-            className="relative bg-white dark:bg-gray-900 w-full max-w-xs p-4"
+            className="relative bg-white dark:bg-gray-900 w-full max-w-xs p-4 -z-20"
             onClick={(e) => e.stopPropagation()}
           >
             <SidebarContent onClose={onClose} />

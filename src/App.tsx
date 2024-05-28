@@ -16,6 +16,7 @@ import { CustomerLayout } from "./components/CustomerLayout";
 import { CustomerCopilot } from "./views/CustomerCopilot";
 import { CustomerCopilots } from "./views/CustomerCopilots";
 import { LoginPage } from "./views/LoginPage";
+import { CustomerSuccessPage } from "./views/CustomerSuccessPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -65,6 +66,10 @@ function App() {
             {
               path: "settings",
               element: <CustomerSettings />,
+            },
+            {
+              path: "success",
+              element: <CustomerSuccessPage />,
             },
           ],
         },
