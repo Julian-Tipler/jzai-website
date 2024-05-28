@@ -16,7 +16,7 @@ export const CopilotForm = () => {
 
   const { handleModalLogin } = useLoginContext();
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const errors = validateForm({ url, primaryColor });
 
@@ -67,7 +67,7 @@ export const CopilotForm = () => {
     <section className="bg-white dark:bg-gray-900 h-[838px]">
       <div className="flex py-8 px-4 mx-auto max-w-screen-xl h-full lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="place-self-center mr-auto lg:col-span-7">
-          <form onSubmit={onSubmit} className="flex flex-col gap-2">
+          <form className="flex flex-col gap-2">
             <input
               type="url"
               value={url}
