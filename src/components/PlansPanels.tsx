@@ -7,6 +7,7 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
   const { id: copilotId } = copilot;
   const [error, setError] = useState<string | null>(null);
 
+  // Free plan
   const selectPlan = async (plan: Plan) => {
     if (plan.code === "free") {
       const { error } = await supabase.functions.invoke(
@@ -25,11 +26,10 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
         );
       }
 
-      // Need to handle recirecting to success page
       return;
     }
-    // Open stripe tab
 
+    // Paid plan
     const { data, error } = await supabase.functions.invoke(
       "stripe/create-checkout-session",
       {
@@ -44,7 +44,6 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
     if (error) {
       console.error("Error creating checkout session:", error);
     } else {
-      console.log(data);
       const redirectUrl = data.redirectUrl;
 
       if (redirectUrl) {
