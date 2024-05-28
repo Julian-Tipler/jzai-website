@@ -14,7 +14,7 @@ export const CopilotForm = () => {
   const [searchParams] = useSearchParams();
   const copilotId = searchParams.get("copilot-id");
 
-  const { handleModalLogin } = useLoginContext();
+  const { modalLogin } = useLoginContext();
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -63,6 +63,11 @@ export const CopilotForm = () => {
     }
   };
 
+  const handleModalLogin = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    modalLogin(`/copilots/${copilotId}`);
+  };
+
   return (
     <section className="bg-white dark:bg-gray-900 h-[838px]">
       <div className="flex py-8 px-4 mx-auto max-w-screen-xl h-full lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -101,7 +106,7 @@ export const CopilotForm = () => {
             </div>
             {copilotId ? (
               <button
-                onClick={() => handleModalLogin(`/copilots/${copilotId}`)}
+                onClick={(e) => handleModalLogin(e)}
                 className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
               >
                 Claim my copilot

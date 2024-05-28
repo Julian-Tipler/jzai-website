@@ -3,7 +3,9 @@ import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { LoginModal } from "./LoginModal";
 import { useLoginContext } from "../contexts/LoginContext";
 import { LinkItem } from "./LinkItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
+import { HeaderButton } from "./HeaderButton";
 
 type LinkItemProps = {
   name: string;
@@ -19,6 +21,12 @@ const linkItems: Array<LinkItemProps> = [
 
 export const Header = () => {
   const { loginModalOpen, setLoginModalOpen } = useLoginContext();
+  const { session } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleDashboardNavigation = () => {
+    navigate("/profile");
+  };
 
   return (
     <header>
@@ -35,12 +43,17 @@ export const Header = () => {
             </span>
           </Link>
           <div className="flex items-center lg:order-2">
-            <button
-              onClick={() => setLoginModalOpen(true)}
-              className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 outline-none"
-            >
-              Login
-            </button>
+            {session ? (
+              <HeaderButton
+                onClick={() => handleDashboardNavigation()}
+                text={"Dashboard"}
+              />
+            ) : (
+              <HeaderButton
+                onClick={() => setLoginModalOpen(true)}
+                text={"Dashboard"}
+              />
+            )}
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
