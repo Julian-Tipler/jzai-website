@@ -86,7 +86,10 @@ export const CopilotForm = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900 h-[838px] border-b">
+    <section
+      id="build"
+      className="bg-white dark:bg-gray-900 h-[838px] border-b"
+    >
       <div className="flex py-8 px-4 mx-auto max-w-screen-xl h-full lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="place-self-center mr-auto lg:col-span-7">
           <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">

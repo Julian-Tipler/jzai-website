@@ -1,6 +1,7 @@
 import { FaBookOpen, FaCompass, FaExclamationCircle } from "react-icons/fa";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { CopilotForm } from "../components/CopilotForm";
+import { Plans } from "../components/Plans";
 
 export const Home = () => {
   return (
@@ -18,7 +19,7 @@ export const Home = () => {
           instantly.
         </p>
         <a
-          href="#"
+          href="#build"
           className="flex flex-row items-center gap-2 mt-4 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
         >
           Build your copilot
@@ -27,8 +28,14 @@ export const Home = () => {
       </section>
       {/* Splash */}
       <CopilotForm />
+      <div id="pricing">
+        <Plans />
+      </div>
       {/* Unleash the potential */}
-      <section className="bg-primary-bg dark:bg-gray-800 border-b border-primary-border">
+      <section
+        id="features"
+        className="bg-primary-bg dark:bg-gray-800 border-b border-primary-border"
+      >
         <div className="py-24 px-4 mx-auto max-w-screen-xl lg:py-36 lg:px-28">
           <div className="mb-8 max-w-screen-md lg:mb-16">
             <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
@@ -136,7 +143,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <section className="bg-white dark:bg-gray-900">
+      <section id="contact" className="bg-white dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
             <h2 className="mb-4 text-4xl font-semibold leading-tight text-gray-900 dark:text-white">
