@@ -38,11 +38,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     return () => subscription.unsubscribe();
   }, []);
+
   const value = {
     session,
   };
-
-  console.log(value);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
