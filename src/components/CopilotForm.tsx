@@ -91,8 +91,8 @@ export const CopilotForm = () => {
   };
 
   return (
-    <div className="flex flex-row flex-wrap lg:justify-between justify-center py-8 px-4 mx-auto max-w-screen-xl h-full lg:py-16 gap-20">
-      <div className="min-w-[450px]">
+    <div className="flex flex-row flex-wrap xl:justify-between justify-center py-8 px-4 mx-auto max-w-screen-xl h-full lg:py-16 gap-20">
+      <div>
         <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
           Build your copilot
         </h2>

@@ -1,7 +1,7 @@
 import { FaBookOpen, FaCompass, FaExclamationCircle } from "react-icons/fa";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { CopilotForm } from "../components/CopilotForm";
-import { Plans } from "../components/Plans";
+// import { PlansPanels } from "../components/PlansPanels";
 
 export const Home = () => {
   return (
@@ -33,12 +33,12 @@ export const Home = () => {
       >
         <CopilotForm />
       </section>
-      <section id="pricing" className="py-24 border-b">
+      {/* <section id="pricing" className="py-24 border-b">
         <div className="flex flex-col items-center justify-center">
           <h2 className="text-2xl font-bold text-center mb-8 w-64">Pricing</h2>
-          <Plans />
+          <PlansPanels />
         </div>
-      </section>
+      </section> */}
       {/* Unleash the potential */}
       <section
         id="features"
