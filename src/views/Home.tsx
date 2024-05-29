@@ -20,17 +20,25 @@ export const Home = () => {
         </p>
         <a
           href="#build"
-          className="flex flex-row items-center gap-2 mt-4 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+          className="flex flex-row items-center gap-2 mt-14 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
         >
           Build your copilot
           <FaArrowDownLong />
         </a>
       </section>
       {/* Splash */}
-      <CopilotForm />
-      <div id="pricing">
-        <Plans />
-      </div>
+      <section
+        id="build"
+        className="bg-white dark:bg-gray-900 min-h-[838px] border-b lg:px-28"
+      >
+        <CopilotForm />
+      </section>
+      <section id="pricing" className="py-24 border-b">
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-2xl font-bold text-center mb-8 w-64">Pricing</h2>
+          <Plans />
+        </div>
+      </section>
       {/* Unleash the potential */}
       <section
         id="features"
