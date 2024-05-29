@@ -42,7 +42,7 @@ export const CustomerCopilot: React.FC = () => {
 
   return (
     <div className="p-8">
-      {!copilot.userId ? (
+      {!copilot.plan ? (
         <PlansPanels copilot={copilot} />
       ) : (
         <CopilotDisplay copilot={copilot} />
