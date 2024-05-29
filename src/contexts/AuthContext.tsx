@@ -38,6 +38,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     return () => subscription.unsubscribe();
   }, []);
+
   const value = {
     session,
   };

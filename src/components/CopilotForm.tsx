@@ -36,9 +36,9 @@ export const CopilotForm = () => {
     setCustomColor(color);
     setSelectedColor(color);
   };
-  const { handleModalLogin } = useLoginContext();
+  const { modalLogin } = useLoginContext();
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const errors = validateForm({ url, primaryColor });
 
@@ -85,6 +85,11 @@ export const CopilotForm = () => {
     }
   };
 
+  const handleModalLogin = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    modalLogin(`/copilots/${copilotId}`);
+  };
+
   return (
     <div className="flex flex-row flex-wrap lg:justify-between justify-center py-8 px-4 mx-auto max-w-screen-xl h-full lg:py-16 gap-20">
       <div className="min-w-[450px]">
@@ -95,7 +100,7 @@ export const CopilotForm = () => {
         <p className="mb-10">
           We&apos;ll generate a Copilot for you to try out.
         </p>
-        <form onSubmit={onSubmit} className="flex flex-col gap-2">
+        <form className="flex flex-col gap-2">
           <div className="mb-3">
             <label
               className="block text-gray-500 text-sm font-normal mb-2"
@@ -169,7 +174,7 @@ export const CopilotForm = () => {
           </div>
           {copilotId ? (
             <button
-              onClick={() => handleModalLogin(`/copilots/${copilotId}`)}
+              onClick={(e) => handleModalLogin(e)}
               className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
               Claim my copilot
