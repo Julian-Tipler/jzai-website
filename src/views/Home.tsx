@@ -1,14 +1,50 @@
 import { FaBookOpen, FaCompass, FaExclamationCircle } from "react-icons/fa";
+import { FaArrowDownLong } from "react-icons/fa6";
 import { CopilotForm } from "../components/CopilotForm";
+// import { PlansPanels } from "../components/PlansPanels";
 
 export const Home = () => {
   return (
     <>
+      <section className="bg-white dark:bg-gray-900 border-primary-border items-center text-center py-8 px-4 mx-auto max-w-screen-xl lg:py-40 lg:px-28 flex flex-col font-light text-gray-500 sm:text-lg dark:text-gray-400">
+        <h1 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
+          Your website needs a tour guide
+        </h1>
+        <p className="mb-4">
+          Use our suite of pre-built AI tools to get started quickly.
+        </p>
+        <p>
+          Our tools are designed to be easy to use and integrate with your
+          existing website. Just insert one line of code and our chatbot appears
+          instantly.
+        </p>
+        <a
+          href="#build"
+          className="flex flex-row items-center gap-2 mt-14 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+        >
+          Build your copilot
+          <FaArrowDownLong />
+        </a>
+      </section>
       {/* Splash */}
-      <CopilotForm />
+      <section
+        id="build"
+        className="bg-white dark:bg-gray-900 min-h-[838px] border-b lg:px-28"
+      >
+        <CopilotForm />
+      </section>
+      {/* <section id="pricing" className="py-24 border-b">
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-2xl font-bold text-center mb-8 w-64">Pricing</h2>
+          <PlansPanels />
+        </div>
+      </section> */}
       {/* Unleash the potential */}
-      <section className="bg-primary-bg dark:bg-gray-800 border-b border-primary-border">
-        <div className="py-24 px-4 mx-auto max-w-screen-xl lg:px-6">
+      <section
+        id="features"
+        className="bg-primary-bg dark:bg-gray-800 border-b border-primary-border"
+      >
+        <div className="py-24 px-4 mx-auto max-w-screen-xl lg:py-36 lg:px-28">
           <div className="mb-8 max-w-screen-md lg:mb-16">
             <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
               Unleash the potential of AI this quarter with AZ-AI
@@ -115,7 +151,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <section className="bg-white dark:bg-gray-900">
+      <section id="contact" className="bg-white dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
             <h2 className="mb-4 text-4xl font-semibold leading-tight text-gray-900 dark:text-white">

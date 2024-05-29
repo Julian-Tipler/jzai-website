@@ -58,10 +58,6 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center mb-8 w-64">
-        To claim your copilot, choose a plan:
-      </h1>
-
       <div className="flex justify-center space-x-4 mb-8">
         {plans.map((plan) => (
           <div

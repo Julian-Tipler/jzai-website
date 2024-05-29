@@ -15,8 +15,9 @@ type LinkItemProps = {
 
 const linkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, href: "/" },
-  { name: "Features", icon: FiCompass, href: "/features" },
-  { name: "Contact", icon: FiSettings, href: "/contact" },
+  { name: "Features", icon: FiCompass, href: "#features" },
+  { name: "Pricing", icon: FiSettings, href: "#pricing" },
+  { name: "Contact", icon: FiSettings, href: "#contact" },
 ];
 
 export const Header = () => {
@@ -92,7 +93,7 @@ export const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex wrap-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex wrap-col mt-4 font-normal lg:flex-row lg:space-x-8 lg:mt-0">
               {linkItems.map((item, i) => (
                 <LinkItem key={`link-item-${i}`} {...item} />
               ))}
