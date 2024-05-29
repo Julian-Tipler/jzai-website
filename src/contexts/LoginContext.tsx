@@ -11,7 +11,7 @@ type LoginContextType = {
   setLoginModalOpen: (open: boolean) => void;
   redirectTo: string;
   setRedirectTo: (url: string) => void;
-  handleModalLogin: (destination: string) => void;
+  modalLogin: (destination: string) => void;
 };
 
 const LoginContext = createContext<LoginContextType>({} as LoginContextType);
@@ -32,7 +32,7 @@ export function LoginContextProvider({ children }: LoginContextProviderProps) {
     setRedirectTo(defaultRedirectTo);
   }, []);
 
-  const handleModalLogin = (destination: string) => {
+  const modalLogin = (destination: string) => {
     const currentUrl = window.location.href;
     const baseUrl = currentUrl.split("/").slice(0, 3).join("/");
 
@@ -45,7 +45,7 @@ export function LoginContextProvider({ children }: LoginContextProviderProps) {
     setLoginModalOpen,
     redirectTo,
     setRedirectTo,
-    handleModalLogin,
+    modalLogin,
   };
 
   return (

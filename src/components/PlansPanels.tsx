@@ -138,7 +138,7 @@ const plans: Plan[] = [
   },
   {
     name: "Gold",
-    code: "silver",
+    code: "gold",
     successUrl: baseUrl() + "/success",
     priceId: import.meta.env.VITE_GOLD_PRICE_ID,
     price: "$10 / month",
@@ -166,7 +166,7 @@ const plans: Plan[] = [
   },
   {
     name: "Platinum",
-    code: "gold",
+    code: "platinum",
     successUrl: baseUrl() + "/success",
     priceId: import.meta.env.VITE_PLATINUM_PRICE_ID,
     price: "$20 / month",
