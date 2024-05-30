@@ -143,7 +143,10 @@ export const CopilotForm = () => {
                   key={color}
                   className={`w-8 h-8 rounded-lg ${selectedColor === color ? "border-2" : "border-1"} ${selectedColor === color ? "border-blue-500" : "border-grey-500"}`}
                   style={{ backgroundColor: color }}
-                  onClick={() => handleColorChange(color)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleColorChange(color);
+                  }}
                 />
               ))}
             </div>
