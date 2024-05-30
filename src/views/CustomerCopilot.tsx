@@ -6,7 +6,9 @@ import { useParams } from "react-router-dom";
 import { CopilotDisplay } from "../components/CopilotDisplay";
 
 export const CustomerCopilot: React.FC = () => {
-  const [copilot, setCopilot] = useState<Tables<"copilots"> | null>(null);
+  const [copilot, setCopilot] = useState<
+    (Tables<"copilots"> & { subscriptions: Tables<"subscriptions">[] }) | null
+  >(null);
   const [error, setError] = useState<string | null>(null);
 
   const { copilotId } = useParams<{ copilotId: string }>();
@@ -42,7 +44,7 @@ export const CustomerCopilot: React.FC = () => {
 
   return (
     <div className="p-8">
-      {!copilot.plan ? (
+      {!copilot.subscriptions?.length ? (
         <PlansPanels copilot={copilot} />
       ) : (
         <CopilotDisplay copilot={copilot} />

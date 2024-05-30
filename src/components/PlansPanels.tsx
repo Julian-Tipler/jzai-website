@@ -1,18 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import supabase from "../clients/supabase";
 import { Tables } from "../types/database.types";
+
 import PlanPanel from "./PlanPanel";
 import { MdError } from "react-icons/md";
 import Plan from "../types/plan";
-import { PLANS } from "../helpers/constants";
 
 export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
   const { id: copilotId } = copilot;
   const [error, setError] = useState<string | null>(null);
+  const [plans, setPlans] = useState<Plan[]>([]);
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      const { data, error } = await supabase.functions.invoke("plans", {
+        method: "GET",
+      });
+
+      if (error) {
+        setError("An error occured. Please try again later.");
+      }
+
+      if (data && data.plans) {
+        setPlans(data.plans);
+      }
+    };
+
+    fetchPlans();
+  }, []);
 
   // Free plan
   const selectPlan = async (plan: Plan) => {
-    if (plan.code === "free") {
+    if (plan.name === "free") {
       const { error } = await supabase.functions.invoke(
         `copilots?copilotId=${copilotId}`,
         {
@@ -38,7 +57,7 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
       {
         method: "POST",
         body: {
-          plan: plan,
+          planId: plan.id,
           copilotId,
         },
       },
@@ -59,10 +78,13 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
     return;
   };
 
+  if (plans.length === 0) return <div>Loading...</div>;
+  console.log("PLANS", plans);
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex justify-center space-x-4 mb-8">
-        {PLANS.map((plan) => (
+        {plans.map((plan) => (
           <PlanPanel key={plan.name} plan={plan}>
             <button
               onClick={() => selectPlan(plan)}

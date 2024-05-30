@@ -52,7 +52,7 @@ export const Header = () => {
             ) : (
               <HeaderButton
                 onClick={() => setLoginModalOpen(true)}
-                text={"Dashboard"}
+                text={"Login"}
               />
             )}
             <button

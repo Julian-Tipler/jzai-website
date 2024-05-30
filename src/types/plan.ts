@@ -1,11 +1,12 @@
 type Plan = {
+  id: string;
   name: string;
   code: string;
-  successUrl: string;
-  priceId: string | null;
-  price: string;
-  renewal: string;
-  features: { feature: string; available: boolean }[];
+  pricePerMessage: number;
+  features: {
+    available: boolean;
+    feature: string;
+  }[];
 };
 
 export default Plan;
