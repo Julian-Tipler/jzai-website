@@ -24,6 +24,8 @@ export const CopilotDisplay = ({
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
       <h1 className="text-2xl font-bold mb-4">Copilot Display</h1>
+      <div className="w-1/3 font-medium capitalize">Url</div>
+      <div className="flex-grow"></div>
       {["title", "primaryColor"].map((field) => (
         <div key={field} className="mb-4 flex items-center">
           <div className="w-1/3 font-medium capitalize">{field}</div>
@@ -46,9 +48,10 @@ export const CopilotDisplay = ({
         </div>
       ))}
       <div className="mb-4 flex items-center">
-        <div className="w-1/3 font-medium">Credits Remaining</div>
         <div className="flex-grow">{copilot.credits}</div>
       </div>
+      <div>Set Usage: _____</div>
+      <div>{"Usage: (====================     )"}</div>
       <button className={"text-red-500"} onClick={cancelSubscription}>
         Cancel
       </button>
