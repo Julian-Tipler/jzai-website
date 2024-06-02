@@ -10,7 +10,7 @@ const PlanPanel = ({
   return (
     <div
       key={plan.name}
-      className={`self-stretch p-6 rounded-lg text-center ${plan.name === "platinum" ? "bg-red-100" : "bg-white"}`}
+      className="w-[325px] p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 text-center"
     >
       <h2 className="text-lg font-bold">{plan.name}</h2>
       <p className="text-2xl font-bold my-2">

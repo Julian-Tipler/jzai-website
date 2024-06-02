@@ -2,56 +2,57 @@ import { FaBookOpen, FaCompass, FaExclamationCircle } from "react-icons/fa";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { CopilotForm } from "../components/CopilotForm";
 import PlanPanel from "../components/PlanPanel";
-import { PLANS } from "../helpers/constants";
-// import { PlansPanels } from "../components/PlansPanels";
+import { useQuery } from "@tanstack/react-query";
+import supabase from "../clients/supabase";
+import Plan from "../types/plan";
+import Section, { SectionVariant } from "../components/Section";
 
 export const Home = () => {
+  const { data } = useQuery({
+    queryKey: ["plans"],
+    queryFn: async () =>
+      await supabase.functions.invoke("plans", {
+        method: "GET",
+      }),
+  });
+
+  const plans = data?.data?.plans ? (data.data.plans as Plan[]) : [];
+
   return (
     <>
-      <section className="bg-white dark:bg-gray-900 border-primary-border items-center text-center py-8 px-4 mx-auto max-w-screen-xl lg:py-40 lg:px-28 flex flex-col font-light text-gray-500 sm:text-lg dark:text-gray-400">
-        <h1 className="mb-5 text-5xl font-semibold text-gray-900 dark:text-white">
-          Your website needs a tour guide
-        </h1>
-        <p className="mb-4">
-          Use our suite of pre-built AI tools to get started quickly.
-        </p>
-        <p>
-          Our tools are designed to be easy to use and integrate with your
-          existing website. Just insert one line of code and our chatbot appears
-          instantly.
-        </p>
-        <a
-          href="#build"
-          className="flex flex-row items-center gap-2 mt-14 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-        >
-          Build your copilot
-          <FaArrowDownLong />
-        </a>
-      </section>
-      {/* Splash */}
-      <section
-        id="build"
-        className="bg-white dark:bg-gray-900 min-h-[838px] border-b lg:px-28"
-      >
-        <CopilotForm />
-      </section>
-      <section
-        id="pricing"
-        className="bg-primary-bg py-24 border-b flex flex-col items-center"
-      >
-        <h2 className="text-2xl font-bold text-center mb-8">Pricing</h2>
-        <div className="flex flex-row items-center justify-center gap-6">
-          {PLANS.map((plan) => (
-            <PlanPanel key={plan.name} plan={plan} />
-          ))}
+      <Section id="home" variant={SectionVariant.Secondary}>
+        <div className="gap-24 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6">
+          <div className="flex flex-col justify-center items-center md:items-start font-light text-gray-500 sm:text-lg dark:text-gray-400">
+            <h1 className="mb-4 text-5xl font-semibold text-gray-900 dark:text-white">
+              Your website needs a tour guide
+            </h1>
+            <p className="mb-4">
+              Use our suite of pre-built AI tools to get started quickly.
+            </p>
+            <p>
+              Our tools are designed to be easy to use and integrate with your
+              existing website. Just insert one line of code and our chatbot
+              appears instantly.
+            </p>
+            <a
+              href="#build"
+              className="flex flex-row items-center w-fit gap-2 mt-14 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+            >
+              Build your copilot
+              <FaArrowDownLong />
+            </a>
+          </div>
+          <div className="flex justify-center items-center">
+            <img
+              className="h-[400px] rounded-lg bg-cover"
+              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
+              alt="office content"
+            />
+          </div>
         </div>
-      </section>
-      {/* Unleash the potential */}
-      <section
-        id="features"
-        className="dark:bg-gray-800 border-b border-primary-border"
-      >
-        <div className="py-24 px-4 mx-auto max-w-screen-xl lg:py-36 lg:px-28">
+      </Section>
+      <Section id="features">
+        <div className="py-24 px-4 mx-auto max-w-screen-xl lg:py-36 lg:px-6">
           <div className="mb-8 max-w-screen-md lg:mb-16">
             <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
               Unleash the potential of AI this quarter with AZ-AI
@@ -99,10 +100,28 @@ export const Home = () => {
             </div>
           </div>
         </div>
-      </section>
-      {/* We make AI integration easy */}
-      <section className="bg-primary-bg dark:bg-gray-900 border-b border-primary-border">
-        <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+      </Section>
+      <Section
+        id="build"
+        variant={SectionVariant.Secondary}
+        className="min-h-[838px]"
+      >
+        <CopilotForm />
+      </Section>
+      <Section id="pricing">
+        <div className="py-8 px-4 lg:py-36 lg:px-6">
+          <h2 className="text-2xl font-semibold text-center mb-8">Pricing</h2>
+          {plans && (
+            <div className="items-center justify-center gap-6 flex flex-wrap">
+              {plans.map((plan) => (
+                <PlanPanel key={plan.name} plan={plan} />
+              ))}
+            </div>
+          )}
+        </div>
+      </Section>
+      <Section id="integration" variant={SectionVariant.Secondary}>
+        <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-36 lg:px-6">
           <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
             <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
               We make AI integration easy
@@ -129,10 +148,9 @@ export const Home = () => {
             />
           </div>
         </div>
-      </section>
-      {/* Custom Solutions */}
-      <section className="dark:bg-gray-900 border-b border-primary-border">
-        <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+      </Section>
+      <Section id="custom">
+        <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-36 lg:px-6">
           <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400 lg:order-last">
             <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
               Need a custom solution?
@@ -157,8 +175,8 @@ export const Home = () => {
             />
           </div>
         </div>
-      </section>
-      <section id="contact" className="bg-primary-bg dark:bg-gray-900">
+      </Section>
+      <Section id="contact" variant={SectionVariant.Secondary}>
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
             <h2 className="mb-4 text-4xl font-semibold leading-tight text-gray-900 dark:text-white">
@@ -177,7 +195,7 @@ export const Home = () => {
             </a>
           </div>
         </div>
-      </section>
+      </Section>
     </>
   );
 };

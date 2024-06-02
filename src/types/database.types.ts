@@ -43,37 +43,37 @@ export type Database = {
       }
       copilots: {
         Row: {
-          anonymousCredits: number | null
           baseUrl: string
           created: string | null
           credits: number | null
           id: string
-          plan: Database["public"]["Enums"]["plan"] | null
+          primaryColor: string
           storageUrl: string | null
+          title: string | null
           updated: string | null
-          userId: string
+          userId: string | null
         }
         Insert: {
-          anonymousCredits?: number | null
           baseUrl: string
           created?: string | null
           credits?: number | null
           id?: string
-          plan?: Database["public"]["Enums"]["plan"] | null
+          primaryColor: string
           storageUrl?: string | null
+          title?: string | null
           updated?: string | null
-          userId: string
+          userId?: string | null
         }
         Update: {
-          anonymousCredits?: number | null
           baseUrl?: string
           created?: string | null
           credits?: number | null
           id?: string
-          plan?: Database["public"]["Enums"]["plan"] | null
+          primaryColor?: string
           storageUrl?: string | null
+          title?: string | null
           updated?: string | null
-          userId?: string
+          userId?: string | null
         }
         Relationships: [
           {
@@ -194,6 +194,30 @@ export type Database = {
         }
         Relationships: []
       }
+      plans: {
+        Row: {
+          features: Json[] | null
+          id: string
+          name: string
+          pricePerMessage: number | null
+          stripePriceId: string | null
+        }
+        Insert: {
+          features?: Json[] | null
+          id?: string
+          name: string
+          pricePerMessage?: number | null
+          stripePriceId?: string | null
+        }
+        Update: {
+          features?: Json[] | null
+          id?: string
+          name?: string
+          pricePerMessage?: number | null
+          stripePriceId?: string | null
+        }
+        Relationships: []
+      }
       responseTemplates: {
         Row: {
           classification: string | null
@@ -228,6 +252,72 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      subscriptions: {
+        Row: {
+          active: boolean
+          copilotId: string
+          credits: number
+          id: string
+          lastPaymentAt: string
+          planId: string
+          stripeCustomerId: string | null
+          stripeSubscriptionId: string | null
+        }
+        Insert: {
+          active?: boolean
+          copilotId: string
+          credits?: number
+          id?: string
+          lastPaymentAt?: string
+          planId: string
+          stripeCustomerId?: string | null
+          stripeSubscriptionId?: string | null
+        }
+        Update: {
+          active?: boolean
+          copilotId?: string
+          credits?: number
+          id?: string
+          lastPaymentAt?: string
+          planId?: string
+          stripeCustomerId?: string | null
+          stripeSubscriptionId?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_copilot"
+            columns: ["copilotId"]
+            isOneToOne: false
+            referencedRelation: "copilots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_plan"
+            columns: ["planId"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          createdAt: string | null
+          email: string | null
+          id: string
+        }
+        Insert: {
+          createdAt?: string | null
+          email?: string | null
+          id: string
+        }
+        Update: {
+          createdAt?: string | null
+          email?: string | null
+          id?: string
+        }
+        Relationships: []
       }
     }
     Views: {
@@ -441,7 +531,10 @@ export type Database = {
       role: "system" | "user" | "assistant"
     }
     CompositeTypes: {
-      [_ in never]: never
+      plan_type: {
+        type: string | null
+        subscription: string | null
+      }
     }
   }
 }

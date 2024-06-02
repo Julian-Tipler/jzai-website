@@ -1,13 +1,6 @@
 import { useState } from "react";
 
-import {
-  // FiHome,
-  FiSettings,
-  FiMenu,
-  FiStar,
-  //   FiCompass,
-  //   FiSmartphone,
-} from "react-icons/fi";
+import { FiSettings, FiMenu, FiStar } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { Link, Outlet } from "react-router-dom";
