@@ -18,21 +18,43 @@ export const Home = () => {
 
   const plans = data?.data?.plans ? (data.data.plans as Plan[]) : [];
 
+  const features = [
+    {
+      title: "Stay ahead of the competition",
+      description:
+        "Provide the AI driven experience an increasing number of users expect",
+      icon: FaCompass,
+    },
+    {
+      title: "Hands off assistance",
+      description: "Reduce time spent answering user questions by up to 50%",
+      icon: FaExclamationCircle,
+    },
+    {
+      title: "Just one line",
+      description:
+        "Tour Guide's copilot displays on your website with just one line of html",
+      icon: FaBookOpen,
+    },
+    {
+      title: "Updates with your website",
+      description:
+        "Tour Guide consistently updates its map as you make changes to your website",
+      icon: FaBookOpen,
+    },
+  ];
+
   return (
     <>
       <Section id="home" variant={SectionVariant.Secondary}>
         <div className="gap-24 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6">
-          <div className="flex flex-col justify-center items-center md:items-start font-light text-gray-500 sm:text-lg dark:text-gray-400">
-            <h1 className="mb-4 text-5xl font-semibold text-gray-900 dark:text-white">
+          <div className="flex flex-col justify-center items-center md:items-start font-light sm:text-lg">
+            <h1 className="mb-4 text-6xl font-medium text-gray-900 dark:text-white leading-tight">
               Your website needs a tour guide
             </h1>
-            <p className="mb-4">
-              Use our suite of pre-built AI tools to get started quickly.
-            </p>
-            <p>
-              Our tools are designed to be easy to use and integrate with your
-              existing website. Just insert one line of code and our chatbot
-              appears instantly.
+            <p className="font-light text-gray-500 dark:text-gray-400">
+              “Tour Guide” answers questions and helps navigate your website,
+              giving them a modern, AI-driven experience
             </p>
             <a
               href="#build"
@@ -53,51 +75,32 @@ export const Home = () => {
       </Section>
       <Section id="features">
         <div className="py-24 px-4 mx-auto max-w-screen-xl lg:py-36 lg:px-6">
-          <div className="mb-8 max-w-screen-md lg:mb-16">
-            <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
-              Unleash the potential of AI this quarter with AZ-AI
+          <div className="max-w-screen-md">
+            <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white leading-tight">
+              Bring your website into the future with <b>one line of code</b>
             </h2>
-            <p className="text-gray-500 sm:text-xl dark:text-gray-400">
-              AI will bring a number of advantages to your business
+            <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light">
+              Lorem ipsum
             </p>
           </div>
-          <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-            <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                <FaCompass size={"24"} className="color-colors-primary-blue" />
+          <hr className="my-16" />
+          <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-12 md:space-y-0">
+            {features.map((feature) => (
+              <div key={feature.title}>
+                <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                  <feature.icon
+                    size={"24"}
+                    className="color-colors-primary-blue"
+                  />
+                </div>
+                <h3 className="mb-2 text-xl font-normal dark:text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 font-light">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Navigation
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                Our helpful chatbot will become a personal guide for your
-                customers.
-              </p>
-            </div>
-            <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                <FaExclamationCircle size={"24"} color="" />
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Customer Complaints
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                Analyze customer complaints with machine learning and identify
-                pain points.
-              </p>
-            </div>
-            <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                <FaBookOpen size={"24"} />
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Public Information
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                Use AI to search through your public data and documents to grab
-                exactly the information your customer needs.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </Section>
@@ -109,8 +112,11 @@ export const Home = () => {
         <CopilotForm />
       </Section>
       <Section id="pricing">
-        <div className="py-8 px-4 lg:py-36 lg:px-6">
-          <h2 className="text-2xl font-semibold text-center mb-8">Pricing</h2>
+        <div className="py-8 px-4 lg:py-36 lg:px-6 flex flex-col items-center">
+          <h2 className="text-5xl font-normal text-center mb-4">Pricing</h2>
+          <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light mb-20">
+            Only pay for what you use...
+          </p>
           {plans && (
             <div className="items-center justify-center gap-6 flex flex-wrap">
               {plans.map((plan) => (
@@ -120,39 +126,10 @@ export const Home = () => {
           )}
         </div>
       </Section>
-      <Section id="integration" variant={SectionVariant.Secondary}>
-        <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-36 lg:px-6">
-          <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-            <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
-              We make AI integration easy
-            </h2>
-            <p className="mb-4">
-              Use our suite of pre-built AI tools to get started quickly.
-            </p>
-            <p>
-              Our tools are designed to be easy to use and integrate with your
-              existing website. Just insert one line of code and our chatbot
-              appears instantly.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 mt-8">
-            <img
-              className="w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
-              alt="chatbot on website"
-            />
-            <img
-              className="mt-4 w-full rounded-lg lg:mt-10"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
-              alt="office content 2"
-            />
-          </div>
-        </div>
-      </Section>
-      <Section id="custom">
+      <Section id="custom" variant={SectionVariant.Secondary}>
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-36 lg:px-6">
           <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400 lg:order-last">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white">
               Need a custom solution?
             </h2>
             <p className="mb-4 font-light">
@@ -160,7 +137,6 @@ export const Home = () => {
               exact business needs. We will set you up with the tools you need
               to get started and provide ongoing support.
             </p>
-            <p className="mb-4 font-medium">Work with a real person.</p>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-8 lg:order-first">
             <img
@@ -176,10 +152,10 @@ export const Home = () => {
           </div>
         </div>
       </Section>
-      <Section id="contact" variant={SectionVariant.Secondary}>
+      <Section id="contact">
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
-            <h2 className="mb-4 text-4xl font-semibold leading-tight text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-4xl font-normal leading-tight text-gray-900 dark:text-white">
               Talk to an engineer today
             </h2>
             <p className="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">

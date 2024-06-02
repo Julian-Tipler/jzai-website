@@ -93,12 +93,14 @@ export const CopilotForm = () => {
   return (
     <div className="gap-24 py-16 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6">
       <div className="flex justify-center items-center">
-        <div className="min-w-96 w-fit">
-          <h2 className="mb-4 text-4xl font-semibold text-gray-900 dark:text-white">
+        <div className="w-96">
+          <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white">
             Build your copilot
           </h2>
-          <p>Enter the URL of the website you want to demo with Copilot.</p>
-          <p className="mb-10">
+          <p className="mb-2 text-gray-500 dark:text-gray-400 font-light">
+            Enter the URL of the website you want to demo with Copilot.
+          </p>
+          <p className="mb-10 text-gray-500 dark:text-gray-400 font-light">
             We&apos;ll generate a Copilot for you to try out.
           </p>
           <form className="flex flex-col gap-2">
@@ -215,7 +217,7 @@ export const CopilotForm = () => {
                     ></path>
                   </svg>
                 </button>
-                <p className="text-center text-gray-400 text-sm">
+                <p className="text-center text-gray-400 text-sm font-light">
                   No Login Required!
                 </p>
               </>
