@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
 import { Copilot } from "./Copilot";
@@ -6,8 +6,8 @@ import { Tables } from "../types/database.types";
 import { useLoginContext } from "../contexts/LoginContext";
 import { MdError } from "react-icons/md";
 
-export const CopilotForm = () => {
-  const [url, setUrl] = useState("");
+export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
+  const [url, setUrl] = useState(webUrl);
   const [title, setTitle] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -24,6 +24,8 @@ export const CopilotForm = () => {
   const [selectedColor, setSelectedColor] = useState(predefinedColors[0]);
   const [customColor, setCustomColor] = useState("");
   const primaryColor = selectedColor || customColor;
+
+  useEffect(() => setUrl(webUrl), [webUrl]);
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color);

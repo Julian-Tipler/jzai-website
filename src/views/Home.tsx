@@ -1,11 +1,13 @@
 import { FaBookOpen, FaCompass, FaExclamationCircle } from "react-icons/fa";
-import { FaArrowDownLong } from "react-icons/fa6";
 import { CopilotForm } from "../components/CopilotForm";
 import PlanPanel from "../components/PlanPanel";
+import { FaArrowDownLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
 import supabase from "../clients/supabase";
 import Plan from "../types/plan";
 import Section, { SectionVariant } from "../components/Section";
+import { useState } from "react";
+import { Message } from "../components/Message";
 
 export const Home = () => {
   const { data } = useQuery({
@@ -17,6 +19,8 @@ export const Home = () => {
   });
 
   const plans = data?.data?.plans ? (data.data.plans as Plan[]) : [];
+
+  const [url, setUrl] = useState("");
 
   const features = [
     {
@@ -47,7 +51,7 @@ export const Home = () => {
   return (
     <>
       <Section id="home" variant={SectionVariant.Secondary}>
-        <div className="gap-24 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6">
+        <div className="gap-40 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6">
           <div className="flex flex-col justify-center items-center md:items-start font-light sm:text-lg">
             <h1 className="mb-4 text-6xl font-medium text-gray-900 dark:text-white leading-tight">
               Your website needs a tour guide
@@ -56,19 +60,45 @@ export const Home = () => {
               “Tour Guide” answers questions and helps navigate your website,
               giving them a modern, AI-driven experience
             </p>
-            <a
-              href="#build"
-              className="flex flex-row items-center w-fit gap-2 mt-14 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-            >
-              Build your copilot
-              <FaArrowDownLong />
-            </a>
+            <div className="flex gap-1 h-fit mt-10">
+              <div className="flex flex-col">
+                <input
+                  id="name"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="Your website URL"
+                  className="w-52 md:w-80 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <a
+                href="#build"
+                className="flex flex-row items-center w-fit gap-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 whitespace-nowrap"
+              >
+                Try it now
+                <FaArrowDownLong />
+              </a>
+            </div>
+            <p className="text-center text-gray-400 text-sm font-light">
+              No Login Required
+            </p>
           </div>
-          <div className="flex justify-center items-center">
-            <img
-              className="h-[400px] rounded-lg bg-cover"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
-              alt="office content"
+          <div className="flex flex-col w-3/4 justify-center items-center gap-8">
+            <Message
+              className="animate-slide-in invisible"
+              message={{
+                role: "assistant",
+                content:
+                  "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
+              }}
+            />
+            <Message
+              className="animate-slide-in invisible"
+              style={{ animationDelay: "1s" }}
+              message={{
+                role: "user",
+                content:
+                  "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
+              }}
             />
           </div>
         </div>
@@ -109,7 +139,7 @@ export const Home = () => {
         variant={SectionVariant.Secondary}
         className="min-h-[838px]"
       >
-        <CopilotForm />
+        <CopilotForm webUrl={url} />
       </Section>
       <Section id="pricing">
         <div className="py-8 px-4 lg:py-36 lg:px-6 flex flex-col items-center">
