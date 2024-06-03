@@ -79,7 +79,6 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
   };
 
   if (plans.length === 0) return <div>Loading...</div>;
-  console.log("PLANS", plans);
 
   return (
     <div className="flex flex-col items-center justify-center">
