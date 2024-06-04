@@ -83,24 +83,26 @@ export const Home = () => {
               No Login Required
             </p>
           </div>
-          <div className="flex flex-col w-3/4 justify-center items-center gap-8">
-            <Message
-              className="animate-slide-in invisible"
-              message={{
-                role: "assistant",
-                content:
-                  "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
-              }}
-            />
-            <Message
-              className="animate-slide-in invisible"
-              style={{ animationDelay: "1s" }}
-              message={{
-                role: "user",
-                content:
-                  "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
-              }}
-            />
+          <div className="flex justify-center">
+            <div className="flex flex-col w-3/4 justify-center items-center gap-8">
+              <Message
+                className="animate-slide-in invisible"
+                message={{
+                  role: "assistant",
+                  content:
+                    "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
+                }}
+              />
+              <Message
+                className="animate-slide-in invisible"
+                style={{ animationDelay: "1s" }}
+                message={{
+                  role: "user",
+                  content:
+                    "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
+                }}
+              />
+            </div>
           </div>
         </div>
       </Section>
