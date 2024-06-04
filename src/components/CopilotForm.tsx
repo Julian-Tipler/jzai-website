@@ -119,7 +119,7 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://your-url-here.com"
-                className={`block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${copilotId ? "bg-gray-200 text-gray-400" : ""}`}
+                className={`w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${copilotId ? "bg-gray-200 text-gray-400" : ""}`}
                 disabled={!!copilotId}
               />
             </div>
@@ -135,7 +135,7 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Copilot"
-                className="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="mb-3">

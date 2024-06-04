@@ -4,21 +4,22 @@ import PlanPanel from "../components/PlanPanel";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
 import supabase from "../clients/supabase";
-import Plan from "../types/plan";
 import Section, { SectionVariant } from "../components/Section";
 import { useState } from "react";
 import { Message } from "../components/Message";
+import { Contact } from "./Contact";
 
 export const Home = () => {
   const { data } = useQuery({
     queryKey: ["plans"],
     queryFn: async () =>
-      await supabase.functions.invoke("plans", {
-        method: "GET",
-      }),
+      await supabase
+        .from("plans")
+        .select("*")
+        .order("pricePerMessage", { ascending: true }),
   });
 
-  const plans = data?.data?.plans ? (data.data.plans as Plan[]) : [];
+  const plans = data?.data ? data.data : [];
 
   const [url, setUrl] = useState("");
 
@@ -193,12 +194,7 @@ export const Home = () => {
               of engineers is ready to answer your questions and help you get
               started.
             </p>
-            <a
-              href="#"
-              className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-            >
-              Find out more
-            </a>
+            <Contact />
           </div>
         </div>
       </Section>

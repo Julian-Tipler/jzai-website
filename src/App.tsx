@@ -6,8 +6,6 @@ import {
 import { PublicLayout } from "./components/PublicLayout";
 import { Home } from "./views/Home";
 import { Error } from "./views/Error";
-import { Features } from "./views/Features";
-import { Contact } from "./views/Contact";
 import { redirect } from "react-router-dom";
 import supabase from "./clients/supabase";
 import { CustomerProfile } from "./views/CustomerProfile";
@@ -35,14 +33,6 @@ function App() {
             {
               index: true,
               element: <Home />,
-            },
-            {
-              path: "features",
-              element: <Features />,
-            },
-            {
-              path: "contact",
-              element: <Contact />,
             },
           ],
         },
