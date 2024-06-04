@@ -6,6 +6,16 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      keyframes: {
+        "slide-in": {
+          "0%": { transform: "translateX(100vw)" },
+          '1%': { visibility: 'visible' },
+          "100%": { transform: "translateX(0)", visibility: 'visible' },
+        },
+      },
+      animation: {
+        "slide-in": "slide-in 1s forwards",
+      },
       colors: {
         primary: {
           50: "#eff6ff",

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
-import productionSupabase from "../clients/productionSupabase";
 import { useQuery } from "@tanstack/react-query";
 
 export const Copilot = () => {
@@ -34,9 +33,7 @@ export const Copilot = () => {
   } = useQuery({
     queryKey: ["copilot-bundle", resolvedCopilotId],
     queryFn: async () => {
-      const file = await productionSupabase.storage
-        .from("bundles")
-        .download(bundleId);
+      const file = await supabase.storage.from("bundles").download(bundleId);
 
       return await file.data?.text();
     },

@@ -5,3 +5,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+.jzai-copilot-container--embedded .jzai-copilot-iframe-wrapper,
+.jzai-copilot-container--embedded .jzai-copilot-trigger-button {
+  z-index: 0 !important;
+}

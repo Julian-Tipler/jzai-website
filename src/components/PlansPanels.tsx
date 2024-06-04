@@ -1,43 +1,35 @@
-import { useState, useEffect } from "react";
 import supabase from "../clients/supabase";
 import { Tables } from "../types/database.types";
 
 import PlanPanel from "./PlanPanel";
 import { MdError } from "react-icons/md";
-import Plan from "../types/plan";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
   const { id: copilotId } = copilot;
   const [error, setError] = useState<string | null>(null);
-  const [plans, setPlans] = useState<Plan[]>([]);
 
-  useEffect(() => {
-    const fetchPlans = async () => {
-      const { data, error } = await supabase.functions.invoke("plans", {
-        method: "GET",
-      });
+  const { data } = useQuery({
+    queryKey: ["plans"],
+    queryFn: async () =>
+      await supabase
+        .from("plans")
+        .select("*")
+        .order("pricePerMessage", { ascending: true }),
+  });
 
-      if (error) {
-        setError("An error occured. Please try again later.");
-      }
-
-      if (data && data.plans) {
-        setPlans(data.plans);
-      }
-    };
-
-    fetchPlans();
-  }, []);
+  const plans = data?.data ? data.data : [];
 
   // Free plan
-  const selectPlan = async (plan: Plan) => {
+  const selectPlan = async (plan: Tables<"plans">) => {
     if (plan.name === "free") {
       const { error } = await supabase.functions.invoke(
         `copilots?copilotId=${copilotId}`,
         {
           method: "PATCH",
           body: {
-            plan: plan.code,
+            plan: plan.id,
           },
         },
       );
