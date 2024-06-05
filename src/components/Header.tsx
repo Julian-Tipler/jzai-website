@@ -3,9 +3,10 @@ import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { LoginModal } from "./LoginModal";
 import { useLoginContext } from "../contexts/LoginContext";
 import { LinkItem } from "./LinkItem";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import { HeaderButton } from "./HeaderButton";
+import Button from "./Button";
+import WiseLink from "./WiseLink";
 
 type LinkItemProps = {
   name: string;
@@ -24,11 +25,6 @@ const linkItems: Array<LinkItemProps> = [
 export const Header = () => {
   const { loginModalOpen, setLoginModalOpen } = useLoginContext();
   const { session } = useAuthContext();
-  const navigate = useNavigate();
-
-  const handleDashboardNavigation = () => {
-    navigate("/profile");
-  };
 
   return (
     <header className="sticky top-0 left-0 right-0 z-10">
@@ -46,15 +42,9 @@ export const Header = () => {
           </Link>
           <div className="flex items-center lg:order-2">
             {session ? (
-              <HeaderButton
-                onClick={() => handleDashboardNavigation()}
-                text={"Dashboard"}
-              />
+              <WiseLink to="/copilots">Dashboard</WiseLink>
             ) : (
-              <HeaderButton
-                onClick={() => setLoginModalOpen(true)}
-                text={"Login"}
-              />
+              <Button onClick={() => setLoginModalOpen(true)}>Login</Button>
             )}
             <button
               data-collapse-toggle="mobile-menu-2"

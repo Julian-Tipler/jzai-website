@@ -10,8 +10,8 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
   const [url, setUrl] = useState(webUrl);
   const [title, setTitle] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const copilotId = searchParams.get("copilot-id");
   const predefinedColors = [
     "#0090FF",

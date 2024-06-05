@@ -1,37 +1,39 @@
-import { useEffect, useState } from "react";
 import supabase from "../clients/supabase";
-import { Tables } from "../types/database.types";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Tables } from "../types/database.types";
+import WiseLink from "../components/WiseLink";
 
 export const CustomerCopilots = () => {
-  const [copilots, setCopilots] = useState<Tables<"copilots">[]>([]);
-
-  useEffect(() => {
-    const fetchCopilot = async () => {
-      const { data, error } = await supabase.functions.invoke("copilots", {
+  const { isPending, error, data } = useQuery({
+    queryKey: ["copilots"],
+    queryFn: async () =>
+      await supabase.functions.invoke("copilots", {
         method: "GET",
-      });
+      }),
+  });
 
-      if (error) {
-        console.error("Error fetching copilot", error);
-      }
-      if (data?.copilots) {
-        setCopilots(data.copilots);
-      }
-    };
+  const copilots = (data?.data?.copilots as Tables<"copilots">[]) || [];
 
-    fetchCopilot()
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
-  }, []);
-
-  if (!copilots.length) {
+  if (isPending) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
   return (
     <div>
-      {copilots.map((copilot) => (
+      {copilots?.length < 1 && (
+        <div className="flex flex-col items-center justify-center my-40">
+          <h2 className="mb-4 text-2xl font-light text-gray-900 dark:text-white leading-tight">
+            No copilots yet
+          </h2>
+          <WiseLink to="/copilots/create">Create a new copilot</WiseLink>
+        </div>
+      )}
+      {copilots?.map((copilot) => (
         <Link key={copilot.id} to={`/copilots/${copilot.id}`}>
           <p>{copilot.baseUrl}</p>
         </Link>

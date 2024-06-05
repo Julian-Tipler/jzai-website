@@ -8,13 +8,13 @@ import { Home } from "./views/Home";
 import { Error } from "./views/Error";
 import { redirect } from "react-router-dom";
 import supabase from "./clients/supabase";
-import { CustomerProfile } from "./views/CustomerProfile";
 import { CustomerSettings } from "./views/CustomerSettings";
 import { CustomerLayout } from "./components/CustomerLayout";
 import { CustomerCopilot } from "./views/CustomerCopilot";
 import { CustomerCopilots } from "./views/CustomerCopilots";
 import { LoginPage } from "./views/LoginPage";
 import { CustomerSuccessPage } from "./views/CustomerSuccessPage";
+import { CreateCopilot } from "./views/CreateCopilot";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,12 +42,13 @@ function App() {
           loader: protectedLoader,
           children: [
             {
-              path: "profile",
-              element: <CustomerProfile />,
-            },
-            {
+              index: true,
               path: "copilots",
               element: <CustomerCopilots />,
+            },
+            {
+              path: "copilots/create",
+              element: <CreateCopilot />,
             },
             {
               path: "copilots/:copilotId",

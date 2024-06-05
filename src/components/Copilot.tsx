@@ -34,8 +34,11 @@ export const Copilot = () => {
     queryKey: ["copilot-bundle", resolvedCopilotId],
     queryFn: async () => {
       const file = await supabase.storage.from("bundles").download(bundleId);
+      const text = await file.data?.text();
 
-      return await file.data?.text();
+      if (!text) throw "No text found in file";
+
+      return text;
     },
     enabled: !isCopilotPending || !copilotId,
   });
