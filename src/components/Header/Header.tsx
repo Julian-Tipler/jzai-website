@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { HeaderButton } from "../HeaderButton";
 import { useEffect, useState } from "react";
-import { MobileMenu } from "../MobileMenu/MobileMenu";
+import { MobileMenu } from "../mobile-menu/MobileMenu";
 import { linkItems } from "./constants/link-items";
 
 export const Header = () => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { linkItems } from "../Header/constants/link-items";
+import { linkItems } from "../header/constants/link-items";
 import "./MobileMenu.css";
 
 export const MobileMenu = ({
