@@ -11,7 +11,8 @@ export const MobileMenu = ({
     const items = document.querySelectorAll(".mobile-menu-item");
 
     items.forEach((item, index) => {
-      item.style.animation = `fadeInUp 0.1s ease-out ${index * 0.02}s forwards`;
+      (item as HTMLElement).style.animation =
+        `fadeInUp 0.1s ease-out ${index * 0.02}s forwards`;
     });
   }, []);
 
