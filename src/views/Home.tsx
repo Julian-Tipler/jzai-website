@@ -38,7 +38,7 @@ export const Home = () => {
     },
     {
       title: "One line of html",
-      description: "Just copy+paste into your website header",
+      description: "Just copy+paste into your website head",
       icon: FaLaptopCode,
     },
     {
@@ -105,7 +105,7 @@ export const Home = () => {
         <div className="py-24 px-4 mx-auto max-w-screen-xl lg:py-36 lg:px-6">
           <div className="max-w-screen-md">
             <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white leading-tight">
-              Bring your website into the future with <b>one line of code</b>
+              It only takes <b>one line of code</b>
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light">
               Creating an AI assistant has never been easier
