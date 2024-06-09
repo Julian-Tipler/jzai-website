@@ -1,4 +1,5 @@
-import { FaBookOpen, FaCompass, FaExclamationCircle } from "react-icons/fa";
+import { FaLaptopCode, FaMapMarkedAlt, FaRobot } from "react-icons/fa";
+import { FaMoneyBill1Wave } from "react-icons/fa6";
 import { CopilotForm } from "../components/CopilotForm";
 import PlanPanel from "../components/PlanPanel";
 import { FaArrowDownLong } from "react-icons/fa6";
@@ -27,25 +28,24 @@ export const Home = () => {
     {
       title: "Stay ahead of the competition",
       description:
-        "Provide the AI driven experience an increasing number of users expect",
-      icon: FaCompass,
+        "Provide the AI driven experience users are starting to expect",
+      icon: FaRobot,
     },
     {
       title: "Hands off assistance",
-      description: "Reduce time spent answering user questions by up to 50%",
-      icon: FaExclamationCircle,
+      description: "Save up to 50% on customer service costs",
+      icon: FaMoneyBill1Wave,
     },
     {
-      title: "Just one line",
-      description:
-        "Tour Guide's copilot displays on your website with just one line of html",
-      icon: FaBookOpen,
+      title: "One line of code",
+      description: "Just copy paste one line of html",
+      icon: FaLaptopCode,
     },
     {
       title: "Updates with your website",
       description:
-        "Tour Guide consistently updates its map as you make changes to your website",
-      icon: FaBookOpen,
+        "Tour Guide consistently updates its map if you make changes to your website",
+      icon: FaMapMarkedAlt,
     },
   ];
 
@@ -86,19 +86,17 @@ export const Home = () => {
           <div className="flex flex-col w-3/4 justify-center items-center gap-8">
             <Message
               className="animate-slide-in invisible"
+              style={{ animationDelay: "1s" }}
               message={{
-                role: "assistant",
-                content:
-                  "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
+                role: "user",
+                content: "What time are you open on Saturday's?",
               }}
             />
             <Message
               className="animate-slide-in invisible"
-              style={{ animationDelay: "1s" }}
               message={{
-                role: "user",
-                content:
-                  "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
+                role: "assistant",
+                content: "Hey! We are open today from 10am-6pm. Come on in!",
               }}
             />
           </div>
