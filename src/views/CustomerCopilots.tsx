@@ -5,6 +5,7 @@ import { Tables } from "../types/database.types";
 import WiseLink from "../components/WiseLink";
 import Card from "../components/Card";
 import { useAuthContext } from "../contexts/AuthContext";
+import { WiseRoutes } from "../helpers/constants";
 
 export const CustomerCopilots = () => {
   const { session } = useAuthContext();
@@ -36,7 +37,9 @@ export const CustomerCopilots = () => {
           <h2 className="mb-4 text-xl font-light text-gray-900 dark:text-white leading-tight">
             No copilots yet
           </h2>
-          <WiseLink to="/copilots/create">Create a new copilot</WiseLink>
+          <WiseLink to={WiseRoutes.dashboard.copilots.create.name}>
+            Create a new copilot
+          </WiseLink>
         </div>
       </Card>
     );
@@ -46,7 +49,9 @@ export const CustomerCopilots = () => {
     <div className="flex flex-col h-full">
       <div className="flex w-full justify-end">
         <div className="flex">
-          <WiseLink to="create">Create a new copilot</WiseLink>
+          <WiseLink to={WiseRoutes.dashboard.copilots.create.name}>
+            Create a new copilot
+          </WiseLink>
         </div>
       </div>
       <ul className="flex">
