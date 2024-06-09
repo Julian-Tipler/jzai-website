@@ -6,7 +6,7 @@ import { FaArrowDownLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
 import supabase from "../clients/supabase";
 import Section, { SectionVariant } from "../components/Section";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Message } from "../components/Message";
 import { Contact } from "../components/Contact";
 
@@ -48,6 +48,17 @@ export const Home = () => {
     },
   ];
 
+  const tryNowLinkRef = useRef<HTMLAnchorElement | null>(null);
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (tryNowLinkRef.current) {
+        tryNowLinkRef.current.click();
+      }
+    }
+  };
+
   return (
     <>
       <Section id="home" variant={SectionVariant.Secondary}>
@@ -68,9 +79,12 @@ export const Home = () => {
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="Your website URL"
                   className="w-52 md:w-80 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  onKeyDown={handleKeyPress}
                 />
               </div>
               <a
+                id="try-it-now"
+                ref={tryNowLinkRef}
                 href="#build"
                 className="flex flex-row items-center w-fit gap-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 whitespace-nowrap"
               >

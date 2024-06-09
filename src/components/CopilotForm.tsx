@@ -230,7 +230,7 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
       <div className="flex justify-center items-center">
         <div className="relative min-h-[610px] min-w-[360px] flex justify-end items-end">
           <Copilot />
-          {!url && (
+          {!copilotId && (
             <div className="absolute inset-0 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg"></div>
           )}
         </div>
