@@ -5,6 +5,7 @@ import { Copilot } from "./Copilot";
 import { Tables } from "../types/database.types";
 import { useLoginContext } from "../contexts/LoginContext";
 import { MdError } from "react-icons/md";
+import Button from "./Button";
 
 export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
   const [url, setUrl] = useState(webUrl);
@@ -24,6 +25,7 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
   const [selectedColor, setSelectedColor] = useState(predefinedColors[0]);
   const [customColor, setCustomColor] = useState("");
   const primaryColor = selectedColor || customColor;
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => setUrl(webUrl), [webUrl]);
 
@@ -42,9 +44,11 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const errors = validateForm({ url, primaryColor });
 
     if (errors.length > 0) {
+      setIsLoading(false);
       setErrors(errors);
 
       return;
@@ -84,6 +88,7 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
 
         navigate(`/?${queryString}`);
       }
+      setIsLoading(false);
     }
   };
 
@@ -200,10 +205,7 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
             </button>
           ) : (
             <>
-              <button
-                onClick={(e) => onSubmit(e)}
-                className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
-              >
+              <Button onClick={(e) => onSubmit(e)} loading={isLoading}>
                 Demo my Copilot
                 <svg
                   className="ml-2 -mr-1 w-5 h-5"
@@ -217,7 +219,7 @@ export const CopilotForm = ({ webUrl = "" }: { webUrl?: string }) => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </button>
+              </Button>
               <p className="text-center text-gray-400 text-sm font-light">
                 No Login Required!
               </p>
