@@ -4,51 +4,34 @@ import supabase from "../clients/supabase";
 import { Tables } from "../types/database.types";
 import { useParams } from "react-router-dom";
 import { CopilotDisplay } from "../components/CopilotDisplay";
+import { FaChevronRight } from "react-icons/fa6";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCopilot } from "../loaders/copilot-loader";
 
 export const CustomerCopilot: React.FC = () => {
-  const [copilot, setCopilot] = useState<
-    (Tables<"copilots"> & { subscriptions: Tables<"subscriptions">[] }) | null
-  >(null);
-  const [error, setError] = useState<string | null>(null);
-
   const { copilotId } = useParams<{ copilotId: string }>();
 
-  useEffect(() => {
-    const fetchCopilot = async () => {
-      const { data, error } = await supabase.functions.invoke(
-        `copilots/${copilotId}`,
-        {
-          method: "GET",
-        },
-      );
+  const { isPending, error, data } = useQuery({
+    queryKey: ["copilot", copilotId],
+    queryFn: () => fetchCopilot(copilotId!),
+    enabled: !!copilotId,
+  });
 
-      if (error) {
-        setError("An error occurred. Please try again later");
-      }
-
-      if (data?.copilot) {
-        setCopilot(data.copilot);
-      }
-    };
-
-    fetchCopilot();
-  }, [copilotId]);
-
-  if (!copilot) {
+  if (isPending) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error.message}</div>;
   }
 
   return (
-    <div className="p-8">
-      {!copilot.subscriptions?.length ? (
+    <div>
+      {/* {!copilot.subscriptions?.length ? (
         <PlansPanels copilot={copilot} />
-      ) : (
-        <CopilotDisplay copilot={copilot} />
-      )}
+      ) : ( */}
+      <CopilotDisplay copilot={data} />
+      {/* )} */}
     </div>
   );
 };

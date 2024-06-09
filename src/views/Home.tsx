@@ -1,6 +1,6 @@
 import { FaLaptopCode, FaMapMarkedAlt, FaRobot } from "react-icons/fa";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
-import { CopilotForm } from "../components/CopilotForm";
+import { BuildCopilotSection } from "../components/BuildCopilotSection";
 import PlanPanel from "../components/PlanPanel";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ import { Message } from "../components/Message";
 import { Contact } from "../components/Contact";
 
 export const Home = () => {
-  const { data } = useQuery({
+  const { isPending, error, data } = useQuery({
     queryKey: ["plans"],
     queryFn: async () =>
       await supabase
@@ -99,7 +99,6 @@ export const Home = () => {
           <div className="flex flex-col w-3/4 justify-center items-center gap-8">
             <Message
               className="animate-slide-in invisible"
-              style={{ animationDelay: "1s" }}
               message={{
                 role: "user",
                 content: "What time are you open on Saturdays?",
@@ -107,6 +106,7 @@ export const Home = () => {
             />
             <Message
               className="animate-slide-in invisible"
+              style={{ animationDelay: "1s" }}
               message={{
                 role: "assistant",
                 content: "Hey! We are open today from 10am-6pm. Come on in!",
@@ -151,7 +151,7 @@ export const Home = () => {
         variant={SectionVariant.Secondary}
         className="min-h-[838px]"
       >
-        <CopilotForm webUrl={url} />
+        <BuildCopilotSection webUrl={url} />
       </Section>
       <Section id="pricing">
         <div className="py-8 px-4 lg:py-36 lg:px-6 flex flex-col items-center">
