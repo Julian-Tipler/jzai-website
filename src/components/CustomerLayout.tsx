@@ -4,6 +4,7 @@ import { Link, Outlet, useMatches } from "react-router-dom";
 import { TopBar } from "./TopBar";
 import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
+import { WiseRoutes } from "../helpers/constants";
 
 interface LinkItemProps {
   name: string;
@@ -12,8 +13,12 @@ interface LinkItemProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Copilots", icon: FiStar, href: "copilots" },
-  { name: "Settings", icon: FiSettings, href: "settings" },
+  { name: "Copilots", icon: FiStar, href: WiseRoutes.dashboard.copilots.name },
+  {
+    name: "Settings",
+    icon: FiSettings,
+    href: WiseRoutes.dashboard.settings.name,
+  },
 ];
 
 const Breadcrumbs = ({ matches }: { matches: RouteItem[] }) => {
@@ -49,7 +54,7 @@ export const CustomerLayout = () => {
   const matches = useMatches() as unknown as RouteItem[];
   const breadcrumbs = matches
     .slice(2)
-    .filter((match) => match.pathname !== "/dashboard/copilots/");
+    .filter((match) => match.pathname !== "/dashboard/copilots/"); // For some reason useMatches() matches dashboard/copilots twice.
   const currentMatch = matches[matches.length - 1];
   const title = currentMatch.handle?.data.title;
 
