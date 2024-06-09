@@ -37,6 +37,7 @@ module.exports = {
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unused-vars": "off"
   },
   parserOptions: {
     ecmaVersion: "latest",

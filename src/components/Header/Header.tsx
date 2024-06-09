@@ -55,7 +55,7 @@ export const Header = () => {
           </Link>
           <div className="flex items-center lg:order-2">
             {session ? (
-              <WiseLink to="/copilots">Dashboard</WiseLink>
+              <WiseLink to="/dashboard">Dashboard</WiseLink>
             ) : (
               <Button onClick={() => setLoginModalOpen(true)}>Login</Button>
             )}

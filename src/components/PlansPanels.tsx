@@ -10,7 +10,11 @@ export const PlansPanels = ({ copilot }: { copilot: Tables<"copilots"> }) => {
   const { id: copilotId } = copilot;
   const [error, setError] = useState<string | null>(null);
 
-  const { data } = useQuery({
+  const {
+    isPending,
+    error: plansError,
+    data,
+  } = useQuery({
     queryKey: ["plans"],
     queryFn: async () =>
       await supabase
