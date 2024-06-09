@@ -58,7 +58,7 @@ export const CustomerCopilots = () => {
           </WiseLink>
         </div>
       </div>
-      <ul className="flex">
+      <ul className="flex flex-col gap-4">
         {copilots?.map((copilot) => (
           <Link key={copilot.id} to={`${copilot.id}`} className="w-full">
             <Card
