@@ -12,7 +12,7 @@ export const MobileMenu = ({
 
     items.forEach((item, index) => {
       (item as HTMLElement).style.animation =
-        `fadeInUp 0.1s ease-out ${index * 0.02}s forwards`;
+        `fadeInUp .1s ease-out ${index * 0.02}s forwards`;
     });
   }, []);
 
@@ -22,7 +22,7 @@ export const MobileMenu = ({
         {linkItems.map((item, i) => (
           <li
             key={`link-item-${i}`}
-            className="mobile-menu-item "
+            className="mobile-menu-item opacity-0"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <a
