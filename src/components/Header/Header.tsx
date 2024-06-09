@@ -1,18 +1,33 @@
-import { LoginModal } from "../LoginModal";
-import { useLoginContext } from "../../contexts/LoginContext";
-import { LinkItem } from "../LinkItem";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../contexts/AuthContext";
-import { HeaderButton } from "../HeaderButton";
+import { IconType } from "react-icons";
+import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MobileMenu } from "../mobile-menu/MobileMenu";
-import { linkItems } from "./constants/link-items";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useLoginContext } from "../../contexts/LoginContext";
+import Button from "../Button";
+import { LinkItem } from "../LinkItem";
+import { LoginModal } from "../LoginModal";
+import WiseLink from "../WiseLink";
+
+type LinkItemProps = {
+  name: string;
+  icon: IconType;
+  href: string;
+};
+
+const linkItems: Array<LinkItemProps> = [
+  { name: "Home", icon: FiHome, href: "/" },
+  { name: "Features", icon: FiCompass, href: "#features" },
+  { name: "Pricing", icon: FiSettings, href: "#pricing" },
+  { name: "Custom Solutions", icon: FiSettings, href: "#custom" },
+  { name: "Contact", icon: FiSettings, href: "#contact" },
+];
 
 export const Header = () => {
   const { loginModalOpen, setLoginModalOpen } = useLoginContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { session } = useAuthContext();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const body = document.body;
@@ -23,10 +38,6 @@ export const Header = () => {
       body.style.overflow = "";
     }
   }, [isMobileMenuOpen]);
-
-  const handleDashboardNavigation = () => {
-    navigate("/profile");
-  };
 
   return (
     <header className="sticky top-0 left-0 right-0 z-10">
@@ -44,15 +55,9 @@ export const Header = () => {
           </Link>
           <div className="flex items-center lg:order-2">
             {session ? (
-              <HeaderButton
-                onClick={() => handleDashboardNavigation()}
-                text={"Dashboard"}
-              />
+              <WiseLink to="/copilots">Dashboard</WiseLink>
             ) : (
-              <HeaderButton
-                onClick={() => setLoginModalOpen(true)}
-                text={"Login"}
-              />
+              <Button onClick={() => setLoginModalOpen(true)}>Login</Button>
             )}
             <button
               data-collapse-toggle="mobile-menu-2"

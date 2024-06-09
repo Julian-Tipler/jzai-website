@@ -27,7 +27,7 @@ export function LoginContextProvider({ children }: LoginContextProviderProps) {
   useEffect(() => {
     const currentUrl = window.location.href;
     const baseUrl = currentUrl.split("/").slice(0, 3).join("/");
-    const defaultRedirectTo = `${baseUrl}/profile`;
+    const defaultRedirectTo = `${baseUrl}/copilots`;
 
     setRedirectTo(defaultRedirectTo);
   }, []);

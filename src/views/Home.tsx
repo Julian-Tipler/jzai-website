@@ -8,7 +8,7 @@ import supabase from "../clients/supabase";
 import Section, { SectionVariant } from "../components/Section";
 import { useState } from "react";
 import { Message } from "../components/Message";
-import { Contact } from "./Contact";
+import { Contact } from "../components/Contact";
 
 export const Home = () => {
   const { data } = useQuery({
