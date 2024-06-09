@@ -5,6 +5,7 @@ import { TopBar } from "./TopBar";
 import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
 import { WiseRoutes } from "../helpers/constants";
+import { FaChevronRight } from "react-icons/fa";
 
 interface LinkItemProps {
   name: string;
@@ -29,9 +30,11 @@ const Breadcrumbs = ({ matches }: { matches: RouteItem[] }) => {
           const { pathname, handle } = match;
           const crumb = handle?.crumb ? handle.crumb(match.data) : pathname;
           const isLast = index === matches.length - 1;
+          const isFirst = index === 0;
 
           return (
             <li key={pathname} className="inline-flex items-center">
+              {!isFirst && <FaChevronRight />}
               {isLast ? (
                 <span
                   className="ml-1 text-gray-400 md:ml-2 dark:text-gray-500"
