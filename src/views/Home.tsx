@@ -28,7 +28,7 @@ export const Home = () => {
     {
       title: "Stay ahead of the competition",
       description:
-        "Provide the AI driven experience users are starting to expect",
+        "Provide the AI driven experience users are coming to expect",
       icon: FaRobot,
     },
     {
@@ -37,14 +37,13 @@ export const Home = () => {
       icon: FaMoneyBill1Wave,
     },
     {
-      title: "One line of code",
-      description: "Just copy paste one line of html",
+      title: "One line of html",
+      description: "Just copy+paste into your website header",
       icon: FaLaptopCode,
     },
     {
       title: "Updates with your website",
-      description:
-        "Tour Guide consistently updates its map if you make changes to your website",
+      description: "Tour Guide frequently updates its map of your website",
       icon: FaMapMarkedAlt,
     },
   ];
@@ -58,8 +57,8 @@ export const Home = () => {
               Your website needs a tour guide
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
-              “Tour Guide” answers questions and helps navigate your website,
-              giving them a modern, AI-driven experience
+              “Tour Guide” is a website assistant that helps your users navigate
+              your website and answers their questions.
             </p>
             <div className="flex gap-1 h-fit mt-10">
               <div className="flex flex-col">
@@ -89,7 +88,7 @@ export const Home = () => {
               style={{ animationDelay: "1s" }}
               message={{
                 role: "user",
-                content: "What time are you open on Saturday's?",
+                content: "What time are you open on Saturdays?",
               }}
             />
             <Message
@@ -109,7 +108,7 @@ export const Home = () => {
               Bring your website into the future with <b>one line of code</b>
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light">
-              Lorem ipsum
+              Creating an AI assistant has never been easier
             </p>
           </div>
           <hr className="my-16" />
