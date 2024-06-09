@@ -9,6 +9,7 @@ import Section, { SectionVariant } from "../components/Section";
 import { useRef, useState } from "react";
 import { Message } from "../components/Message";
 import { Contact } from "../components/Contact";
+import { RotatingMessages } from "../components/RotatingMessages";
 
 export const Home = () => {
   const { isPending, error, data } = useQuery({
@@ -68,8 +69,7 @@ export const Home = () => {
               Your website needs a tour guide
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
-              “Tour Guide” is a website assistant that helps your users navigate
-              your website and answers their questions.
+              “Tour Guide” answers questions and helps with website navigation.
             </p>
             <div className="flex gap-1 h-fit mt-10">
               <div className="flex flex-col">
@@ -96,23 +96,7 @@ export const Home = () => {
               No Login Required
             </p>
           </div>
-          <div className="flex flex-col w-3/4 justify-center items-center gap-8">
-            <Message
-              className="animate-slide-in invisible"
-              message={{
-                role: "user",
-                content: "What time are you open on Saturdays?",
-              }}
-            />
-            <Message
-              className="animate-slide-in invisible"
-              style={{ animationDelay: "1s" }}
-              message={{
-                role: "assistant",
-                content: "Hey! We are open today from 10am-6pm. Come on in!",
-              }}
-            />
-          </div>
+          <RotatingMessages />
         </div>
       </Section>
       <Section id="features">
