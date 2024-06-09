@@ -1,9 +1,9 @@
-import { CopilotForm } from "../components/CopilotForm";
+import { BuildCopilotSection } from "../components/BuildCopilotSection";
 
 export const CreateCopilot = () => {
   return (
     <div>
-      <CopilotForm />
+      <BuildCopilotSection />
     </div>
   );
 };
