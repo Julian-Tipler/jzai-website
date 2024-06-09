@@ -1,12 +1,14 @@
 import { IconType } from "react-icons";
 import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
-import { LoginModal } from "./LoginModal";
-import { useLoginContext } from "../contexts/LoginContext";
-import { LinkItem } from "./LinkItem";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../contexts/AuthContext";
-import Button from "./Button";
-import WiseLink from "./WiseLink";
+import { useEffect, useState } from "react";
+import { MobileMenu } from "../mobile-menu/MobileMenu";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useLoginContext } from "../../contexts/LoginContext";
+import Button from "../Button";
+import { LinkItem } from "../LinkItem";
+import { LoginModal } from "../LoginModal";
+import WiseLink from "../WiseLink";
 
 type LinkItemProps = {
   name: string;
@@ -24,11 +26,22 @@ const linkItems: Array<LinkItemProps> = [
 
 export const Header = () => {
   const { loginModalOpen, setLoginModalOpen } = useLoginContext();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { session } = useAuthContext();
+
+  useEffect(() => {
+    const body = document.body;
+
+    if (isMobileMenuOpen) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "";
+    }
+  }, [isMobileMenuOpen]);
 
   return (
     <header className="sticky top-0 left-0 right-0 z-10">
-      <nav className="bg-white border-primary-border px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b">
+      <nav className="bg-white border-primary-border px-4 lg:px-6 py-2.5 dark:bg-gray-800 border-b z-50">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to={"/"} className="flex items-center">
             <img
@@ -52,6 +65,7 @@ export const Header = () => {
               className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="mobile-menu-2"
               aria-expanded="false"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -92,6 +106,9 @@ export const Header = () => {
           </div>
         </div>
       </nav>
+      {isMobileMenuOpen && (
+        <MobileMenu setIsMobileMenuOpen={setIsMobileMenuOpen} />
+      )}
       <LoginModal
         loginModalOpen={loginModalOpen}
         setLoginModalOpen={setLoginModalOpen}

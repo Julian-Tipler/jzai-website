@@ -1,4 +1,5 @@
-import { FaBookOpen, FaCompass, FaExclamationCircle } from "react-icons/fa";
+import { FaLaptopCode, FaMapMarkedAlt, FaRobot } from "react-icons/fa";
+import { FaMoneyBill1Wave } from "react-icons/fa6";
 import { CopilotForm } from "../components/CopilotForm";
 import PlanPanel from "../components/PlanPanel";
 import { FaArrowDownLong } from "react-icons/fa6";
@@ -27,39 +28,37 @@ export const Home = () => {
     {
       title: "Stay ahead of the competition",
       description:
-        "Provide the AI driven experience an increasing number of users expect",
-      icon: FaCompass,
+        "Provide the AI driven experience users are coming to expect",
+      icon: FaRobot,
     },
     {
       title: "Hands off assistance",
-      description: "Reduce time spent answering user questions by up to 50%",
-      icon: FaExclamationCircle,
+      description: "Save up to 50% on customer service costs",
+      icon: FaMoneyBill1Wave,
     },
     {
-      title: "Just one line",
-      description:
-        "Tour Guide's copilot displays on your website with just one line of html",
-      icon: FaBookOpen,
+      title: "One line of html",
+      description: "Just copy+paste into your website header",
+      icon: FaLaptopCode,
     },
     {
       title: "Updates with your website",
-      description:
-        "Tour Guide consistently updates its map as you make changes to your website",
-      icon: FaBookOpen,
+      description: "Tour Guide frequently updates its map of your website",
+      icon: FaMapMarkedAlt,
     },
   ];
 
   return (
     <>
       <Section id="home" variant={SectionVariant.Secondary}>
-        <div className="gap-40 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6">
+        <div className="gap-40 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6 justify-items-center">
           <div className="flex flex-col justify-center items-center md:items-start font-light sm:text-lg">
             <h1 className="mb-4 text-6xl font-medium text-gray-900 dark:text-white leading-tight">
               Your website needs a tour guide
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
-              “Tour Guide” answers questions and helps navigate your website,
-              giving them a modern, AI-driven experience
+              “Tour Guide” is a website assistant that helps your users navigate
+              your website and answers their questions.
             </p>
             <div className="flex gap-1 h-fit mt-10">
               <div className="flex flex-col">
@@ -83,26 +82,22 @@ export const Home = () => {
               No Login Required
             </p>
           </div>
-          <div className="flex justify-center">
-            <div className="flex flex-col w-3/4 justify-center items-center gap-8">
-              <Message
-                className="animate-slide-in invisible"
-                message={{
-                  role: "assistant",
-                  content:
-                    "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
-                }}
-              />
-              <Message
-                className="animate-slide-in invisible"
-                style={{ animationDelay: "1s" }}
-                message={{
-                  role: "user",
-                  content:
-                    "Tour Guide answers questions and helps navigate your website, giving them a modern, AI-driven experience",
-                }}
-              />
-            </div>
+          <div className="flex flex-col w-3/4 justify-center items-center gap-8">
+            <Message
+              className="animate-slide-in invisible"
+              style={{ animationDelay: "1s" }}
+              message={{
+                role: "user",
+                content: "What time are you open on Saturdays?",
+              }}
+            />
+            <Message
+              className="animate-slide-in invisible"
+              message={{
+                role: "assistant",
+                content: "Hey! We are open today from 10am-6pm. Come on in!",
+              }}
+            />
           </div>
         </div>
       </Section>
@@ -113,7 +108,7 @@ export const Home = () => {
               Bring your website into the future with <b>one line of code</b>
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light">
-              Lorem ipsum
+              Creating an AI assistant has never been easier
             </p>
           </div>
           <hr className="my-16" />
