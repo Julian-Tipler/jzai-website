@@ -37,7 +37,7 @@ export const Message = ({
         </div>
         <div
           className={classNames(
-            "w-4/5 rounded-lg rounded-tl-lg rounded-tr-lg p-4 text-left text-sm font-normal",
+            "w-4/5 rounded-lg rounded-tl-lg rounded-tr-lg p-4 text-left text-lg font-normal",
             {
               "self-end rounded-bl-lg rounded-br-none bg-primary-700 text-white":
                 isUser,

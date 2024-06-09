@@ -52,7 +52,7 @@ export const Home = () => {
   return (
     <>
       <Section id="home" variant={SectionVariant.Secondary}>
-        <div className="gap-40 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6">
+        <div className="gap-40 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6 justify-items-center">
           <div className="flex flex-col justify-center items-center md:items-start font-light sm:text-lg">
             <h1 className="mb-4 text-6xl font-medium text-gray-900 dark:text-white leading-tight">
               Your website needs a tour guide
