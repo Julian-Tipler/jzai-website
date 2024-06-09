@@ -59,18 +59,18 @@ export const CustomerLayout = () => {
     .slice(2)
     .filter((match) => match.pathname !== "/dashboard/copilots/"); // For some reason useMatches() matches dashboard/copilots twice.
   const currentMatch = matches[matches.length - 1];
-  const title = currentMatch.handle?.data.title;
+  const title = currentMatch.handle?.crumb(currentMatch.data);
 
   return (
     <div className="bg-gray-100 flex flex-row h-full w-full">
       <Helmet>
-        <title>{currentMatch.handle?.data.title} | JZAI</title>
+        <title>{title} | JZAI</title>
       </Helmet>
       <SideNav />
       <div className="flex flex-col flex-1">
         <div className="overflow-scroll h-full flex flex-col">
           <TopBar />
-          <main className="p-4 flex flex-col h-full gap-2">
+          <main className="relative p-4 flex flex-col h-full gap-2">
             {breadcrumbs && breadcrumbs.length > 1 && (
               <Breadcrumbs matches={breadcrumbs} />
             )}
@@ -79,6 +79,7 @@ export const CustomerLayout = () => {
                 {title}
               </h1>
             )}
+            <hr className="my-8" />
             <Outlet />
           </main>
         </div>

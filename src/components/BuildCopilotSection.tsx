@@ -6,6 +6,7 @@ import { Tables } from "../types/database.types";
 import { useLoginContext } from "../contexts/LoginContext";
 import { MdError } from "react-icons/md";
 import CopilotForm from "./CopilotForm";
+import { WiseRoutes } from "../helpers/constants";
 
 export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
   const [url, setUrl] = useState(webUrl);
@@ -90,7 +91,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
 
   const handleModalLogin = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    modalLogin(`/copilots/${copilotId}`);
+    modalLogin(`${WiseRoutes.dashboard.copilots.path}/${copilotId}`);
   };
 
   return (

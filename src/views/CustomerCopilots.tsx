@@ -6,6 +6,7 @@ import WiseLink from "../components/WiseLink";
 import Card from "../components/Card";
 import { useAuthContext } from "../contexts/AuthContext";
 import { WiseRoutes } from "../helpers/constants";
+import ChatIcon from "../components/ChatIcon";
 
 export const CustomerCopilots = () => {
   const { session } = useAuthContext();
@@ -49,23 +50,32 @@ export const CustomerCopilots = () => {
     <div className="flex flex-col h-full">
       <div className="flex w-full justify-end">
         <div className="flex">
-          <WiseLink to={WiseRoutes.dashboard.copilots.create.name}>
+          <WiseLink
+            to={WiseRoutes.dashboard.copilots.create.name}
+            className="absolute right-0 top-0 m-4"
+          >
             Create a new copilot
           </WiseLink>
         </div>
       </div>
       <ul className="flex">
         {copilots?.map((copilot) => (
-          <Link key={copilot.id} to={`${copilot.id}`}>
-            <Card key={copilot.id}>
+          <Link key={copilot.id} to={`${copilot.id}`} className="w-full">
+            <Card
+              key={copilot.id}
+              style={{ border: `1px solid ${copilot.primaryColor}` }}
+              className="!p-3 w-1/2"
+            >
               <div className="flex justify-between">
-                <div className="flex gap-4">
+                <div className="flex gap-4 items-center">
                   <div
-                    className="flex w-8 self-stretch rounded-md"
+                    className="flex w-12 h-12 rounded-full items-center justify-center"
                     style={{ backgroundColor: copilot.primaryColor }}
-                  />
+                  >
+                    <ChatIcon />
+                  </div>
                   <div className="flex flex-col">
-                    <h3 className="mb-1 text-xl font-normal text-gray-900 dark:text-white">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {copilot.title}
                     </h3>
                     <p className="text-gray-500 text-md font-normal">
@@ -73,7 +83,6 @@ export const CustomerCopilots = () => {
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col v-gap-4">Online</div>
               </div>
             </Card>
           </Link>
