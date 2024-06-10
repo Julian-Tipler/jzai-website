@@ -13,9 +13,9 @@ export const Message = ({
 
   return (
     <div
-      className={classNames(className, "flex flex-row text-xs", {
-        "items-end": isUser,
-        "items-start": !isUser,
+      className={classNames(className, "flex flex-row text-xs ", {
+        "self-end": isUser,
+        "self-start": !isUser,
       })}
       style={style}
     >
@@ -37,7 +37,7 @@ export const Message = ({
         </div>
         <div
           className={classNames(
-            "w-4/5 rounded-lg rounded-tl-lg rounded-tr-lg p-4 text-left text-lg font-normal",
+            "max-w-[23rem] min-w-8 rounded-lg rounded-tl-lg rounded-tr-lg p-4 text-left text-lg font-normal break-words",
             {
               "self-end rounded-bl-lg rounded-br-none bg-primary-700 text-white":
                 isUser,
