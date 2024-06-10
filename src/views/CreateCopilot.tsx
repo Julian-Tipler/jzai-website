@@ -15,7 +15,6 @@ export const CreateCopilot = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const predefinedColors = [
     "#0090FF",
-    "#FFFFFF",
     "#323232",
     "#5856fe",
     "#45AF96",

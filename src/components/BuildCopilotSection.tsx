@@ -17,7 +17,6 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
   const copilotId = searchParams.get("copilot-id");
   const predefinedColors = [
     "#0090FF",
-    "#FFFFFF",
     "#323232",
     "#5856fe",
     "#45AF96",
