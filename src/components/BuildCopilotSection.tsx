@@ -73,6 +73,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
         console.error(error);
         setErrors(["An error occurred. Please try again later"]);
       }
+
       if (data?.errorMessage) {
         setErrors([data.errorMessage]);
       }

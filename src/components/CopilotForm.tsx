@@ -5,6 +5,7 @@ const CopilotForm = ({
   selectedColor,
   customColor,
   copilotId,
+  urlIsReadOnly,
   setUrl,
   setTitle,
   handleColorChange,
@@ -16,6 +17,7 @@ const CopilotForm = ({
   selectedColor: string;
   customColor: string;
   copilotId: string | null;
+  urlIsReadOnly?: boolean;
   setUrl: (url: string) => void;
   setTitle: (title: string) => void;
   handleColorChange: (color: string) => void;
@@ -37,7 +39,7 @@ const CopilotForm = ({
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://your-url-here.com"
           className={`w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${copilotId ? "bg-gray-200 text-gray-400" : ""}`}
-          disabled={!!copilotId}
+          disabled={!!copilotId || urlIsReadOnly}
         />
       </div>
       <div className="mb-3">
