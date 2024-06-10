@@ -100,10 +100,10 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
           Build your copilot
         </h2>
         <p className="mb-2 text-gray-500 dark:text-gray-400 font-light">
-          Enter the URL of the website you want to demo with Copilot.
+          Enter your website&apos;s url.
         </p>
         <p className="mb-10 text-gray-500 dark:text-gray-400 font-light">
-          We&apos;ll generate a Copilot for you to try out.
+          In less than a minute we&apos;ll generate a Copilot for you.
         </p>
         <form className="flex flex-col gap-2 w-4/5">
           <CopilotForm
@@ -177,8 +177,11 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
         </form>
       </div>
       <div className="flex justify-center items-center">
-        <div className="min-h-[610px] min-w-[360px] flex justify-end items-end">
+        <div className="relative min-h-[610px] min-w-[360px] flex justify-end items-end">
           <Copilot />
+          {!copilotId && (
+            <div className="absolute inset-[-5px] bg-white bg-opacity-20 backdrop-blur-sm rounded-lg"></div>
+          )}
         </div>
       </div>
     </div>

@@ -6,9 +6,10 @@ import { FaArrowDownLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
 import supabase from "../clients/supabase";
 import Section, { SectionVariant } from "../components/Section";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Message } from "../components/Message";
 import { Contact } from "../components/Contact";
+import { RotatingMessages } from "../components/RotatingMessages";
 
 export const Home = () => {
   const { isPending, error, data } = useQuery({
@@ -38,7 +39,7 @@ export const Home = () => {
     },
     {
       title: "One line of html",
-      description: "Just copy+paste into your website header",
+      description: "Just copy+paste into your website head",
       icon: FaLaptopCode,
     },
     {
@@ -47,6 +48,17 @@ export const Home = () => {
       icon: FaMapMarkedAlt,
     },
   ];
+
+  const tryNowLinkRef = useRef<HTMLAnchorElement | null>(null);
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (tryNowLinkRef.current) {
+        tryNowLinkRef.current.click();
+      }
+    }
+  };
 
   return (
     <>
@@ -57,8 +69,7 @@ export const Home = () => {
               Your website needs a tour guide
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
-              “Tour Guide” is a website assistant that helps your users navigate
-              your website and answers their questions.
+              “Tour Guide” answers questions and helps with website navigation.
             </p>
             <div className="flex gap-1 h-fit mt-10">
               <div className="flex flex-col">
@@ -68,9 +79,12 @@ export const Home = () => {
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="Your website URL"
                   className="w-52 md:w-80 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  onKeyDown={handleKeyPress}
                 />
               </div>
               <a
+                id="try-it-now"
+                ref={tryNowLinkRef}
                 href="#build"
                 className="flex flex-row items-center w-fit gap-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 whitespace-nowrap"
               >
@@ -82,30 +96,14 @@ export const Home = () => {
               No Login Required
             </p>
           </div>
-          <div className="flex flex-col w-3/4 justify-center items-center gap-8">
-            <Message
-              className="animate-slide-in invisible"
-              message={{
-                role: "user",
-                content: "What time are you open on Saturdays?",
-              }}
-            />
-            <Message
-              className="animate-slide-in invisible"
-              style={{ animationDelay: "1s" }}
-              message={{
-                role: "assistant",
-                content: "Hey! We are open today from 10am-6pm. Come on in!",
-              }}
-            />
-          </div>
+          <RotatingMessages />
         </div>
       </Section>
       <Section id="features">
         <div className="py-24 px-4 mx-auto max-w-screen-xl lg:py-36 lg:px-6">
           <div className="max-w-screen-md">
             <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white leading-tight">
-              Bring your website into the future with <b>one line of code</b>
+              It only takes <b>one line of code</b>
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light">
               Creating an AI assistant has never been easier
