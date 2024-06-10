@@ -7,6 +7,7 @@ import { useLoginContext } from "../contexts/LoginContext";
 import { MdError } from "react-icons/md";
 import CopilotForm from "./CopilotForm";
 import Button from "./Button";
+import { WiseRoutes } from "../helpers/constants";
 
 export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
   const [url, setUrl] = useState(webUrl);
@@ -18,7 +19,6 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
   const copilotId = searchParams.get("copilot-id");
   const predefinedColors = [
     "#0090FF",
-    "#FFFFFF",
     "#323232",
     "#5856fe",
     "#45AF96",
@@ -78,6 +78,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
         console.error(error);
         setErrors(["An error occurred. Please try again later"]);
       }
+
       if (data?.errorMessage) {
         setLoading(false);
         setErrors([data.errorMessage]);
@@ -97,7 +98,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
 
   const handleModalLogin = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    modalLogin(`/copilots/${copilotId}`);
+    modalLogin(`${WiseRoutes.dashboard.copilots.path}/${copilotId}`);
   };
 
   return (
@@ -122,7 +123,6 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
             predefinedColors={predefinedColors}
             copilotId={copilotId}
           />
-          {/* Error Container */}
           <div className="min-h-8">
             {errors.map((error) => (
               <p

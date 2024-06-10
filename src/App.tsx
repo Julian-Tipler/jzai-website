@@ -99,11 +99,11 @@ function App({ queryClient }: { queryClient: QueryClient }) {
               ],
             },
             {
-              path: WiseRoutes.dashboard.settings.name,
+              path: WiseRoutes.dashboard.support.name,
               element: <CustomerSettings />,
               handle: {
-                crumb: () => WiseRoutes.dashboard.settings.title,
-                data: { title: WiseRoutes.dashboard.settings.title },
+                crumb: () => WiseRoutes.dashboard.support.title,
+                data: { title: WiseRoutes.dashboard.support.title },
               },
             },
             {

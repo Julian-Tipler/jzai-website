@@ -1,32 +1,40 @@
 import { ChangeEvent, useState } from "react";
 import { Tables } from "../types/database.types";
 import supabase from "../clients/supabase";
-import { redirect } from "react-router-dom";
+import { redirect, useParams } from "react-router-dom";
 import { Copilot } from "./Copilot";
 import CopilotForm from "./CopilotForm";
 import { MdError } from "react-icons/md";
 import Card from "./Card";
 import Button from "./Button";
+import { WiseRoutes } from "../helpers/constants";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const CopilotDisplay = ({
   copilot,
 }: {
   copilot: Tables<"copilots">;
 }) => {
-  const [url, setUrl] = useState("");
-  const [title, setTitle] = useState("");
+  const { copilotId } = useParams<{ copilotId: string }>();
+  const [url, setUrl] = useState(copilot.baseUrl);
+  const [title, setTitle] = useState(copilot.title ?? "Copilot");
   const [errors, setErrors] = useState<string[]>([]);
   const predefinedColors = [
     "#0090FF",
-    "#FFFFFF",
     "#323232",
     "#5856fe",
     "#45AF96",
     "#F35353",
   ];
-  const [selectedColor, setSelectedColor] = useState(predefinedColors[0]);
-  const [customColor, setCustomColor] = useState("");
+  const isCustomColor = !predefinedColors.includes(copilot.primaryColor);
+  const [selectedColor, setSelectedColor] = useState(
+    isCustomColor ? predefinedColors[0] : copilot.primaryColor,
+  );
+  const [customColor, setCustomColor] = useState(
+    isCustomColor ? copilot.primaryColor : "",
+  );
   const primaryColor = selectedColor || customColor;
+  const queryClient = useQueryClient();
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color);
@@ -44,10 +52,66 @@ export const CopilotDisplay = ({
     await supabase.functions.invoke("stripe/cancel-subscription", {
       method: "POST",
       body: {
-        copilotId: copilot.id,
+        copilotId: copilotId,
       },
     });
-    redirect("/copilots");
+    redirect(WiseRoutes.dashboard.copilots.path);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const errors = validateForm({ url, primaryColor });
+
+    if (errors.length > 0) {
+      setErrors(errors);
+
+      return;
+    } else {
+      setErrors([]);
+
+      const body = {
+        copilotId: copilotId,
+        primaryColor,
+        title,
+      };
+
+      const { data, error } = await supabase.functions.invoke("copilots", {
+        method: "PUT",
+        body,
+      });
+
+      if (error) {
+        console.error(error);
+        setErrors(["An error occurred. Please try again later"]);
+      }
+
+      if (data?.errorMessage) {
+        setErrors([data.errorMessage]);
+      }
+
+      queryClient.invalidateQueries({
+        queryKey: ["copilot-bundle", copilotId],
+      });
+      queryClient.refetchQueries({ queryKey: ["copilot-bundle", copilotId] });
+      queryClient.refetchQueries({ queryKey: ["copilot", copilotId] });
+    }
+  };
+
+  const validateForm = ({
+    url,
+    primaryColor,
+  }: {
+    url: string;
+    primaryColor: string;
+  }) => {
+    if (!url) {
+      return ["url is required"];
+    }
+    if (!primaryColor) {
+      return ["color is required"];
+    }
+
+    return [];
   };
 
   return (
@@ -73,6 +137,7 @@ export const CopilotDisplay = ({
                 customColor={customColor}
                 predefinedColors={predefinedColors}
                 copilotId={copilot.id}
+                urlIsReadOnly={true}
               />
               <div className="min-h-8">
                 {errors.map((error) => (
@@ -85,7 +150,7 @@ export const CopilotDisplay = ({
                   </p>
                 ))}
               </div>
-              <Button className="w-full" onClick={cancelSubscription}>
+              <Button className="w-full" onClick={onSubmit}>
                 Save Changes
               </Button>
             </form>

@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
 import { WiseRoutes } from "../helpers/constants";
 import { FaChevronRight } from "react-icons/fa";
+import { MdContactSupport } from "react-icons/md";
 
 interface LinkItemProps {
   name: string;
@@ -16,9 +17,9 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Copilots", icon: FiStar, href: WiseRoutes.dashboard.copilots.name },
   {
-    name: "Settings",
-    icon: FiSettings,
-    href: WiseRoutes.dashboard.settings.name,
+    name: "Support",
+    icon: MdContactSupport,
+    href: WiseRoutes.dashboard.support.name,
   },
 ];
 
@@ -59,18 +60,18 @@ export const CustomerLayout = () => {
     .slice(2)
     .filter((match) => match.pathname !== "/dashboard/copilots/"); // For some reason useMatches() matches dashboard/copilots twice.
   const currentMatch = matches[matches.length - 1];
-  const title = currentMatch.handle?.data.title;
+  const title = currentMatch.handle?.crumb(currentMatch.data);
 
   return (
     <div className="bg-gray-100 flex flex-row h-full w-full">
       <Helmet>
-        <title>{currentMatch.handle?.data.title} | JZAI</title>
+        <title>{title} | JZAI</title>
       </Helmet>
       <SideNav />
       <div className="flex flex-col flex-1">
         <div className="overflow-scroll h-full flex flex-col">
           <TopBar />
-          <main className="p-4 flex flex-col h-full gap-2">
+          <main className="relative p-4 flex flex-col h-full gap-2">
             {breadcrumbs && breadcrumbs.length > 1 && (
               <Breadcrumbs matches={breadcrumbs} />
             )}
@@ -79,6 +80,7 @@ export const CustomerLayout = () => {
                 {title}
               </h1>
             )}
+            <hr className="my-8" />
             <Outlet />
           </main>
         </div>
@@ -127,7 +129,7 @@ const NavItem = ({
       to={href}
       className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-200"
     >
-      {IconComponent && <IconComponent className="mr-4 text-16" />}
+      {IconComponent && <IconComponent className="mr-4 text-16" size={20} />}
       {children}
     </Link>
   );

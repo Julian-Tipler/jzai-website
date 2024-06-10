@@ -21,10 +21,10 @@ export const WiseRoutes = {
         title: "Create",
       },
     },
-    settings: {
-      name: "settings",
-      path: "/dashboard/settings",
-      title: "Settings",
+    support: {
+      name: "support",
+      path: "/dashboard/support",
+      title: "Support",
     },
   },
 };
