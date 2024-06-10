@@ -1,10 +1,14 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
 import { useQuery } from "@tanstack/react-query";
 
 export const Copilot = () => {
-  const copilotId = useParams().copilotId;
+  // We search both searchParams and regular params to handle both home and copilot pages.
+  const [searchParams] = useSearchParams();
+  const paramsCopilotId = useParams().copilotId;
+  const searchParamsCopilotId = searchParams.get("copilot-id");
+  const copilotId = paramsCopilotId || searchParamsCopilotId;
   const hostId = "jzai-copilot-host";
 
   const {
