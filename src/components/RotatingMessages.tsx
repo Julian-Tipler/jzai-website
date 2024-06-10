@@ -24,7 +24,7 @@ export const RotatingMessages = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSelected((prev) => (prev + 1) % conversations.length);
-    }, 10000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, []);
