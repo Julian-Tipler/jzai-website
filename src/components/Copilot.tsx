@@ -18,12 +18,8 @@ export const Copilot = () => {
     enabled: !!copilotId,
   });
 
-  const resolvedCopilotId = copilot?.data?.id || copilotId;
-  const copilotHostId = resolvedCopilotId
-    ? `${hostId}-${resolvedCopilotId}`
-    : hostId;
-  // If no resolvedCopilotId then just get the default copilot.js
-  const bundleId = resolvedCopilotId ? `${resolvedCopilotId}.js` : "copilot.js";
+  const resolvedCopilotId = copilot?.data?.id;
+  const copilotHostId = `${hostId}-${resolvedCopilotId}`;
 
   const {
     isPending,
@@ -32,14 +28,16 @@ export const Copilot = () => {
   } = useQuery({
     queryKey: ["copilot-bundle", resolvedCopilotId],
     queryFn: async () => {
-      const file = await supabase.storage.from("bundles").download(bundleId);
+      const file = await supabase.storage
+        .from("bundles")
+        .download(resolvedCopilotId!);
       const text = await file.data?.text();
 
       if (!text) throw "No text found in file";
 
       return text;
     },
-    enabled: !isCopilotPending || !copilotId,
+    enabled: !!resolvedCopilotId,
   });
 
   useEffect(() => {
