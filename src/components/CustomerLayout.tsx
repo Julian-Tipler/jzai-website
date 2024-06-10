@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
 import { WiseRoutes } from "../helpers/constants";
 import { FaChevronRight } from "react-icons/fa";
+import { MdContactSupport } from "react-icons/md";
 
 interface LinkItemProps {
   name: string;
@@ -16,9 +17,9 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Copilots", icon: FiStar, href: WiseRoutes.dashboard.copilots.name },
   {
-    name: "Settings",
-    icon: FiSettings,
-    href: WiseRoutes.dashboard.settings.name,
+    name: "Support",
+    icon: MdContactSupport,
+    href: WiseRoutes.dashboard.support.name,
   },
 ];
 
@@ -128,7 +129,7 @@ const NavItem = ({
       to={href}
       className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-200"
     >
-      {IconComponent && <IconComponent className="mr-4 text-16" />}
+      {IconComponent && <IconComponent className="mr-4 text-16" size={20} />}
       {children}
     </Link>
   );

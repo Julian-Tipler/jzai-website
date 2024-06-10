@@ -119,7 +119,6 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
             predefinedColors={predefinedColors}
             copilotId={copilotId}
           />
-          {/* Error Container */}
           <div className="min-h-8">
             {errors.map((error) => (
               <p
