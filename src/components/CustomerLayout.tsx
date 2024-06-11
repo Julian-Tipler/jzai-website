@@ -65,7 +65,7 @@ export const CustomerLayout = () => {
   return (
     <div className="bg-gray-100 flex flex-row h-full w-full">
       <Helmet>
-        <title>{title} | JZAI</title>
+        <title>{title ? `${title} | JZAI` : "JZAI"}</title>
       </Helmet>
       <SideNav />
       <div className="flex flex-col flex-1">

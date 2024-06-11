@@ -26,7 +26,7 @@ const linkItems: Array<LinkItemProps> = [
 ];
 
 export const Header = () => {
-  const { loginModalOpen, setLoginModalOpen } = useLoginContext();
+  const { loginModalOpen, setLoginModalOpen, modalLogin } = useLoginContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { session } = useAuthContext();
 
@@ -58,7 +58,11 @@ export const Header = () => {
             {session ? (
               <WiseLink to={WiseRoutes.dashboard.path}>Dashboard</WiseLink>
             ) : (
-              <Button onClick={() => setLoginModalOpen(true)}>Login</Button>
+              <Button
+                onClick={() => modalLogin(WiseRoutes.dashboard.copilots.path)}
+              >
+                Login
+              </Button>
             )}
             <button
               data-collapse-toggle="mobile-menu-2"
