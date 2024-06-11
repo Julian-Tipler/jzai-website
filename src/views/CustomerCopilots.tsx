@@ -60,11 +60,11 @@ export const CustomerCopilots = () => {
       </div>
       <ul className="flex flex-col gap-4">
         {copilots?.map((copilot) => (
-          <Link key={copilot.id} to={`${copilot.id}`} className="w-full">
+          <Link key={copilot.id} to={`${copilot.id}`} className="w-1/2">
             <Card
               key={copilot.id}
               style={{ border: `1px solid ${copilot.primaryColor}` }}
-              className="!p-3 w-1/2"
+              className="!p-3"
             >
               <div className="flex justify-between">
                 <div className="flex gap-4 items-center">

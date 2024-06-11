@@ -10,7 +10,7 @@ import { PublicLayout } from "./components/PublicLayout";
 import { Home } from "./views/Home";
 import { Error } from "./views/Error";
 import { redirect } from "react-router-dom";
-import { CustomerSettings } from "./views/CustomerSettings";
+import { CustomerSupport } from "./views/CustomerSupport";
 import { CustomerLayout } from "./components/CustomerLayout";
 import { CustomerCopilot } from "./views/CustomerCopilot";
 import { CustomerCopilots } from "./views/CustomerCopilots";
@@ -100,7 +100,7 @@ function App({ queryClient }: { queryClient: QueryClient }) {
             },
             {
               path: WiseRoutes.dashboard.support.name,
-              element: <CustomerSettings />,
+              element: <CustomerSupport />,
               handle: {
                 crumb: () => WiseRoutes.dashboard.support.title,
                 data: { title: WiseRoutes.dashboard.support.title },
