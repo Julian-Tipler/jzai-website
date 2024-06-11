@@ -36,7 +36,7 @@ export const Copilot = () => {
       const uniqueId = new Date().getTime();
       const file = await supabase.storage
         .from("bundles")
-        .download(`${resolvedCopilotId!}?${uniqueId}`);
+        .download(`${resolvedCopilotId!}.js?${uniqueId}`);
       const text = await file.data?.text();
 
       if (!text) throw "No text found in file";

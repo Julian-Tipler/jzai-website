@@ -184,7 +184,7 @@ export const Home = () => {
             <h2 className="mb-4 text-4xl font-normal leading-tight text-gray-900 dark:text-white">
               Talk to an engineer today
             </h2>
-            <p className="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
+            <p className="mb-10 font-light text-gray-500 dark:text-gray-400 md:text-lg">
               We are here to help you get started with AI integration. Our team
               of engineers is ready to answer your questions and help you get
               started.
