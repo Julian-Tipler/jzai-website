@@ -107,8 +107,8 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
         <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white">
           Build your copilot
         </h2>
-        <p className="mb-10 text-gray-500 dark:text-gray-400 font-light">
-          Generation takes <b>less than a minute</b>
+        <p className="mb-2 text-gray-500 dark:text-gray-400 font-light">
+          Generation takes <b className="font-semibold">less than a minute</b>
         </p>
         <form className="flex flex-col gap-2 w-4/5">
           <CopilotForm
@@ -183,9 +183,12 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
       </div>
       <div className="flex justify-center items-center">
         <div className="relative min-h-[610px] min-w-[360px] flex justify-end items-end">
-          <Copilot />
+          {copilotId && <Copilot />}
           {!copilotId && (
-            <div className="absolute inset-[-5px] bg-white bg-opacity-20 backdrop-blur-sm rounded-lg"></div>
+            <>
+              <div className="absolute inset-[-5px] bg-white bg-opacity-20 backdrop-blur-sm rounded-lg"></div>
+              <img src="/copilot.png" alt="Picture of a copilot" width={470} />
+            </>
           )}
         </div>
       </div>

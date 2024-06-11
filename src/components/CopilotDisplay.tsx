@@ -161,7 +161,7 @@ export const CopilotDisplay = ({
           </div>
         </Card>
         <div className="flex justify-center items-center">
-          <div className="min-h-[610px] min-w-[360px] flex justify-end items-end">
+          <div className="min-h-[610px] min-w-[360px] flex justify-end items-end relative">
             <Copilot />
           </div>
         </div>
