@@ -6,6 +6,7 @@ import { Tables } from "../types/database.types";
 import { useLoginContext } from "../contexts/LoginContext";
 import { MdError } from "react-icons/md";
 import CopilotForm from "./CopilotForm";
+import Button from "./Button";
 import { WiseRoutes } from "../helpers/constants";
 
 export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
@@ -13,6 +14,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
   const [title, setTitle] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const copilotId = searchParams.get("copilot-id");
   const predefinedColors = [
@@ -43,9 +45,11 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setLoading(true);
     const errors = validateForm({ url, primaryColor });
 
     if (errors.length > 0) {
+      setLoading(false);
       setErrors(errors);
 
       return;
@@ -70,15 +74,18 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
       });
 
       if (error) {
+        setLoading(false);
         console.error(error);
         setErrors(["An error occurred. Please try again later"]);
       }
 
       if (data?.errorMessage) {
+        setLoading(false);
         setErrors([data.errorMessage]);
       }
 
       if (data?.copilot?.id) {
+        setLoading(false);
         const queryParams = new URLSearchParams();
 
         queryParams.set("copilot-id", data.copilot.id);
@@ -101,7 +108,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
           Build your copilot
         </h2>
         <p className="mb-10 text-gray-500 dark:text-gray-400 font-light">
-          Generation takes less than a minute
+          Generation takes <b>less than a minute</b>
         </p>
         <form className="flex flex-col gap-2 w-4/5">
           <CopilotForm
@@ -148,8 +155,9 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
             </button>
           ) : (
             <>
-              <button
+              <Button
                 onClick={(e) => onSubmit(e)}
+                loading={loading}
                 className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
               >
                 Demo my Copilot
@@ -165,7 +173,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </button>
+              </Button>
               <p className="text-center text-gray-400 text-sm font-light">
                 No Login Required!
               </p>
