@@ -32,9 +32,11 @@ export const Copilot = () => {
   } = useQuery({
     queryKey: ["copilot-bundle", resolvedCopilotId],
     queryFn: async () => {
+      // This id prevents the browser from caching the file.
+      const uniqueId = new Date().getTime();
       const file = await supabase.storage
         .from("bundles")
-        .download(resolvedCopilotId!);
+        .download(`${resolvedCopilotId!}?${uniqueId}`);
       const text = await file.data?.text();
 
       if (!text) throw "No text found in file";

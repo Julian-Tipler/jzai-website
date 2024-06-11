@@ -4,7 +4,7 @@ import supabase from "../clients/supabase";
 import { redirect, useParams } from "react-router-dom";
 import { Copilot } from "./Copilot";
 import CopilotForm from "./CopilotForm";
-import { MdError } from "react-icons/md";
+import { MdEdit, MdError } from "react-icons/md";
 import Card from "./Card";
 import Button from "./Button";
 import { WiseRoutes } from "../helpers/constants";
@@ -19,6 +19,7 @@ export const CopilotDisplay = ({
   const [url, setUrl] = useState(copilot.baseUrl);
   const [title, setTitle] = useState(copilot.title ?? "Copilot");
   const [errors, setErrors] = useState<string[]>([]);
+  const [edit, setEdit] = useState(false);
   const predefinedColors = [
     "#0090FF",
     "#323232",
@@ -89,11 +90,7 @@ export const CopilotDisplay = ({
         setErrors([data.errorMessage]);
       }
 
-      queryClient.invalidateQueries({
-        queryKey: ["copilot-bundle", copilotId],
-      });
-      queryClient.refetchQueries({ queryKey: ["copilot-bundle", copilotId] });
-      queryClient.refetchQueries({ queryKey: ["copilot", copilotId] });
+      window.location.reload();
     }
   };
 
@@ -119,12 +116,16 @@ export const CopilotDisplay = ({
       <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
         <Card>
           <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
-            <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
-              Edit your copilot
-            </h2>
-            <p className="mb-8 text-gray-500 dark:text-gray-400 font-light">
-              Enter the URL of the website you want to demo with Copilot.
-            </p>
+            <div className="flex mb-6 w-full justify-between">
+              <h2 className="text-2xl font-normal text-gray-900 dark:text-white">
+                Copilot Options
+              </h2>
+              {!edit && (
+                <button onClick={() => setEdit(true)} aria-label="Edit copilot">
+                  <MdEdit size={24} />
+                </button>
+              )}
+            </div>
             <form className="flex flex-col gap-2 w-full">
               <CopilotForm
                 url={url}
@@ -138,6 +139,7 @@ export const CopilotDisplay = ({
                 predefinedColors={predefinedColors}
                 copilotId={copilot.id}
                 urlIsReadOnly={true}
+                allReadyOnly={!edit}
               />
               <div className="min-h-8">
                 {errors.map((error) => (
@@ -150,9 +152,11 @@ export const CopilotDisplay = ({
                   </p>
                 ))}
               </div>
-              <Button className="w-full" onClick={onSubmit}>
-                Save Changes
-              </Button>
+              {edit && (
+                <Button className="w-full" onClick={onSubmit}>
+                  Save Changes
+                </Button>
+              )}
             </form>
           </div>
         </Card>
