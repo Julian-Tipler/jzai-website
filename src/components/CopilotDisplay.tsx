@@ -8,7 +8,6 @@ import { MdClose, MdEdit, MdError } from "react-icons/md";
 import Card from "./Card";
 import Button from "./Button";
 import { WiseRoutes } from "../helpers/constants";
-import { useQueryClient } from "@tanstack/react-query";
 import { CodeSnippet } from "./CodeSnippet";
 
 export const CopilotDisplay = ({
@@ -36,7 +35,7 @@ export const CopilotDisplay = ({
     isCustomColor ? copilot.primaryColor : "",
   );
   const primaryColor = selectedColor || customColor;
-  const queryClient = useQueryClient();
+  const downloadUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/bundles/${copilotId}.js`;
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color);
@@ -187,9 +186,7 @@ export const CopilotDisplay = ({
                 {" <head>"} tag in your index.html file to embed your Copilot on
                 your website.
               </p>
-              <CodeSnippet
-                codeStr={'<iframe src="https://copilot.wiseai.io" />'}
-              />
+              <CodeSnippet codeStr={downloadUrl} />
             </div>
           </Card>
         </div>

@@ -14,13 +14,13 @@ export const CodeSnippet = ({ codeStr }: { codeStr: string }) => {
   };
 
   return (
-    <div className="flex gap-2">
-      <div className="bg-gray-100 p-2 rounded-md flex items-center justify-between">
+    <div className="flex gap-2 items-center">
+      <div className="bg-gray-100 p-2 rounded-md flex items-center justify-between break-all">
         <code className="text-sm font-mono text-gray-800">{codeStr}</code>
       </div>
       <Button
         onClick={handleCopy}
-        className={classNames("!p-2", {
+        className={classNames("!p-2 h-fit", {
           "animate-bounce-once": copied,
         })}
         aria-label={copied ? "Copied" : "Copy"}
