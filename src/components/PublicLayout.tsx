@@ -2,6 +2,7 @@ import { Header } from "./header/Header";
 import { Outlet, useMatches } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
+import { Footer } from "./Footer";
 
 export const PublicLayout = () => {
   const matches = useMatches() as unknown as RouteItem[];
@@ -14,6 +15,7 @@ export const PublicLayout = () => {
       </Helmet>
       <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 };
