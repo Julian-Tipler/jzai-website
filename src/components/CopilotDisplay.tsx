@@ -4,11 +4,12 @@ import supabase from "../clients/supabase";
 import { redirect, useParams } from "react-router-dom";
 import { Copilot } from "./Copilot";
 import CopilotForm from "./CopilotForm";
-import { MdEdit, MdError } from "react-icons/md";
+import { MdClose, MdEdit, MdError } from "react-icons/md";
 import Card from "./Card";
 import Button from "./Button";
 import { WiseRoutes } from "../helpers/constants";
 import { useQueryClient } from "@tanstack/react-query";
+import { CodeSnippet } from "./CodeSnippet";
 
 export const CopilotDisplay = ({
   copilot,
@@ -114,52 +115,84 @@ export const CopilotDisplay = ({
   return (
     <div>
       <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
-        <Card>
-          <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
-            <div className="flex mb-6 w-full justify-between">
-              <h2 className="text-2xl font-normal text-gray-900 dark:text-white">
-                Copilot Options
-              </h2>
-              {!edit && (
-                <button onClick={() => setEdit(true)} aria-label="Edit copilot">
-                  <MdEdit size={24} />
-                </button>
-              )}
-            </div>
-            <form className="flex flex-col gap-2 w-full">
-              <CopilotForm
-                url={url}
-                setUrl={setUrl}
-                title={title}
-                setTitle={setTitle}
-                handleColorChange={handleColorChange}
-                handleCustomColorChange={handleCustomColorChange}
-                selectedColor={selectedColor}
-                customColor={customColor}
-                predefinedColors={predefinedColors}
-                copilotId={copilot.id}
-                urlIsReadOnly={true}
-                allReadyOnly={!edit}
-              />
-              <div className="min-h-8">
-                {errors.map((error) => (
-                  <p
-                    key={error}
-                    className="text-red-600 flex flex-row gap-2 items-center"
-                  >
-                    <MdError />
-                    {error}
+        <div className="flex flex-col gap-2">
+          <Card>
+            <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
+              <div className="flex mb-6 w-full justify-between items-start">
+                <div className="flex flex-col">
+                  <h2 className="text-2xl font-normal text-gray-900 dark:text-white">
+                    Copilot Options
+                  </h2>
+                  <p className="text-gray-500 dark:text-gray-400 font-light">
+                    Edit your copilot and see changes in real-time.
                   </p>
-                ))}
+                </div>
+                {edit ? (
+                  <button
+                    onClick={() => setEdit(false)}
+                    aria-label="Stop editing copilot"
+                  >
+                    <MdClose size={24} />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setEdit(true)}
+                    aria-label="Edit copilot"
+                  >
+                    <MdEdit size={24} />
+                  </button>
+                )}
               </div>
-              {edit && (
-                <Button className="w-full" onClick={onSubmit}>
-                  Save Changes
-                </Button>
-              )}
-            </form>
-          </div>
-        </Card>
+              <form className="flex flex-col gap-2 w-full">
+                <CopilotForm
+                  url={url}
+                  setUrl={setUrl}
+                  title={title}
+                  setTitle={setTitle}
+                  handleColorChange={handleColorChange}
+                  handleCustomColorChange={handleCustomColorChange}
+                  selectedColor={selectedColor}
+                  customColor={customColor}
+                  predefinedColors={predefinedColors}
+                  copilotId={copilot.id}
+                  urlIsReadOnly={true}
+                  allReadyOnly={!edit}
+                />
+                <div className="min-h-8">
+                  {errors.map((error) => (
+                    <p
+                      key={error}
+                      className="text-red-600 flex flex-row gap-2 items-center"
+                    >
+                      <MdError />
+                      {error}
+                    </p>
+                  ))}
+                </div>
+                {edit && (
+                  <Button className="w-full" onClick={onSubmit}>
+                    Save Changes
+                  </Button>
+                )}
+              </form>
+            </div>
+          </Card>
+          <Card>
+            <div className="flex flex-col">
+              <h3 className="text-xl font-normal text-gray-900 dark:text-white">
+                Code Snippet
+              </h3>
+              <p className="mb-6 text-gray-500 dark:text-gray-400 font-light">
+                Copy the following code snippet and paste it into the
+                {" <head>"} tag in your index.html file to embed your Copilot on
+                your website.
+              </p>
+              <CodeSnippet
+                codeStr={'<iframe src="https://copilot.wiseai.io" />'}
+              />
+            </div>
+          </Card>
+        </div>
         <div className="flex justify-center items-center">
           <div className="min-h-[610px] min-w-[360px] flex justify-end items-end relative">
             <Copilot />

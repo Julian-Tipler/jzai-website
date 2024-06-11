@@ -12,9 +12,14 @@ export default {
           '1%': { visibility: 'visible' },
           "100%": { transform: "translateX(0)", visibility: 'visible' },
         },
+        bounceOnce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-25%)' },
+        },
       },
       animation: {
         "slide-in": "slide-in 1s forwards",
+        'bounce-once': 'bounceOnce 0.5s ease-in-out',
       },
       colors: {
         primary: {
