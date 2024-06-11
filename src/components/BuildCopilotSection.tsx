@@ -8,8 +8,10 @@ import { MdError } from "react-icons/md";
 import CopilotForm from "./CopilotForm";
 import Button from "./Button";
 import { WiseRoutes } from "../helpers/constants";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
+  const { session } = useAuthContext();
   const [url, setUrl] = useState(webUrl);
   const [title, setTitle] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -96,9 +98,16 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
     }
   };
 
-  const handleModalLogin = (e: React.FormEvent<HTMLButtonElement>) => {
+  const claimCopilot = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    modalLogin(`${WiseRoutes.dashboard.copilots.path}/${copilotId}`);
+
+    // If the user is logged in, navigate to the copilot dashboard
+    if (session) {
+      navigate(`${WiseRoutes.dashboard.copilots.path}/${copilotId}`);
+    } else {
+      // Otherwise, open the login modal
+      modalLogin(`${WiseRoutes.dashboard.copilots.path}/${copilotId}`);
+    }
   };
 
   return (
@@ -107,8 +116,9 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
         <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white">
           Build your copilot
         </h2>
-        <p className="mb-2 text-gray-500 dark:text-gray-400 font-light">
-          Generation takes <b className="font-semibold">less than a minute</b>
+        <p className="mb-10 text-gray-500 dark:text-gray-400 font-light">
+          {/* Generation takes <b className="font-semibold">less than a minute</b> */}
+          Interact with your copilot in real-time.
         </p>
         <form className="flex flex-col gap-2 w-4/5">
           <CopilotForm
@@ -136,7 +146,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
           </div>
           {copilotId ? (
             <button
-              onClick={(e) => handleModalLogin(e)}
+              onClick={(e) => claimCopilot(e)}
               className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
               Claim my copilot

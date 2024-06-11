@@ -84,8 +84,11 @@ function App({ queryClient }: { queryClient: QueryClient }) {
                   loader: async ({ params }) =>
                     await copilotLoader({ params, queryClient }),
                   handle: {
-                    crumb: (data: Tables<"copilots">) => data.title,
-                    data: { title: WiseRoutes.dashboard.copilots.title },
+                    crumb: (data: Tables<"copilots">) =>
+                      data.title ?? "Copilot",
+                    data: {
+                      title: WiseRoutes.dashboard.copilots.title ?? "Copilot",
+                    },
                   },
                 },
                 {
