@@ -9,7 +9,9 @@
     "gentypes": "supabase gen types typescript --project-id gvewqhwcmnmdeyckkvlo > src/types/database.types.ts",
     "lint": "eslint --fix",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.1",
