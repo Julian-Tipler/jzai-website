@@ -114,7 +114,7 @@ export const CopilotDisplay = ({
             <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
               <div className="flex mb-6 w-full justify-between items-start">
                 <div className="flex flex-col">
-                  <h2 className="text-2xl font-normal text-gray-900 dark:text-white">
+                  <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
                     Copilot Options
                   </h2>
                   <p className="text-gray-500 dark:text-gray-400 font-light">
@@ -173,12 +173,12 @@ export const CopilotDisplay = ({
           </Card>
           <Card>
             <div className="flex flex-col">
-              <h3 className="text-xl font-normal text-gray-900 dark:text-white">
+              <h3 className="mb-4 text-xl font-normal text-gray-900 dark:text-white">
                 Code Snippet
               </h3>
               <p className="mb-6 text-gray-500 dark:text-gray-400 font-light">
-                Copy the following code snippet and paste it into the
-                {" <head>"} tag in your index.html file to embed your Copilot on
+                Paste the following code snippet into the
+                {" <head>"} tag of your index.html file to add your copilot to
                 your website.
               </p>
               <CodeSnippet codeStr={downloadUrl} />
