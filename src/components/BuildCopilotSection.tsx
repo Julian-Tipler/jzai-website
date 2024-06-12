@@ -7,7 +7,7 @@ import { useLoginContext } from "../contexts/LoginContext";
 import { MdError } from "react-icons/md";
 import CopilotForm from "./CopilotForm";
 import Button from "./Button";
-import { WiseRoutes } from "../helpers/constants";
+import { WiseRoutes, colors } from "../helpers/constants";
 import { useAuthContext } from "../contexts/AuthContext";
 
 export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
@@ -19,14 +19,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const copilotId = searchParams.get("copilot-id");
-  const predefinedColors = [
-    "#0090FF",
-    "#323232",
-    "#5856fe",
-    "#45AF96",
-    "#F35353",
-  ];
-  const [selectedColor, setSelectedColor] = useState(predefinedColors[0]);
+  const [selectedColor, setSelectedColor] = useState(colors[0].hex);
   const [customColor, setCustomColor] = useState("");
   const primaryColor = selectedColor || customColor;
 
@@ -130,7 +123,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
             handleCustomColorChange={handleCustomColorChange}
             selectedColor={selectedColor}
             customColor={customColor}
-            predefinedColors={predefinedColors}
+            predefinedColors={colors}
             copilotId={copilotId}
           />
           <div className="min-h-8">

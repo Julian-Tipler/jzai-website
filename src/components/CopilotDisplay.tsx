@@ -7,7 +7,7 @@ import CopilotForm from "./CopilotForm";
 import { MdClose, MdEdit, MdError } from "react-icons/md";
 import Card from "./Card";
 import Button from "./Button";
-import { WiseRoutes } from "../helpers/constants";
+import { WiseRoutes, colors } from "../helpers/constants";
 import { CodeSnippet } from "./CodeSnippet";
 
 export const CopilotDisplay = ({
@@ -20,16 +20,11 @@ export const CopilotDisplay = ({
   const [title, setTitle] = useState(copilot.title ?? "Copilot");
   const [errors, setErrors] = useState<string[]>([]);
   const [edit, setEdit] = useState(false);
-  const predefinedColors = [
-    "#0090FF",
-    "#323232",
-    "#5856fe",
-    "#45AF96",
-    "#F35353",
-  ];
-  const isCustomColor = !predefinedColors.includes(copilot.primaryColor);
+  const isCustomColor = !colors
+    .map((color) => color.hex)
+    .includes(copilot.primaryColor);
   const [selectedColor, setSelectedColor] = useState(
-    isCustomColor ? predefinedColors[0] : copilot.primaryColor,
+    isCustomColor ? colors[0].hex : copilot.primaryColor,
   );
   const [customColor, setCustomColor] = useState(
     isCustomColor ? copilot.primaryColor : "",
@@ -152,7 +147,7 @@ export const CopilotDisplay = ({
                   handleCustomColorChange={handleCustomColorChange}
                   selectedColor={selectedColor}
                   customColor={customColor}
-                  predefinedColors={predefinedColors}
+                  predefinedColors={colors}
                   copilotId={copilot.id}
                   urlIsReadOnly={true}
                   allReadyOnly={!edit}
