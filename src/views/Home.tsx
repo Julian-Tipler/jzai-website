@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import supabase from "../clients/supabase";
 import Section, { SectionVariant } from "../components/Section";
 import { useRef, useState } from "react";
-import { Message } from "../components/Message";
 import { Contact } from "../components/Contact";
 import { RotatingMessages } from "../components/RotatingMessages";
 
@@ -28,8 +27,7 @@ export const Home = () => {
   const features = [
     {
       title: "Stay ahead of the competition",
-      description:
-        "Provide the AI driven experience users are coming to expect",
+      description: "Provide the AI driven experience users expect",
       icon: FaRobot,
     },
     {
@@ -38,13 +36,13 @@ export const Home = () => {
       icon: FaMoneyBill1Wave,
     },
     {
-      title: "One line of html",
-      description: "Just copy+paste into your website head",
+      title: "One line of HTML",
+      description: "Just copy and paste!",
       icon: FaLaptopCode,
     },
     {
       title: "Updates with your website",
-      description: "Tour Guide frequently updates its map of your website",
+      description: "WebPilot frequently updates its map of your website",
       icon: FaMapMarkedAlt,
     },
   ];
@@ -66,10 +64,11 @@ export const Home = () => {
         <div className="gap-40 py-8 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 lg:py-36 lg:px-6 justify-items-center">
           <div className="flex flex-col justify-center items-center md:items-start font-light sm:text-lg">
             <h1 className="mb-4 text-6xl font-medium text-gray-900 dark:text-white leading-tight">
-              Your website needs a tour guide
+              Your website needs a copilot
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
-              “Tour Guide” answers questions and helps with website navigation.
+              WisePilot is an AI assistant that helps users navigate your
+              website.
             </p>
             <div className="flex gap-1 h-fit mt-10">
               <div className="flex flex-col">
@@ -106,7 +105,7 @@ export const Home = () => {
               It only takes <b>one line of code</b>
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light">
-              Creating an AI assistant has never been easier
+              Adding an AI assistant has never been easier
             </p>
           </div>
           <hr className="my-16" />
@@ -137,21 +136,21 @@ export const Home = () => {
       >
         <BuildCopilotSection webUrl={url} />
       </Section>
-      <Section id="pricing">
-        <div className="py-8 px-4 lg:py-36 lg:px-6 flex flex-col items-center">
-          <h2 className="text-5xl font-normal text-center mb-4">Pricing</h2>
-          <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light mb-20">
-            Only pay for what you use...
-          </p>
-          {plans && (
+      {plans && (
+        <Section id="pricing">
+          <div className="py-8 px-4 lg:py-36 lg:px-6 flex flex-col items-center">
+            <h2 className="text-5xl font-normal text-center mb-4">Pricing</h2>
+            <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light mb-20">
+              Only pay for what you use.
+            </p>
             <div className="items-center justify-center gap-6 flex flex-wrap">
               {plans.map((plan) => (
                 <PlanPanel key={plan.name} plan={plan} />
               ))}
             </div>
-          )}
-        </div>
-      </Section>
+          </div>
+        </Section>
+      )}
       <Section id="custom" variant={SectionVariant.Secondary}>
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-36 lg:px-6">
           <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400 lg:order-last">
@@ -159,20 +158,20 @@ export const Home = () => {
               Need a custom solution?
             </h2>
             <p className="mb-4 font-light">
-              We work with you to build a custom AI solution that fits your
-              exact business needs. We will set you up with the tools you need
-              to get started and provide ongoing support.
+              We will work with you to build a custom AI solution that fits your
+              exact business needs. We can set you up with the tools you need to
+              get started and provide ongoing support.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-8 lg:order-first">
             <img
               className="w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
+              src="https://gvewqhwcmnmdeyckkvlo.supabase.co/storage/v1/object/public/photos/priscilla-du-preez-nNMBa7Y1Ymk-unsplash.jpg"
               alt=""
             />
             <img
-              className="mt-4 w-full rounded-lg lg:mt-10"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
+              className="mt-4 w-full h-full rounded-lg lg:mt-10"
+              src="https://gvewqhwcmnmdeyckkvlo.supabase.co/storage/v1/object/public/photos/olena-bohovyk-dIMJWLx1YbE-unsplash.jpg"
               alt=""
             />
           </div>
@@ -185,9 +184,9 @@ export const Home = () => {
               Talk to an engineer today
             </h2>
             <p className="mb-10 font-light text-gray-500 dark:text-gray-400 md:text-lg">
-              We are here to help you get started with AI integration. Our team
-              of engineers is ready to answer your questions and help you get
-              started.
+              We&apos;re here to help you get started with AI integration. Our
+              team of engineers is ready to answer your questions and help you
+              get started.
             </p>
             <Contact />
           </div>

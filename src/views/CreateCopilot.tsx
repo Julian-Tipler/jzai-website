@@ -103,8 +103,11 @@ export const CreateCopilot = () => {
             <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
               Build your copilot
             </h2>
+            <p className="mb-1 text-gray-500 dark:text-gray-400 font-light">
+              1. Generate your copilot in seconds.
+            </p>
             <p className="mb-8 text-gray-500 dark:text-gray-400 font-light">
-              Enter the URL of the website you want to demo with Copilot.
+              2. Ask it questions about your website.
             </p>
             <form className="flex flex-col gap-2 w-full h-full justify-between">
               <>

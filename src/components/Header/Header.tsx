@@ -57,7 +57,7 @@ export const Header = () => {
               alt="Flowbite Logo"
             />
             <span className="self-center text-xl font-light whitespace-nowrap dark:text-white">
-              Wise AI
+              WisePilot
             </span>
           </Link>
           <div className="flex items-center lg:order-2">

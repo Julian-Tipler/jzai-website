@@ -109,9 +109,11 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
         <h2 className="mb-4 text-5xl font-normal text-gray-900 dark:text-white">
           Build your copilot
         </h2>
-        <p className="mb-10 text-gray-500 dark:text-gray-400 font-light">
-          {/* Generation takes <b className="font-semibold">less than a minute</b> */}
-          Interact with your copilot in real-time.
+        <p className="mb-1 text-gray-500 dark:text-gray-400 font-light">
+          1. Generate your copilot in seconds.
+        </p>
+        <p className="mb-8 text-gray-500 dark:text-gray-400 font-light">
+          2. Ask it questions about your website.
         </p>
         <form className="flex flex-col gap-2 w-4/5">
           <CopilotForm
