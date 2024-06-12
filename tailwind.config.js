@@ -9,19 +9,20 @@ export default {
       keyframes: {
         "slide-in": {
           "0%": { transform: "translateX(100vw)" },
-          '1%': { visibility: 'visible' },
-          "100%": { transform: "translateX(0)", visibility: 'visible' },
+          "1%": { visibility: "visible" },
+          "100%": { transform: "translateX(0)", visibility: "visible" },
         },
         bounceOnce: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-25%)' },
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-25%)" },
         },
       },
       animation: {
         "slide-in": "slide-in 1s forwards",
-        'bounce-once': 'bounceOnce 0.5s ease-in-out',
+        "bounce-once": "bounceOnce 0.5s ease-in-out",
       },
       colors: {
+        brand: "#5974FF",
         primary: {
           50: "#eff6ff",
           100: "#dbeafe",
