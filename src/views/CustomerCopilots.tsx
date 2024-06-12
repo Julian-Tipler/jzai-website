@@ -60,32 +60,34 @@ export const CustomerCopilots = () => {
       </div>
       <ul className="flex flex-col gap-4">
         {copilots?.map((copilot) => (
-          <Link key={copilot.id} to={`${copilot.id}`} className="w-1/2">
-            <Card
-              key={copilot.id}
-              style={{ border: `1px solid ${copilot.primaryColor}` }}
-              className="!p-3"
-            >
-              <div className="flex justify-between">
-                <div className="flex gap-4 items-center">
-                  <div
-                    className="flex w-12 h-12 rounded-full items-center justify-center"
-                    style={{ backgroundColor: copilot.primaryColor }}
-                  >
-                    <ChatIcon />
-                  </div>
-                  <div className="flex flex-col">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {copilot.title}
-                    </h3>
-                    <p className="text-gray-500 text-md font-normal">
-                      {copilot.baseUrl}
-                    </p>
+          <li key={copilot.id} className="w-1/2">
+            <Link to={`${copilot.id}`}>
+              <Card
+                key={copilot.id}
+                style={{ border: `1px solid ${copilot.primaryColor}` }}
+                className="!p-3"
+              >
+                <div className="flex justify-between">
+                  <div className="flex gap-4 items-center">
+                    <div
+                      className="flex w-12 h-12 rounded-full items-center justify-center"
+                      style={{ backgroundColor: copilot.primaryColor }}
+                    >
+                      <ChatIcon />
+                    </div>
+                    <div className="flex flex-col">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        {copilot.title}
+                      </h3>
+                      <p className="text-gray-500 text-md font-normal">
+                        {copilot.baseUrl}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Card>
-          </Link>
+              </Card>
+            </Link>
+          </li>
         ))}
       </ul>
     </div>

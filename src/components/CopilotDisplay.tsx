@@ -195,7 +195,7 @@ export const CopilotDisplay = ({
         <hr />
         <div className="flex justify-center">
           <Button
-            className="bg-red-500 hover:bg-red-700 w-1/4"
+            className="bg-red-700 hover:bg-red-900 w-1/4"
             onClick={cancelSubscription}
           >
             Cancel Subscription
