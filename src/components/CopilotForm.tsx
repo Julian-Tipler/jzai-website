@@ -68,30 +68,42 @@ const CopilotForm = ({
         </label>
         <div className="flex space-x-2">
           {predefinedColors.map((color) => (
-            <button
+            <label
+              htmlFor={color.name}
               key={color.hex}
-              className={classNames("w-8 h-8 rounded-lg", {
-                "border-2": selectedColor === color.hex,
-                "border-1": selectedColor !== color.hex,
-                "border-blue-500": selectedColor === color.hex,
-                "border-grey-500": selectedColor !== color.hex,
-              })}
+              className={classNames(
+                "w-8 h-8 rounded-lg cursor-pointer flex items-center justify-center",
+                {
+                  "border-2 border-blue-500": selectedColor === color.hex,
+                  "border-1 border-gray-500": selectedColor !== color.hex,
+                },
+              )}
               style={{ backgroundColor: color.hex }}
-              disabled={allReadyOnly}
-              aria-label={`Select ${color.name}`}
-              onClick={(e) => {
-                e.preventDefault();
-                handleColorChange(color.hex);
-              }}
-            />
+            >
+              <input
+                type="radio"
+                name="color"
+                id={color.name}
+                value={color.hex}
+                checked={selectedColor === color.hex}
+                onChange={() => handleColorChange(color.hex)}
+                className="sr-only"
+                disabled={allReadyOnly}
+                aria-label={`Select ${color.name}`}
+              />
+            </label>
           ))}
         </div>
       </div>
       <div className="mb-3">
-        <label className="block text-gray-500 text-sm font-normal mb-2">
+        <label
+          htmlFor="custom-color"
+          className="block text-gray-500 text-sm font-normal mb-2"
+        >
           Or enter a custom color:
         </label>
         <input
+          id="custom-color"
           type="text"
           value={customColor}
           onChange={handleCustomColorChange}

@@ -168,12 +168,12 @@ export const Home = () => {
             <img
               className="w-full rounded-lg"
               src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
-              alt="a real person talking to you"
+              alt=""
             />
             <img
               className="mt-4 w-full rounded-lg lg:mt-10"
               src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
-              alt="more collaborative pictures"
+              alt=""
             />
           </div>
         </div>
