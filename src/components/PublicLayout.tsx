@@ -14,7 +14,9 @@ export const PublicLayout = () => {
         <title>{currentMatch.handle?.data.title} | JZAI</title>
       </Helmet>
       <Header />
-      <Outlet />
+      <main id="main-content">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );
