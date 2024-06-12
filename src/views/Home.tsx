@@ -42,7 +42,7 @@ export const Home = () => {
     },
     {
       title: "Updates with your website",
-      description: "WebPilot frequently updates its map of your website",
+      description: "WisePilot frequently updates its map of your website",
       icon: FaMapMarkedAlt,
     },
   ];
@@ -67,8 +67,7 @@ export const Home = () => {
               Your website needs a copilot
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
-              WisePilot is an AI assistant that helps users navigate your
-              website.
+              WisePilot is an AI chatbot that helps users navigate your website.
             </p>
             <div className="flex gap-1 h-fit mt-10">
               <div className="flex flex-col">

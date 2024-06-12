@@ -13,8 +13,7 @@ const conversations = [
   },
   {
     user: "When is my order getting here?",
-    assistant:
-      "Sure! you can track your order here: https://yourwebsite.com/orders",
+    assistant: "You can track your order here: https://yourwebsite.com/orders",
   },
 ];
 
