@@ -1,7 +1,6 @@
 import { MdError } from "react-icons/md";
 import Button from "../components/Button";
 import Card from "../components/Card";
-import { Copilot } from "../components/Copilot";
 import CopilotForm from "../components/CopilotForm";
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
@@ -98,48 +97,57 @@ export const CreateCopilot = () => {
 
   return (
     <div>
-      <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
-        <Card>
-          <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
+      <div className="gap-2 grid grid-cols-1 lg:grid-cols-2 h-fit">
+        <Card className="h-fit">
+          <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start h-fit">
             <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
               Build your copilot
             </h2>
             <p className="mb-8 text-gray-500 dark:text-gray-400 font-light">
               Enter the URL of the website you want to demo with Copilot.
             </p>
-            <form className="flex flex-col gap-2 w-full">
-              <CopilotForm
-                url={url}
-                setUrl={setUrl}
-                title={title}
-                setTitle={setTitle}
-                handleColorChange={handleColorChange}
-                handleCustomColorChange={handleCustomColorChange}
-                selectedColor={selectedColor}
-                customColor={customColor}
-                predefinedColors={colors}
-                copilotId={null}
-              />
-              <div className="min-h-8">
-                {errors.map((error) => (
-                  <p
-                    key={error}
-                    className="text-red-600 flex flex-row gap-2 items-center"
-                  >
-                    <MdError />
-                    {error}
-                  </p>
-                ))}
-              </div>
+            <form className="flex flex-col gap-2 w-full h-full justify-between">
+              <>
+                <CopilotForm
+                  url={url}
+                  setUrl={setUrl}
+                  title={title}
+                  setTitle={setTitle}
+                  handleColorChange={handleColorChange}
+                  handleCustomColorChange={handleCustomColorChange}
+                  selectedColor={selectedColor}
+                  customColor={customColor}
+                  predefinedColors={colors}
+                  copilotId={null}
+                />
+                <div className="min-h-8">
+                  {errors.map((error) => (
+                    <p
+                      key={error}
+                      className="text-red-600 flex flex-row gap-2 items-center"
+                    >
+                      <MdError />
+                      {error}
+                    </p>
+                  ))}
+                </div>
+              </>
               <Button className="w-full" onClick={onSubmit}>
-                Save Changes
+                Create
               </Button>
             </form>
           </div>
         </Card>
         <div className="flex justify-center items-center">
-          <div className="min-h-[610px] min-w-[360px] flex justify-end items-end">
-            <Copilot />
+          <div className="relative min-h-[610px] min-w-[360px] flex justify-end items-end">
+            <>
+              <div className="absolute inset-[-15px] bg-primary-bg bg-opacity-20 backdrop-blur-sm rounded-lg"></div>
+              <img
+                src="/copilot-gray-bg.png"
+                alt="Picture of a copilot"
+                width={450}
+              />
+            </>
           </div>
         </div>
       </div>
