@@ -32,7 +32,7 @@ export const Message = ({
           "items-start": !isUser,
         })}
       >
-        <div className="mb-1 text-xs text-slate-400">
+        <div className="mb-1 text-xs text-slate-600">
           {isUser ? "You" : "Bot"}
         </div>
         <div

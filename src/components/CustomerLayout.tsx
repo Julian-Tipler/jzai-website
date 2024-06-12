@@ -1,12 +1,12 @@
-import { FiSettings, FiMenu, FiStar } from "react-icons/fi";
+import { FiMenu, FiStar } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { Link, Outlet, useMatches } from "react-router-dom";
 import { TopBar } from "./TopBar";
 import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
 import { WiseRoutes } from "../helpers/constants";
-import { FaChevronRight } from "react-icons/fa";
 import { MdContactSupport } from "react-icons/md";
+import { Breadcrumbs } from "./Breadcrumbs";
 
 interface LinkItemProps {
   name: string;
@@ -22,37 +22,6 @@ const LinkItems: Array<LinkItemProps> = [
     href: WiseRoutes.dashboard.support.name,
   },
 ];
-
-const Breadcrumbs = ({ matches }: { matches: RouteItem[] }) => {
-  return (
-    <nav className="flex mb-5" aria-label="Breadcrumbs">
-      <ol className="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-        {matches.map((match, index) => {
-          const { pathname, handle } = match;
-          const crumb = handle?.crumb ? handle.crumb(match.data) : pathname;
-          const isLast = index === matches.length - 1;
-          const isFirst = index === 0;
-
-          return (
-            <li key={pathname} className="inline-flex items-center">
-              {!isFirst && <FaChevronRight />}
-              {isLast ? (
-                <span
-                  className="ml-1 text-gray-400 md:ml-2 dark:text-gray-500"
-                  aria-current="page"
-                >
-                  {crumb}
-                </span>
-              ) : (
-                <Link to={pathname}>{crumb}</Link>
-              )}
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
-  );
-};
 
 export const CustomerLayout = () => {
   const matches = useMatches() as unknown as RouteItem[];
@@ -106,9 +75,11 @@ const SideNav = () => {
       </div>
       <ul className="m-4">
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} href={link.href}>
-            {link.name}
-          </NavItem>
+          <li key={link.name}>
+            <NavItem icon={link.icon} href={link.href}>
+              {link.name}
+            </NavItem>
+          </li>
         ))}
       </ul>
     </nav>

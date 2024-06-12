@@ -28,3 +28,26 @@ export const WiseRoutes = {
     },
   },
 };
+
+export const colors = [
+  {
+    hex: "#0090FF",
+    name: "Blue",
+  },
+  {
+    hex: "#323232",
+    name: "Black",
+  },
+  {
+    hex: "#5856fe",
+    name: "Purple",
+  },
+  {
+    hex: "#45AF96",
+    name: "Green",
+  },
+  {
+    hex: "#F35353",
+    name: "Red",
+  },
+];

@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 const CopilotForm = ({
   url,
   title,
@@ -14,7 +16,7 @@ const CopilotForm = ({
 }: {
   url: string;
   title: string;
-  predefinedColors: string[];
+  predefinedColors: { hex: string; name: string }[];
   selectedColor: string;
   customColor: string;
   copilotId: string | null;
@@ -67,13 +69,19 @@ const CopilotForm = ({
         <div className="flex space-x-2">
           {predefinedColors.map((color) => (
             <button
-              key={color}
-              className={`w-8 h-8 rounded-lg ${selectedColor === color ? "border-2" : "border-1"} ${selectedColor === color ? "border-blue-500" : "border-grey-500"}`}
-              style={{ backgroundColor: color }}
+              key={color.hex}
+              className={classNames("w-8 h-8 rounded-lg", {
+                "border-2": selectedColor === color.hex,
+                "border-1": selectedColor !== color.hex,
+                "border-blue-500": selectedColor === color.hex,
+                "border-grey-500": selectedColor !== color.hex,
+              })}
+              style={{ backgroundColor: color.hex }}
               disabled={allReadyOnly}
+              aria-label={`Select ${color.name}`}
               onClick={(e) => {
                 e.preventDefault();
-                handleColorChange(color);
+                handleColorChange(color.hex);
               }}
             />
           ))}

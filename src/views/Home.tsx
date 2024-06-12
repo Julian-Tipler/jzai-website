@@ -92,7 +92,7 @@ export const Home = () => {
                 <FaArrowDownLong />
               </a>
             </div>
-            <p className="text-center text-gray-400 text-sm font-light">
+            <p className="text-center text-gray-600 text-sm font-light">
               No Login Required
             </p>
           </div>
