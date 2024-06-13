@@ -18,10 +18,6 @@ export const CookiesDisclaimer = () => {
     setShowDisclaimer(false);
   };
 
-  const handleDecline = () => {
-    setShowDisclaimer(false);
-  };
-
   if (!showDisclaimer) return null;
 
   return (
@@ -42,17 +38,10 @@ export const CookiesDisclaimer = () => {
       </div>
       <div className="flex gap-2">
         <Button
-          onClick={handleDecline}
-          className="border-2 border-brand bg-white !text-gray-900 hover:bg-primary-100"
-          aria-label="Accept cookies and close this message"
-        >
-          Reject
-        </Button>
-        <Button
           onClick={handleAccept}
           aria-label="Accept cookies and close this message"
         >
-          Accept
+          Got it!
         </Button>
       </div>
     </div>
