@@ -22,7 +22,7 @@ export default {
         "bounce-once": "bounceOnce 0.5s ease-in-out",
       },
       colors: {
-        brand: "#5974FF",
+        brand: "#1C4CC7",
         primary: {
           50: "#eff6ff",
           100: "#dbeafe",

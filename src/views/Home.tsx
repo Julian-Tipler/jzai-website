@@ -9,6 +9,7 @@ import Section, { SectionVariant } from "../components/Section";
 import { useRef, useState } from "react";
 import { Contact } from "../components/Contact";
 import { RotatingMessages } from "../components/RotatingMessages";
+import WiseLink from "../components/WiseLink";
 
 export const Home = () => {
   const { isPending, error, data } = useQuery({
@@ -81,15 +82,15 @@ export const Home = () => {
                   onKeyDown={handleKeyPress}
                 />
               </div>
-              <a
+              <WiseLink
                 id="try-it-now"
                 ref={tryNowLinkRef}
-                href="#build"
-                className="flex flex-row items-center w-fit gap-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 whitespace-nowrap"
+                to="#build"
+                className="flex flex-row items-center w-fit gap-2 whitespace-nowrap"
               >
                 Try it now
                 <FaArrowDownLong />
-              </a>
+              </WiseLink>
             </div>
             <p className="text-center text-gray-600 text-sm font-light">
               No Login Required
