@@ -21,7 +21,7 @@ import { QueryClient } from "@tanstack/react-query";
 import supabase from "./clients/supabase";
 import { copilotLoader } from "./loaders/copilot-loader";
 import { Tables } from "./types/database.types";
-import { WiseRoutes } from "./helpers/constants";
+import { ROUTES } from "./helpers/constants";
 
 function App({ queryClient }: { queryClient: QueryClient }) {
   const router = createBrowserRouter([
@@ -30,10 +30,10 @@ function App({ queryClient }: { queryClient: QueryClient }) {
       path: "/",
       children: [
         {
-          path: WiseRoutes.login.path,
+          path: ROUTES.login.path,
           element: <LoginPage />,
           handle: {
-            data: { title: WiseRoutes.login.title },
+            data: { title: ROUTES.login.title },
           },
         },
         {
@@ -50,36 +50,36 @@ function App({ queryClient }: { queryClient: QueryClient }) {
           ],
         },
         {
-          path: WiseRoutes.dashboard.path,
+          path: ROUTES.dashboard.path,
           element: <CustomerLayout />,
           loader: protectedLoader,
           children: [
             {
               index: true,
-              element: <Navigate to={WiseRoutes.dashboard.copilots.path} />,
+              element: <Navigate to={ROUTES.dashboard.copilots.path} />,
               handle: {
-                crumb: () => WiseRoutes.dashboard.copilots.title,
-                data: { title: WiseRoutes.dashboard.copilots.title },
+                crumb: () => ROUTES.dashboard.copilots.title,
+                data: { title: ROUTES.dashboard.copilots.title },
               },
             },
             {
-              path: WiseRoutes.dashboard.copilots.name,
+              path: ROUTES.dashboard.copilots.name,
               element: <Outlet />,
               handle: {
-                crumb: () => WiseRoutes.dashboard.copilots.title,
-                data: { title: WiseRoutes.dashboard.copilots.title },
+                crumb: () => ROUTES.dashboard.copilots.title,
+                data: { title: ROUTES.dashboard.copilots.title },
               },
               children: [
                 {
                   index: true,
                   element: <CustomerCopilots />,
                   handle: {
-                    crumb: () => WiseRoutes.dashboard.copilots.title,
-                    data: { title: WiseRoutes.dashboard.copilots.title },
+                    crumb: () => ROUTES.dashboard.copilots.title,
+                    data: { title: ROUTES.dashboard.copilots.title },
                   },
                 },
                 {
-                  path: WiseRoutes.dashboard.copilots.copilotId.name,
+                  path: ROUTES.dashboard.copilots.copilotId.name,
                   element: <CustomerCopilot />,
                   loader: async ({ params }) =>
                     await copilotLoader({ params, queryClient }),
@@ -87,26 +87,26 @@ function App({ queryClient }: { queryClient: QueryClient }) {
                     crumb: (data: Tables<"copilots">) =>
                       data.title ?? "Copilot",
                     data: {
-                      title: WiseRoutes.dashboard.copilots.title ?? "Copilot",
+                      title: ROUTES.dashboard.copilots.title ?? "Copilot",
                     },
                   },
                 },
                 {
-                  path: WiseRoutes.dashboard.copilots.create.name,
+                  path: ROUTES.dashboard.copilots.create.name,
                   element: <CreateCopilot />,
                   handle: {
-                    crumb: () => WiseRoutes.dashboard.copilots.create.title,
-                    data: { title: WiseRoutes.dashboard.copilots.create.title },
+                    crumb: () => ROUTES.dashboard.copilots.create.title,
+                    data: { title: ROUTES.dashboard.copilots.create.title },
                   },
                 },
               ],
             },
             {
-              path: WiseRoutes.dashboard.support.name,
+              path: ROUTES.dashboard.support.name,
               element: <CustomerSupport />,
               handle: {
-                crumb: () => WiseRoutes.dashboard.support.title,
-                data: { title: WiseRoutes.dashboard.support.title },
+                crumb: () => ROUTES.dashboard.support.title,
+                data: { title: ROUTES.dashboard.support.title },
               },
             },
             {

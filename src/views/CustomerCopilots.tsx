@@ -5,7 +5,7 @@ import { Tables } from "../types/database.types";
 import WiseLink from "../components/WiseLink";
 import Card from "../components/Card";
 import { useAuthContext } from "../contexts/AuthContext";
-import { WiseRoutes } from "../helpers/constants";
+import { ROUTES } from "../helpers/constants";
 import ChatIcon from "../components/ChatIcon";
 
 export const CustomerCopilots = () => {
@@ -38,7 +38,7 @@ export const CustomerCopilots = () => {
           <h2 className="mb-4 text-xl font-light text-gray-900 dark:text-white leading-tight">
             No copilots yet
           </h2>
-          <WiseLink to={WiseRoutes.dashboard.copilots.create.name}>
+          <WiseLink to={ROUTES.dashboard.copilots.create.name}>
             Create a new copilot
           </WiseLink>
         </div>
@@ -51,7 +51,7 @@ export const CustomerCopilots = () => {
       <div className="flex w-full justify-end">
         <div className="flex">
           <WiseLink
-            to={WiseRoutes.dashboard.copilots.create.name}
+            to={ROUTES.dashboard.copilots.create.name}
             className="absolute right-0 top-0 m-4"
           >
             Create a new copilot

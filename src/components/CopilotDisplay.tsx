@@ -7,7 +7,7 @@ import CopilotForm from "./CopilotForm";
 import { MdClose, MdEdit, MdError } from "react-icons/md";
 import Card from "./Card";
 import Button from "./Button";
-import { WiseRoutes, colors } from "../helpers/constants";
+import { ROUTES, COLORS } from "../helpers/constants";
 import { CodeSnippet } from "./CodeSnippet";
 import { CancelSubscriptionModal } from "./CancelSubscriptionModal";
 
@@ -23,11 +23,11 @@ export const CopilotDisplay = ({
   const [title, setTitle] = useState(copilot.title ?? "Copilot");
   const [errors, setErrors] = useState<string[]>([]);
   const [edit, setEdit] = useState(false);
-  const isCustomColor = !colors
-    .map((color) => color.hex)
-    .includes(copilot.primaryColor);
+  const isCustomColor = !COLORS.map((color) => color.hex).includes(
+    copilot.primaryColor,
+  );
   const [selectedColor, setSelectedColor] = useState(
-    isCustomColor ? colors[0].hex : copilot.primaryColor,
+    isCustomColor ? COLORS[0].hex : copilot.primaryColor,
   );
   const [customColor, setCustomColor] = useState(
     isCustomColor ? copilot.primaryColor : "",
@@ -54,7 +54,7 @@ export const CopilotDisplay = ({
         copilotId: copilotId,
       },
     });
-    redirect(WiseRoutes.dashboard.copilots.path);
+    redirect(ROUTES.dashboard.copilots.path);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -155,7 +155,7 @@ export const CopilotDisplay = ({
                   handleCustomColorChange={handleCustomColorChange}
                   selectedColor={selectedColor}
                   customColor={customColor}
-                  predefinedColors={colors}
+                  predefinedColors={COLORS}
                   copilotId={copilot.id}
                   urlIsReadOnly={true}
                   allReadyOnly={!edit}

@@ -9,7 +9,7 @@ import Button from "../Button";
 import { LinkItem } from "../LinkItem";
 import { LoginModal } from "../LoginModal";
 import WiseLink from "../WiseLink";
-import { WiseRoutes } from "../../helpers/constants";
+import { ROUTES } from "../../helpers/constants";
 
 type LinkItemProps = {
   name: string;
@@ -62,10 +62,10 @@ export const Header = () => {
           </Link>
           <div className="flex items-center lg:order-2">
             {session ? (
-              <WiseLink to={WiseRoutes.dashboard.path}>Dashboard</WiseLink>
+              <WiseLink to={ROUTES.dashboard.path}>Dashboard</WiseLink>
             ) : (
               <Button
-                onClick={() => modalLogin(WiseRoutes.dashboard.copilots.path)}
+                onClick={() => modalLogin(ROUTES.dashboard.copilots.path)}
               >
                 Login
               </Button>

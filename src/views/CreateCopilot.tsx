@@ -6,7 +6,7 @@ import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tables } from "../types/database.types";
 import supabase from "../clients/supabase";
-import { WiseRoutes, colors } from "../helpers/constants";
+import { ROUTES, COLORS } from "../helpers/constants";
 
 export const CreateCopilot = () => {
   const [url, setUrl] = useState("");
@@ -73,7 +73,7 @@ export const CreateCopilot = () => {
       }
 
       if (data?.copilot?.id) {
-        navigate(`${WiseRoutes.dashboard.copilots.path}/${data.copilot.id}`);
+        navigate(`${ROUTES.dashboard.copilots.path}/${data.copilot.id}`);
       }
     }
   };
@@ -120,7 +120,7 @@ export const CreateCopilot = () => {
                   handleCustomColorChange={handleCustomColorChange}
                   selectedColor={selectedColor}
                   customColor={customColor}
-                  predefinedColors={colors}
+                  predefinedColors={COLORS}
                   copilotId={null}
                 />
                 <div className="min-h-8">

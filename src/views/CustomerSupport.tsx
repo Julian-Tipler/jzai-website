@@ -1,5 +1,6 @@
 import Card from "../components/Card";
 import { Contact } from "../components/Contact";
+import { SUPPORT_EMAIL } from "../helpers/constants";
 
 export const CustomerSupport = () => {
   return (
@@ -12,8 +13,15 @@ export const CustomerSupport = () => {
             engineers is ready to answer your questions and help you get
             started.
           </p>
-          <p className="text-gray-500 font-light">
+          <p className="mb-2 text-gray-500 font-light">
             If you need a more specific solution, we can help you with that too.
+          </p>
+          <p className="text-gray-500 font-light">
+            Use the form to the right to send us a message or email us at{" "}
+            <a className="text-brand" href={`mailto:${SUPPORT_EMAIL}`}>
+              {SUPPORT_EMAIL}
+            </a>
+            .
           </p>
         </div>
         <div className="w-1/2">

@@ -7,7 +7,7 @@ import { useLoginContext } from "../contexts/LoginContext";
 import { MdError } from "react-icons/md";
 import CopilotForm from "./CopilotForm";
 import Button from "./Button";
-import { WiseRoutes, colors } from "../helpers/constants";
+import { ROUTES, COLORS } from "../helpers/constants";
 import { useAuthContext } from "../contexts/AuthContext";
 
 export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
@@ -19,7 +19,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const copilotId = searchParams.get("copilot-id");
-  const [selectedColor, setSelectedColor] = useState(colors[0].hex);
+  const [selectedColor, setSelectedColor] = useState(COLORS[0].hex);
   const [customColor, setCustomColor] = useState("");
   const primaryColor = selectedColor || customColor;
 
@@ -96,10 +96,10 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
 
     // If the user is logged in, navigate to the copilot dashboard
     if (session) {
-      navigate(`${WiseRoutes.dashboard.copilots.path}/${copilotId}`);
+      navigate(`${ROUTES.dashboard.copilots.path}/${copilotId}`);
     } else {
       // Otherwise, open the login modal
-      modalLogin(`${WiseRoutes.dashboard.copilots.path}/${copilotId}`);
+      modalLogin(`${ROUTES.dashboard.copilots.path}/${copilotId}`);
     }
   };
 
@@ -125,7 +125,7 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
             handleCustomColorChange={handleCustomColorChange}
             selectedColor={selectedColor}
             customColor={customColor}
-            predefinedColors={colors}
+            predefinedColors={COLORS}
             copilotId={copilotId}
           />
           <div className="min-h-8">

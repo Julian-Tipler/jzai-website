@@ -1,4 +1,4 @@
-export const WiseRoutes = {
+export const ROUTES = {
   login: {
     name: "login",
     path: "/login",
@@ -29,7 +29,7 @@ export const WiseRoutes = {
   },
 };
 
-export const colors = [
+export const COLORS = [
   {
     hex: "#0090FF",
     name: "Blue",
@@ -51,3 +51,5 @@ export const colors = [
     name: "Red",
   },
 ];
+
+export const SUPPORT_EMAIL = "support@wisepilot.io";

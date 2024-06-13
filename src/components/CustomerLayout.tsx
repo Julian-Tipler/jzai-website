@@ -4,7 +4,7 @@ import { Link, Outlet, useMatches } from "react-router-dom";
 import { TopBar } from "./TopBar";
 import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
-import { WiseRoutes } from "../helpers/constants";
+import { ROUTES } from "../helpers/constants";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { AiFillMessage } from "react-icons/ai";
 import { BsSendFill } from "react-icons/bs";
@@ -19,12 +19,12 @@ const LinkItems: Array<LinkItemProps> = [
   {
     name: "Copilots",
     icon: BsSendFill,
-    href: WiseRoutes.dashboard.copilots.name,
+    href: ROUTES.dashboard.copilots.name,
   },
   {
     name: "Support",
     icon: AiFillMessage,
-    href: WiseRoutes.dashboard.support.name,
+    href: ROUTES.dashboard.support.name,
   },
 ];
 
