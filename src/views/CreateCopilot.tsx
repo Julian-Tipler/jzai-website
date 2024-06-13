@@ -97,7 +97,7 @@ export const CreateCopilot = () => {
 
   return (
     <div>
-      <div className="gap-2 grid grid-cols-1 lg:grid-cols-2 h-fit">
+      <div className="gap-2 grid grid-cols-1 lg:grid-cols-2 h-fit items-start">
         <Card className="h-fit">
           <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start h-fit">
             <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
@@ -142,7 +142,7 @@ export const CreateCopilot = () => {
           </div>
         </Card>
         <div className="flex justify-center items-center">
-          <div className="relative min-h-[610px] min-w-[360px] flex justify-end items-end">
+          <div className="lg:mt-[-35px] relative min-w-[360px] flex justify-end items-end overflow-hidden">
             <>
               <div className="absolute inset-[-15px] bg-primary-bg bg-opacity-20 backdrop-blur-sm rounded-lg"></div>
               <img

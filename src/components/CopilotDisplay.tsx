@@ -9,6 +9,7 @@ import Card from "./Card";
 import Button from "./Button";
 import { WiseRoutes, colors } from "../helpers/constants";
 import { CodeSnippet } from "./CodeSnippet";
+import { CancelSubscriptionModal } from "./CancelSubscriptionModal";
 
 export const CopilotDisplay = ({
   copilot,
@@ -16,6 +17,8 @@ export const CopilotDisplay = ({
   copilot: Tables<"copilots">;
 }) => {
   const { copilotId } = useParams<{ copilotId: string }>();
+  const [cancelSubscriptionModalOpen, setCancelSubscriptionModalOpen] =
+    useState(false);
   const [url, setUrl] = useState(copilot.baseUrl);
   const [title, setTitle] = useState(copilot.title ?? "Copilot");
   const [errors, setErrors] = useState<string[]>([]);
@@ -108,6 +111,11 @@ export const CopilotDisplay = ({
 
   return (
     <div>
+      <CancelSubscriptionModal
+        open={cancelSubscriptionModalOpen}
+        setOpen={setCancelSubscriptionModalOpen}
+        cancel={cancelSubscription}
+      />
       <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Card>
@@ -196,7 +204,7 @@ export const CopilotDisplay = ({
         <div className="flex justify-center">
           <Button
             className="bg-red-700 hover:bg-red-900 w-1/4"
-            onClick={cancelSubscription}
+            onClick={() => setCancelSubscriptionModalOpen(true)}
           >
             Cancel Subscription
           </Button>

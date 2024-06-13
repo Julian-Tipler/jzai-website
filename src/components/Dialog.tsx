@@ -21,7 +21,7 @@ const Dialog: React.FC<DialogProps> = ({ isOpen, children }) => {
       role="dialog"
       aria-modal="true"
       aria-labelledby="dialog-title"
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 backdrop-blur-sm"
+      className="z-10 fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 backdrop-blur-sm"
       ref={dialogRef}
       tabIndex={-1}
     >

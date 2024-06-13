@@ -52,11 +52,11 @@ export const Header = () => {
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to={"/"} className="flex items-center" aria-label="Home">
             <img
-              src="/wisepilot-logo-circle.svg"
+              src="/wisepilot-logo.svg"
               className="mr-3 h-6 sm:h-9"
-              alt="Flowbite Logo"
+              alt="WisePilot Logo"
             />
-            <span className="self-center text-xl font-light whitespace-nowrap dark:text-white">
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               WisePilot
             </span>
           </Link>
