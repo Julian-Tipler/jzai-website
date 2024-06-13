@@ -1,12 +1,13 @@
-import { FiMenu, FiStar } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { Link, Outlet, useMatches } from "react-router-dom";
 import { TopBar } from "./TopBar";
 import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
 import { WiseRoutes } from "../helpers/constants";
-import { MdContactSupport } from "react-icons/md";
 import { Breadcrumbs } from "./Breadcrumbs";
+import { AiFillMessage } from "react-icons/ai";
+import { BsSendFill } from "react-icons/bs";
 
 interface LinkItemProps {
   name: string;
@@ -15,10 +16,14 @@ interface LinkItemProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Copilots", icon: FiStar, href: WiseRoutes.dashboard.copilots.name },
+  {
+    name: "Copilots",
+    icon: BsSendFill,
+    href: WiseRoutes.dashboard.copilots.name,
+  },
   {
     name: "Support",
-    icon: MdContactSupport,
+    icon: AiFillMessage,
     href: WiseRoutes.dashboard.support.name,
   },
 ];
@@ -76,9 +81,7 @@ const SideNav = () => {
       <ul className="m-4">
         {LinkItems.map((link) => (
           <li key={link.name}>
-            <NavItem icon={link.icon} href={link.href}>
-              {link.name}
-            </NavItem>
+            <NavItem {...link}>{link.name}</NavItem>
           </li>
         ))}
       </ul>
@@ -118,7 +121,6 @@ const MobileNav = ({ onOpen }: { onOpen: () => void }) => {
       >
         <FiMenu className="text-xl" />
       </button>
-
       <span className="text-2xl ml-8 font-mono font-bold">Logo</span>
     </div>
   );
