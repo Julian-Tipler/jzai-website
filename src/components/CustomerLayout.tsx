@@ -64,12 +64,12 @@ const SideNav = () => {
       <div className="flex items-center m-4 justify-between">
         <Link to="/" className="flex items-center">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src="/wisepilot-logo.svg"
             className="mr-3 h-6 sm:h-9"
-            alt="Flowbite Logo"
+            alt="WisePilot Logo"
           />
-          <span className="self-center text-xl font-normal whitespace-nowrap dark:text-white">
-            Wise AI
+          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+            WisePilot
           </span>
         </Link>
       </div>
