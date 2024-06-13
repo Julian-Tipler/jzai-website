@@ -20,3 +20,7 @@ npm run dev
 
 ## Creating Copilot
 /copilots to create the documents
+
+
+## Deploy
+github deploy

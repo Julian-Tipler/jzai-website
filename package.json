@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --mode development",
+    "build": "tsc && vite build --mode production",
     "gentypes": "supabase gen types typescript --project-id gvewqhwcmnmdeyckkvlo > src/types/database.types.ts",
     "lint": "eslint --fix",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.1",
