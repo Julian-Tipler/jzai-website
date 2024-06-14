@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run gentypes && tsc && vite build --mode production",
-    "gentypes": "npx supabase gen types typescript --project-id ywdbdzcdnpusijyanlbj > src/types/database.types.ts",
+    "gentypes": "echo $SUPABASE_ACCESS_TOKEN | npx supabase login --token $SUPABASE_ACCESS_TOKEN && npx supabase gen types typescript --project-id ywdbdzcdnpusijyanlbj > src/types/database.types.ts",
     "lint": "eslint --fix",
     "preview": "vite preview",
     "prepare": "husky",
