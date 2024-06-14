@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { CopilotView } from "./copilot-view";
+import { CopilotView } from "./CopilotView";
 import { fetchCopilot } from "../../../../loaders/copilot-loader";
 
 export const CustomerCopilot: React.FC = () => {

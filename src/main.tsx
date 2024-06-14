@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthContextProvider } from "./contexts/AuthContext.tsx";
 import { LoginContextProvider } from "./contexts/LoginContext.tsx";
 import { HelmetProvider } from "react-helmet-async";
-import { CookiesDisclaimer } from "./(public)/home/cookies-disclaimer.tsx";
+import { CookiesDisclaimer } from "./(public)/home/CookiesDisclaimer.tsx";
 import App from "./page.tsx";
 import "./index.css";
 

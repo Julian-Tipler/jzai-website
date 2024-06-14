@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "../../components/button";
+import Button from "../../components/Button";
 
 export const CookiesDisclaimer = () => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);

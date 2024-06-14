@@ -2,14 +2,14 @@ import { ChangeEvent, useState } from "react";
 import { Tables } from "../../../../types/database.types";
 import supabase from "../../../../clients/supabase";
 import { redirect, useParams } from "react-router-dom";
-import { CopilotDisplay } from "../../../../components/copilot-display";
-import CopilotForm from "../../../../components/copilot-form";
+import { CopilotDisplay } from "../../../../components/CopilotDisplay";
+import CopilotForm from "../../../../components/CopilotForm";
 import { MdClose, MdEdit, MdError } from "react-icons/md";
-import Button from "../../../../components/button";
+import Button from "../../../../components/Button";
 import { ROUTES, COLORS } from "../../../../helpers/constants";
-import { CodeSnippet } from "../../../../components/code-snippet";
-import { CancelSubscriptionModal } from "./cancel-subscription-modal";
-import Card from "../../../../components/card";
+import { CodeSnippet } from "../../../../components/CodeSnippet";
+import { CancelSubscriptionModal } from "./CancelSubscriptionModal";
+import Card from "../../../../components/Card";
 
 export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
   const { copilotId } = useParams<{ copilotId: string }>();

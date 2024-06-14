@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import supabase from "../../../clients/supabase";
-import Card from "../../../components/card";
-import ChatIcon from "../../../components/chat-icon";
-import WiseLink from "../../../components/wise-link";
+import Card from "../../../components/Card";
+import ChatIcon from "../../../components/ChatIcon";
+import WiseLink from "../../../components/WiseLink";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { ROUTES } from "../../../helpers/constants";
 import { Tables } from "../../../types/database.types";

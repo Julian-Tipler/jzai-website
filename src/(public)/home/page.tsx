@@ -1,15 +1,15 @@
 import { FaLaptopCode, FaMapMarkedAlt, FaRobot } from "react-icons/fa";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
-import { BuildCopilotSection } from "./build-copilot-section";
-import PlanCard from "../../components/plan-card";
+import { BuildCopilotSection } from "./BuildCopilotSection";
+import PlanCard from "../../components/PlanCard";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
 import supabase from "../../clients/supabase";
-import Section, { SectionVariant } from "../../components/section";
+import Section, { SectionVariant } from "../../components/Section";
 import { useRef, useState } from "react";
-import { Contact } from "../../components/contact-form";
-import { RotatingMessages } from "./rotating-messages";
-import WiseLink from "../../components/wise-link";
+import { Contact } from "../../components/ContactForm";
+import { RotatingMessages } from "./RotatingMessages";
+import WiseLink from "../../components/WiseLink";
 import { SUPPORT_EMAIL } from "../../helpers/constants";
 
 export const Home = () => {

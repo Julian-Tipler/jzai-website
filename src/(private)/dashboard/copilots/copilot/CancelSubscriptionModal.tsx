@@ -1,5 +1,5 @@
-import Button from "../../../../components/button";
-import Dialog from "../../../../components/dialog";
+import Button from "../../../../components/Button";
+import Dialog from "../../../../components/Dialog";
 
 export const CancelSubscriptionModal = ({
   open,

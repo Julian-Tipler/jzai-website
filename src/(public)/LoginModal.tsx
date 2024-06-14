@@ -1,5 +1,5 @@
-import Dialog from "../components/dialog";
-import GoogleSignInButton from "../components/google-sign-in-button";
+import Dialog from "../components/Dialog";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 
 export const LoginModal = ({
   loginModalOpen,

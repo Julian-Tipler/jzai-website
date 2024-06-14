@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import supabase from "../../clients/supabase";
-import { CopilotDisplay } from "../../components/copilot-display";
+import { CopilotDisplay } from "../../components/CopilotDisplay";
 import { Tables } from "../../types/database.types";
 import { useLoginContext } from "../../contexts/LoginContext";
 import { MdError } from "react-icons/md";
-import CopilotForm from "../../components/copilot-form";
-import Button from "../../components/button";
+import CopilotForm from "../../components/CopilotForm";
+import Button from "../../components/Button";
 import { ROUTES, COLORS } from "../../helpers/constants";
 import { useAuthContext } from "../../contexts/AuthContext";
 

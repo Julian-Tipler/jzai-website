@@ -2,13 +2,13 @@ import { IconType } from "react-icons";
 import { FiHome, FiCompass, FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { MobileMenu } from "./mobile-menu";
+import { MobileMenu } from "./MobileMenu";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useLoginContext } from "../contexts/LoginContext";
-import Button from "../components/button";
-import { LinkItem } from "./link-item";
-import { LoginModal } from "./login-modal";
-import WiseLink from "../components/wise-link";
+import Button from "../components/Button";
+import { LinkItem } from "./LinkItem";
+import { LoginModal } from "./LoginModal";
+import WiseLink from "../components/WiseLink";
 import { ROUTES } from "../helpers/constants";
 import { LINK_ITEMS } from "./constants";
 

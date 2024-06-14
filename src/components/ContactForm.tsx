@@ -1,7 +1,7 @@
 import { useState, FormEvent } from "react";
 import supabase from "../clients/supabase";
 import { MdCheckCircle, MdError } from "react-icons/md";
-import Button from "./button";
+import Button from "./Button";
 
 export const Contact = () => {
   const [name, setName] = useState<string>("");

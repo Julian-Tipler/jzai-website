@@ -1,7 +1,7 @@
 import supabase from "../../../../clients/supabase";
 import { Tables } from "../../../../types/database.types";
 
-import PlanCard from "../../../../components/plan-card";
+import PlanCard from "../../../../components/PlanCard";
 import { MdError } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";

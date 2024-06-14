@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoIosCheckmarkCircle, IoIosCopy } from "react-icons/io";
-import Button from "./button";
+import Button from "./Button";
 import classNames from "classnames";
 
 export const CodeSnippet = ({ codeStr }: { codeStr: string }) => {

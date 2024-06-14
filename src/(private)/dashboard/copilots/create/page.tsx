@@ -2,9 +2,9 @@ import { MdError } from "react-icons/md";
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../../../clients/supabase";
-import Button from "../../../../components/button";
-import Card from "../../../../components/card";
-import CopilotForm from "../../../../components/copilot-form";
+import Button from "../../../../components/Button";
+import Card from "../../../../components/Card";
+import CopilotForm from "../../../../components/CopilotForm";
 import { ROUTES, COLORS } from "../../../../helpers/constants";
 import { Tables } from "../../../../types/database.types";
 

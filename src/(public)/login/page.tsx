@@ -1,4 +1,4 @@
-import GoogleSignInButton from "../../components/google-sign-in-button";
+import GoogleSignInButton from "../../components/GoogleSignInButton";
 
 export const Login = () => {
   return (

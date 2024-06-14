@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MessageBubble } from "../../components/message-bubble";
+import { MessageBubble } from "../../components/MessageBubble";
 
 const conversations = [
   {

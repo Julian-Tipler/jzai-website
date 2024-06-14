@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import supabase from "../clients/supabase";
-import Button from "../components/button";
+import Button from "../components/Button";
 
 export const TopBar = () => {
   const navigate = useNavigate();

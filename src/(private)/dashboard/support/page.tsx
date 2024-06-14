@@ -1,5 +1,5 @@
-import Card from "../../../components/card";
-import { Contact } from "../../../components/contact-form";
+import Card from "../../../components/Card";
+import { Contact } from "../../../components/ContactForm";
 import { SUPPORT_EMAIL } from "../../../helpers/constants";
 
 export const CustomerSupport = () => {
