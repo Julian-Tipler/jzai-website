@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "../../components/mobile-menu/MobileMenu.css";
 import { LINK_ITEMS } from "./constants";
 
 export const MobileMenu = ({

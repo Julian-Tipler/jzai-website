@@ -8,7 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import supabase from "./clients/supabase";
-import { PublicLayout } from "./(public)/Layout";
+import { PublicLayout } from "./(public)/layout";
 import { ROUTES } from "./helpers/constants";
 import { copilotLoader } from "./loaders/copilot-loader";
 import { Tables } from "./types/database.types";
@@ -19,7 +19,7 @@ import { CreateCopilot } from "./(private)/dashboard/copilots/create/page";
 import { CustomerCopilots } from "./(private)/dashboard/copilots/page";
 import { CustomerSupport } from "./(private)/dashboard/support/page";
 import { Error } from "./(public)/error/page";
-import { PrivateLayout } from "./(private)/Layout";
+import { PrivateLayout } from "./(private)/layout.tsx";
 
 function App({ queryClient }: { queryClient: QueryClient }) {
   const router = createBrowserRouter([
