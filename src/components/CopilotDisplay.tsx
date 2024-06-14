@@ -1,215 +1,114 @@
-import { ChangeEvent, useState } from "react";
-import { Tables } from "../types/database.types";
+import { useEffect } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
-import { redirect, useParams } from "react-router-dom";
-import { Copilot } from "./Copilot";
-import CopilotForm from "./CopilotForm";
-import { MdClose, MdEdit, MdError } from "react-icons/md";
-import Card from "./Card";
-import Button from "./Button";
-import { WiseRoutes, colors } from "../helpers/constants";
-import { CodeSnippet } from "./CodeSnippet";
-import { CancelSubscriptionModal } from "./CancelSubscriptionModal";
+import { useQuery } from "@tanstack/react-query";
 
-export const CopilotDisplay = ({
-  copilot,
-}: {
-  copilot: Tables<"copilots">;
-}) => {
-  const { copilotId } = useParams<{ copilotId: string }>();
-  const [cancelSubscriptionModalOpen, setCancelSubscriptionModalOpen] =
-    useState(false);
-  const [url, setUrl] = useState(copilot.baseUrl);
-  const [title, setTitle] = useState(copilot.title ?? "Copilot");
-  const [errors, setErrors] = useState<string[]>([]);
-  const [edit, setEdit] = useState(false);
-  const isCustomColor = !colors
-    .map((color) => color.hex)
-    .includes(copilot.primaryColor);
-  const [selectedColor, setSelectedColor] = useState(
-    isCustomColor ? colors[0].hex : copilot.primaryColor,
-  );
-  const [customColor, setCustomColor] = useState(
-    isCustomColor ? copilot.primaryColor : "",
-  );
-  const primaryColor = selectedColor || customColor;
-  const downloadUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/bundles/${copilotId}.js`;
+export const CopilotDisplay = () => {
+  // We search both searchParams and regular params to handle both home and copilot pages.
+  const [searchParams] = useSearchParams();
+  const paramsCopilotId = useParams().copilotId;
+  const searchParamsCopilotId = searchParams.get("copilot-id");
+  const copilotId = paramsCopilotId || searchParamsCopilotId;
+  const hostId = "jzai-copilot-host";
 
-  const handleColorChange = (color: string) => {
-    setSelectedColor(color);
-    setCustomColor("");
-  };
+  const {
+    isPending: isCopilotPending,
+    error: copilotError,
+    data: copilot,
+  } = useQuery({
+    queryKey: ["copilot", copilotId],
+    queryFn: async () =>
+      await supabase.from("copilots").select("*").eq("id", copilotId!).single(),
+    enabled: !!copilotId,
+  });
 
-  const handleCustomColorChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const color = e.target.value;
+  const resolvedCopilotId = copilot?.data?.id;
+  const copilotHostId = `${hostId}-${resolvedCopilotId}`;
 
-    setCustomColor(color);
-    setSelectedColor(color);
-  };
+  const {
+    isPending,
+    error,
+    data: scriptContent,
+  } = useQuery({
+    queryKey: ["copilot-bundle", resolvedCopilotId],
+    queryFn: async () => {
+      // This id prevents the browser from caching the file.
+      const uniqueId = new Date().getTime();
+      const file = await supabase.storage
+        .from("bundles")
+        .download(`${resolvedCopilotId!}.js?${uniqueId}`);
+      const text = await file.data?.text();
 
-  const cancelSubscription = async () => {
-    await supabase.functions.invoke("stripe/cancel-subscription", {
-      method: "POST",
-      body: {
-        copilotId: copilotId,
-      },
-    });
-    redirect(WiseRoutes.dashboard.copilots.path);
-  };
+      if (!text) throw "No text found in file";
 
-  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const errors = validateForm({ url, primaryColor });
+      return text;
+    },
+    enabled: !!resolvedCopilotId,
+  });
 
-    if (errors.length > 0) {
-      setErrors(errors);
+  useEffect(() => {
+    const removeOldScript = () => {
+      const currentScript = document.querySelector(
+        `script[id="${copilotHostId}"]`,
+      );
 
-      return;
-    } else {
-      setErrors([]);
-
-      const body = {
-        copilotId: copilotId,
-        primaryColor,
-        title,
-      };
-
-      const { data, error } = await supabase.functions.invoke("copilots", {
-        method: "PUT",
-        body,
-      });
-
-      if (error) {
-        console.error(error);
-        setErrors(["An error occurred. Please try again later"]);
+      if (currentScript) {
+        document.body.removeChild(currentScript);
       }
+    };
 
-      if (data?.errorMessage) {
-        setErrors([data.errorMessage]);
-      }
+    if (scriptContent) {
+      removeOldScript();
 
-      window.location.reload();
-    }
-  };
+      // Create a new <script> element if it doesn't exist
+      const script = document.createElement("script");
 
-  const validateForm = ({
-    url,
-    primaryColor,
-  }: {
-    url: string;
-    primaryColor: string;
-  }) => {
-    if (!url) {
-      return ["url is required"];
-    }
-    if (!primaryColor) {
-      return ["color is required"];
+      script.type = "text/javascript";
+      script.textContent = `(function() {${scriptContent}})();`;
+      script.id = copilotHostId;
+
+      // Append the <script> element to the document body
+      document.body.appendChild(script);
     }
 
-    return [];
-  };
+    return () => {
+      removeOldScript();
+    };
+  }, [scriptContent, copilotHostId]);
+
+  if (error) return "An error has occurred: " + error.message;
+  if (copilotError) return "An error has occurred: " + copilotError.message;
+
+  if (isPending) {
+    return (
+      <div className="absolute flex justify-center items-center h-full w-full">
+        <svg
+          className="animate-spin h-10 w-10 text-primary-700"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <CancelSubscriptionModal
-        open={cancelSubscriptionModalOpen}
-        setOpen={setCancelSubscriptionModalOpen}
-        cancel={cancelSubscription}
-      />
-      <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
-        <div className="flex flex-col gap-2">
-          <Card>
-            <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
-              <div className="flex mb-6 w-full justify-between items-start">
-                <div className="flex flex-col">
-                  <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
-                    Copilot Options
-                  </h2>
-                  <p className="text-gray-500 dark:text-gray-400 font-light">
-                    Edit your copilot and see changes in real-time.
-                  </p>
-                </div>
-                {edit ? (
-                  <button
-                    onClick={() => setEdit(false)}
-                    aria-label="Stop editing copilot"
-                  >
-                    <MdClose size={24} />
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => setEdit(true)}
-                    aria-label="Edit copilot"
-                  >
-                    <MdEdit size={24} />
-                  </button>
-                )}
-              </div>
-              <form className="flex flex-col gap-2 w-full">
-                <CopilotForm
-                  url={url}
-                  setUrl={setUrl}
-                  title={title}
-                  setTitle={setTitle}
-                  handleColorChange={handleColorChange}
-                  handleCustomColorChange={handleCustomColorChange}
-                  selectedColor={selectedColor}
-                  customColor={customColor}
-                  predefinedColors={colors}
-                  copilotId={copilot.id}
-                  urlIsReadOnly={true}
-                  allReadyOnly={!edit}
-                />
-                <div className="min-h-8">
-                  {errors.map((error) => (
-                    <p
-                      key={error}
-                      className="text-red-600 flex flex-row gap-2 items-center"
-                    >
-                      <MdError />
-                      {error}
-                    </p>
-                  ))}
-                </div>
-                {edit && (
-                  <Button className="w-full" onClick={onSubmit}>
-                    Save Changes
-                  </Button>
-                )}
-              </form>
-            </div>
-          </Card>
-          <Card>
-            <div className="flex flex-col">
-              <h3 className="mb-4 text-xl font-normal text-gray-900 dark:text-white">
-                Code Snippet
-              </h3>
-              <p className="mb-6 text-gray-500 dark:text-gray-400 font-light">
-                Paste the following code snippet into the
-                {" <head>"} tag of your index.html file to add your copilot to
-                your website.
-              </p>
-              <CodeSnippet codeStr={downloadUrl} />
-            </div>
-          </Card>
-        </div>
-        <div className="flex justify-center items-center">
-          <div className="min-h-[610px] min-w-[360px] flex justify-end items-end relative">
-            <Copilot />
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col gap-20 my-20">
-        <hr />
-        <div className="flex justify-center">
-          <Button
-            className="bg-red-700 hover:bg-red-900 w-1/4"
-            onClick={() => setCancelSubscriptionModalOpen(true)}
-          >
-            Cancel Subscription
-          </Button>
-        </div>
-      </div>
+    <div id={copilotHostId} style={{ position: "relative" }}>
+      {/* <div>{copilot.id}</div> */}
     </div>
   );
 };

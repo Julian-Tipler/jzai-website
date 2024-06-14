@@ -12,14 +12,25 @@ export default {
           "1%": { visibility: "visible" },
           "100%": { transform: "translateX(0)", visibility: "visible" },
         },
-        bounceOnce: {
+        "bounce-once": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-25%)" },
+        },
+        "fade-in-up": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(-20px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
         },
       },
       animation: {
         "slide-in": "slide-in 1s forwards",
-        "bounce-once": "bounceOnce 0.5s ease-in-out",
+        "bounce-once": "bounce-once 0.5s ease-in-out",
+        "fade-in-up": "fade-in-up 1s ease-out",
       },
       colors: {
         brand: "#1C4CC7",
