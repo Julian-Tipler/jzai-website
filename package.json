@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run gentypes && tsc && vite build --mode production",
-    "gentypes": "supabase gen types typescript --project-id ywdbdzcdnpusijyanlbj > src/types/database.types.ts",
+    "gentypes": "npx supabase gen types typescript --project-id ywdbdzcdnpusijyanlbj > src/types/database.types.ts",
     "lint": "eslint --fix",
     "preview": "vite preview",
     "prepare": "husky",
@@ -50,6 +50,7 @@
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "supabase": "^1.176.10",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
