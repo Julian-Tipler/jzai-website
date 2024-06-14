@@ -4,7 +4,7 @@ import { Link, Outlet, useMatches } from "react-router-dom";
 import { TopBar } from "./TopBar";
 import { Helmet } from "react-helmet-async";
 import { RouteItem } from "../types/route-item";
-import { Breadcrumbs } from "./Zreadcrumbs";
+import { Breadcrumbs } from "./Breadcrumbs";
 import { SideNav } from "./SideNav";
 
 export const PrivateLayout = () => {
