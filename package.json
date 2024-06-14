@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --mode production",
-    "gentypes": "supabase gen types typescript --project-id gvewqhwcmnmdeyckkvlo > src/types/database.types.ts",
+    "build": "npm run gentypes && tsc && vite build --mode production",
+    "gentypes": "supabase gen types typescript --project-id ywdbdzcdnpusijyanlbj > src/types/database.types.ts",
     "lint": "eslint --fix",
     "preview": "vite preview",
     "prepare": "husky",
