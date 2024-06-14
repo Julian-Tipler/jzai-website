@@ -1,7 +1,7 @@
 import { Outlet, useMatches } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
+import { Footer } from "./Zooter";
+import { Header } from "./Zeader";
 import { RouteItem } from "../types/route-item";
 
 export const PublicLayout = () => {
