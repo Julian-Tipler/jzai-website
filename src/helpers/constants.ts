@@ -31,7 +31,7 @@ export const ROUTES = {
 
 export const COLORS = [
   {
-    hex: "#0090FF",
+    hex: "#0146DF",
     name: "Blue",
   },
   {
@@ -43,11 +43,11 @@ export const COLORS = [
     name: "Purple",
   },
   {
-    hex: "#45AF96",
+    hex: "#206350",
     name: "Green",
   },
   {
-    hex: "#F35353",
+    hex: "#af1526",
     name: "Red",
   },
 ];
