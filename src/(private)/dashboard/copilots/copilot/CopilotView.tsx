@@ -30,6 +30,7 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
   );
   const primaryColor = selectedColor || customColor;
   const downloadUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/bundles/${copilotId}.js`;
+  const codeSnippet = `<script src="${downloadUrl}"></script>`;
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color);
@@ -185,7 +186,7 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
                 {" <head>"} tag of your index.html file to add your copilot to
                 your website.
               </p>
-              <CodeSnippet codeStr={downloadUrl} />
+              <CodeSnippet codeStr={codeSnippet} />
             </div>
           </Card>
         </div>
