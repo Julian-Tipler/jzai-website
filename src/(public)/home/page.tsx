@@ -106,7 +106,7 @@ export const Home = () => {
               It only takes <b>one line of code</b>
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400 font-light">
-              Adding an AI assistant has never been easier
+              Adding an AI assistant to your webpage has never been easier
             </p>
           </div>
           <hr className="my-16" />
