@@ -11,7 +11,7 @@ export const PublicLayout = () => {
   return (
     <div>
       <Helmet>
-        <title>{currentMatch.handle?.data.title} | JZAI</title>
+        <title>{currentMatch.handle?.data.title} | WisePilot</title>
       </Helmet>
       <Header />
       <main id="main-content">
