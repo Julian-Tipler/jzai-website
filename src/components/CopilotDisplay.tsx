@@ -76,7 +76,15 @@ export const CopilotDisplay = () => {
     };
   }, [scriptContent, copilotHostId]);
 
-  if (error) return "An error has occurred: " + error.message;
+  if (error) {
+    // TODO: Log error
+    return (
+      <div className="flex justify-center items-center">
+        There was a problem loading the copilot. Our team has been notified.
+        Please try again later.
+      </div>
+    );
+  }
   if (copilotError) return "An error has occurred: " + copilotError.message;
 
   if (isPending) {
