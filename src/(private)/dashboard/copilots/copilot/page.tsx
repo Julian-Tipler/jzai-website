@@ -18,7 +18,9 @@ export const CustomerCopilot: React.FC = () => {
   }
 
   if (error) {
-    return <div>{error.message}</div>;
+    return (
+      <div className="flex items-center justify-center">{error.message}</div>
+    );
   }
 
   return (

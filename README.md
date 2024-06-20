@@ -1,4 +1,4 @@
-# JZAI Website
+# WisePilot Website
 
 React + TypeScript + Vite + Tailwind
 
