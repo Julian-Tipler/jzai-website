@@ -43,7 +43,7 @@ const PlanCard = ({
 export default PlanCard;
 
 function convertToPrice(number: number): string {
-  const dollars = (number / 10000).toFixed(3);
+  const dollars = (number / 1000).toFixed(3);
 
   return `$${dollars}`;
 }
