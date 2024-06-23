@@ -15,7 +15,6 @@ export const CustomerCopilot: React.FC = () => {
   } = useQuery({
     queryKey: ["copilot", copilotId],
     queryFn: () => fetchCopilot(copilotId!),
-    enabled: !!copilotId,
   });
 
   if (isPending) {
@@ -27,7 +26,6 @@ export const CustomerCopilot: React.FC = () => {
       <div className="flex items-center justify-center">{error.message}</div>
     );
   }
-  console.log(copilot);
 
   return (
     <div>
