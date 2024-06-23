@@ -26,6 +26,11 @@ export const ROUTES = {
       path: "/dashboard/support",
       title: "Support",
     },
+    success: {
+      name: "success",
+      path: "/dashboard/success",
+      title: "Success",
+    },
   },
 };
 
