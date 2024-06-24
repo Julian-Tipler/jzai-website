@@ -1,6 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { Params } from "react-router-dom";
 import supabase from "../clients/supabase";
+import { QueryData } from "@supabase/supabase-js";
 
 export const fetchCopilot = async (copilotId: string) => {
   const { data, error } = await supabase

@@ -11,7 +11,18 @@ import { CodeSnippet } from "../../../../components/CodeSnippet";
 import { CancelSubscriptionModal } from "./CancelSubscriptionModal";
 import Card from "../../../../components/Card";
 
-export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
+type Subscriptions = Tables<"subscriptions"> & {
+  plans?: Tables<"plans"> | null;
+};
+type CopilotWithSubscriptions = Tables<"copilots"> & {
+  subscriptions: Subscriptions[];
+};
+
+export const CopilotView = ({
+  copilot,
+}: {
+  copilot: CopilotWithSubscriptions;
+}) => {
   const { copilotId } = useParams<{ copilotId: string }>();
   const [cancelSubscriptionModalOpen, setCancelSubscriptionModalOpen] =
     useState(false);
@@ -174,7 +185,7 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
                       Subscription:
                     </span>
                     <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                      {copilot.subscriptions[0].plans.name}
+                      {copilot.subscriptions[0].plans?.name}
                     </span>
                   </div>
                 )}

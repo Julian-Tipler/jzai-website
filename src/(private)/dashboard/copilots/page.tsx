@@ -21,7 +21,7 @@ export const CustomerCopilots = () => {
     enabled: !!session?.user.id,
   });
 
-  const copilots = (data?.data as Tables<"copilots">[]) || [];
+  const copilots = data?.data || [];
 
   console.log(copilots);
 
@@ -90,7 +90,7 @@ export const CustomerCopilots = () => {
                             Subscription:
                           </span>
                           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                            {copilot.subscriptions[0].plans.name}
+                            {copilot.subscriptions[0].plans?.name}
                           </span>
                         </div>
                       )}
