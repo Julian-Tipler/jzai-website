@@ -18,6 +18,7 @@ import { CustomerCopilot } from "./(private)/dashboard/copilots/copilot/page";
 import { CreateCopilot } from "./(private)/dashboard/copilots/create/page";
 import { CustomerCopilots } from "./(private)/dashboard/copilots/page";
 import { CustomerSupport } from "./(private)/dashboard/support/page";
+import { SuccessPage } from "./(private)/dashboard/success/page.tsx";
 import { Error } from "./(public)/error/page";
 import { PrivateLayout } from "./(private)/layout.tsx";
 
@@ -106,6 +107,10 @@ function App({ queryClient }: { queryClient: QueryClient }) {
                 crumb: () => ROUTES.dashboard.support.title,
                 data: { title: ROUTES.dashboard.support.title },
               },
+            },
+            {
+              path: ROUTES.dashboard.success.name,
+              element: <SuccessPage />,
             },
           ],
         },
