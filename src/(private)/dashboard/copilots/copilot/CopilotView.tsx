@@ -1,12 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { Tables } from "../../../../types/database.types";
 import supabase from "../../../../clients/supabase";
-import { redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CopilotDisplay } from "../../../../components/CopilotDisplay";
 import CopilotForm from "../../../../components/CopilotForm";
 import { MdClose, MdEdit, MdError } from "react-icons/md";
 import Button from "../../../../components/Button";
-import { ROUTES, COLORS } from "../../../../helpers/constants";
+import { COLORS } from "../../../../helpers/constants";
 import { CodeSnippet } from "../../../../components/CodeSnippet";
 import { CancelSubscriptionModal } from "./CancelSubscriptionModal";
 import Card from "../../../../components/Card";
@@ -53,16 +53,6 @@ export const CopilotView = ({
 
     setCustomColor(color);
     setSelectedColor(color);
-  };
-
-  const cancelSubscription = async () => {
-    await supabase.functions.invoke("stripe/cancel-subscription", {
-      method: "POST",
-      body: {
-        copilotId: copilotId,
-      },
-    });
-    redirect(ROUTES.dashboard.copilots.path);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -184,9 +174,15 @@ export const CopilotView = ({
                     <span className="text-sm font-semibold text-gray-900 dark:text-white">
                       Subscription:
                     </span>
-                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                      {copilot.subscriptions[0].plans?.name}
-                    </span>
+                    {copilot.subscriptions[0].active ? (
+                      <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                        {copilot.subscriptions[0].plans?.name}
+                      </span>
+                    ) : (
+                      <span className="text-sm font-normal text-red-500 dark:text-gray-400">
+                        Inactive
+                      </span>
+                    )}
                   </div>
                 )}
               </form>
@@ -226,7 +222,7 @@ export const CopilotView = ({
       <CancelSubscriptionModal
         open={cancelSubscriptionModalOpen}
         setOpen={setCancelSubscriptionModalOpen}
-        cancel={cancelSubscription}
+        copilotId={copilotId}
       />
     </div>
   );

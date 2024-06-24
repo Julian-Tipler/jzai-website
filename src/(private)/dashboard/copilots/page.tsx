@@ -17,13 +17,14 @@ export const CustomerCopilots = () => {
         .from("copilots")
         .select("*, subscriptions(*, plans(*))")
         .eq("userId", session!.user.id)
-        .order("created", { ascending: false }),
+        .order("createdAt", {
+          referencedTable: "subscriptions",
+          ascending: false,
+        }),
     enabled: !!session?.user.id,
   });
 
   const copilots = data?.data || [];
-
-  console.log(copilots);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -81,7 +82,7 @@ export const CustomerCopilots = () => {
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {copilot.title}
                       </h3>
-                      <p className="text-gray-500 text-md font-normal">
+                      <p className="text-gray-500 text-md font-normal break-all">
                         {copilot.baseUrl}
                       </p>
                       {copilot.subscriptions?.length > 0 && (
@@ -89,9 +90,15 @@ export const CustomerCopilots = () => {
                           <span className="text-sm font-semibold text-gray-900 dark:text-white">
                             Subscription:
                           </span>
-                          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                            {copilot.subscriptions[0].plans?.name}
-                          </span>
+                          {copilot.subscriptions[0].active ? (
+                            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                              {copilot.subscriptions[0].plans?.name}
+                            </span>
+                          ) : (
+                            <span className="text-sm font-normal text-red-500 dark:text-gray-400">
+                              Inactive
+                            </span>
+                          )}
                         </div>
                       )}
                     </div>

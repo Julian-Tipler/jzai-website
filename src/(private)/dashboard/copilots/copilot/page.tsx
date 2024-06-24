@@ -26,10 +26,11 @@ export const CustomerCopilot: React.FC = () => {
       <div className="flex items-center justify-center">{error.message}</div>
     );
   }
+  const subscription = copilot?.subscriptions[0];
 
   return (
     <div>
-      {!copilot.subscriptions?.length ? (
+      {!subscription || !subscription.active ? (
         <PlansView copilot={copilot} />
       ) : (
         <CopilotView copilot={copilot} />

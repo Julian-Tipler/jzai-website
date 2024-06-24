@@ -4,17 +4,22 @@ import supabase from "../clients/supabase";
 import { QueryData } from "@supabase/supabase-js";
 
 export const fetchCopilot = async (copilotId: string) => {
-  const { data, error } = await supabase
+  const { data: copilot, error } = await supabase
     .from("copilots")
     .select("*, subscriptions(*,plans(*))")
     .eq("id", copilotId)
+    .order("createdAt", {
+      referencedTable: "subscriptions",
+      ascending: false,
+    })
     .single();
 
   if (error) {
     throw new Error("Network response was not ok");
   }
 
-  return data;
+  // Sorts the subscriptions by createdAt
+  return copilot;
 };
 
 export const copilotLoader = async ({
