@@ -108,18 +108,13 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
 
   return (
     <div>
-      <CancelSubscriptionModal
-        open={cancelSubscriptionModalOpen}
-        setOpen={setCancelSubscriptionModalOpen}
-        cancel={cancelSubscription}
-      />
       <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Card>
             <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
               <div className="flex mb-6 w-full justify-between items-start">
                 <div className="flex flex-col">
-                  <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
+                  <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white flex items-end gap-2">
                     Copilot Options
                   </h2>
                   <p className="text-gray-500 dark:text-gray-400 font-light">
@@ -173,6 +168,16 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
                     Save Changes
                   </Button>
                 )}
+                {copilot.subscriptions?.length > 0 && (
+                  <div className="flex gap-2">
+                    <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                      Subscription:
+                    </span>
+                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                      {copilot.subscriptions[0].plans.name}
+                    </span>
+                  </div>
+                )}
               </form>
             </div>
           </Card>
@@ -207,6 +212,11 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
           </Button>
         </div>
       </div>
+      <CancelSubscriptionModal
+        open={cancelSubscriptionModalOpen}
+        setOpen={setCancelSubscriptionModalOpen}
+        cancel={cancelSubscription}
+      />
     </div>
   );
 };

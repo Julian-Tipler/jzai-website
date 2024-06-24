@@ -5,7 +5,7 @@ import supabase from "../clients/supabase";
 export const fetchCopilot = async (copilotId: string) => {
   const { data, error } = await supabase
     .from("copilots")
-    .select("*")
+    .select("*, subscriptions(*,plans(*))")
     .eq("id", copilotId)
     .single();
 

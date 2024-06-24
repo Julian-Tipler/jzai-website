@@ -15,13 +15,15 @@ export const CustomerCopilots = () => {
     queryFn: async () =>
       await supabase
         .from("copilots")
-        .select("*")
+        .select("*, subscriptions(*, plans(*))")
         .eq("userId", session!.user.id)
         .order("created", { ascending: false }),
     enabled: !!session?.user.id,
   });
 
   const copilots = (data?.data as Tables<"copilots">[]) || [];
+
+  console.log(copilots);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -82,6 +84,16 @@ export const CustomerCopilots = () => {
                       <p className="text-gray-500 text-md font-normal">
                         {copilot.baseUrl}
                       </p>
+                      {copilot.subscriptions?.length > 0 && (
+                        <div className="flex gap-2">
+                          <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                            Subscription:
+                          </span>
+                          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                            {copilot.subscriptions[0].plans.name}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
