@@ -12,7 +12,6 @@ export const CancelSubscriptionModal = ({
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  cancel: () => void;
   copilotId: string;
 }) => {
   const [loading, setLoading] = useState(false);

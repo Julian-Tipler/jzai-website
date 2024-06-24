@@ -107,6 +107,8 @@ export const CopilotView = ({
     return [];
   };
 
+  if (!copilotId) return <div>No Copilot found</div>;
+
   return (
     <div>
       <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
