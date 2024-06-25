@@ -1,15 +1,34 @@
+import { redirect } from "react-router-dom";
+import supabase from "../../../../clients/supabase";
 import Button from "../../../../components/Button";
 import Dialog from "../../../../components/Dialog";
+import { ROUTES } from "../../../../helpers/constants";
+import { useState } from "react";
 
 export const CancelSubscriptionModal = ({
   open,
   setOpen,
-  cancel,
+  copilotId,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  cancel: () => void;
+  copilotId: string;
 }) => {
+  const [loading, setLoading] = useState(false);
+  const cancelSubscription = async () => {
+    setLoading(true);
+    await supabase.functions.invoke("stripe/cancel-subscription", {
+      method: "POST",
+      body: {
+        copilotId: copilotId,
+      },
+    });
+
+    // setTimeout(() => {
+    window.location.reload();
+    // }, 1000);
+  };
+
   return (
     <Dialog isOpen={open}>
       <div className="relative p-4 w-full max-w-sm max-h-full">
@@ -56,7 +75,8 @@ export const CancelSubscriptionModal = ({
             </Button>
             <Button
               className="w-full bg-red-700 hover:bg-red-900"
-              onClick={cancel}
+              onClick={cancelSubscription}
+              loading={loading}
             >
               Yes
             </Button>

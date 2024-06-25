@@ -1,17 +1,28 @@
 import { ChangeEvent, useState } from "react";
 import { Tables } from "../../../../types/database.types";
 import supabase from "../../../../clients/supabase";
-import { redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CopilotDisplay } from "../../../../components/CopilotDisplay";
 import CopilotForm from "../../../../components/CopilotForm";
 import { MdClose, MdEdit, MdError } from "react-icons/md";
 import Button from "../../../../components/Button";
-import { ROUTES, COLORS } from "../../../../helpers/constants";
+import { COLORS } from "../../../../helpers/constants";
 import { CodeSnippet } from "../../../../components/CodeSnippet";
 import { CancelSubscriptionModal } from "./CancelSubscriptionModal";
 import Card from "../../../../components/Card";
 
-export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
+type Subscriptions = Tables<"subscriptions"> & {
+  plans?: Tables<"plans"> | null;
+};
+type CopilotWithSubscriptions = Tables<"copilots"> & {
+  subscriptions: Subscriptions[];
+};
+
+export const CopilotView = ({
+  copilot,
+}: {
+  copilot: CopilotWithSubscriptions;
+}) => {
   const { copilotId } = useParams<{ copilotId: string }>();
   const [cancelSubscriptionModalOpen, setCancelSubscriptionModalOpen] =
     useState(false);
@@ -42,16 +53,6 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
 
     setCustomColor(color);
     setSelectedColor(color);
-  };
-
-  const cancelSubscription = async () => {
-    await supabase.functions.invoke("stripe/cancel-subscription", {
-      method: "POST",
-      body: {
-        copilotId: copilotId,
-      },
-    });
-    redirect(ROUTES.dashboard.copilots.path);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -106,20 +107,17 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
     return [];
   };
 
+  if (!copilotId) return <div>No Copilot found</div>;
+
   return (
     <div>
-      <CancelSubscriptionModal
-        open={cancelSubscriptionModalOpen}
-        setOpen={setCancelSubscriptionModalOpen}
-        cancel={cancelSubscription}
-      />
       <div className="gap-2 grid grid-cols-1 lg:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Card>
             <div className="flex flex-col justify-center text-center items-center lg:items-start lg:text-start">
               <div className="flex mb-6 w-full justify-between items-start">
                 <div className="flex flex-col">
-                  <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white">
+                  <h2 className="mb-4 text-2xl font-normal text-gray-900 dark:text-white flex items-end gap-2">
                     Copilot Options
                   </h2>
                   <p className="text-gray-500 dark:text-gray-400 font-light">
@@ -173,6 +171,22 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
                     Save Changes
                   </Button>
                 )}
+                {copilot.subscriptions?.length > 0 && (
+                  <div className="flex gap-2">
+                    <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                      Subscription:
+                    </span>
+                    {copilot.subscriptions[0].active ? (
+                      <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                        {copilot.subscriptions[0].plans?.name}
+                      </span>
+                    ) : (
+                      <span className="text-sm font-normal text-red-500 dark:text-gray-400">
+                        Inactive
+                      </span>
+                    )}
+                  </div>
+                )}
               </form>
             </div>
           </Card>
@@ -207,6 +221,11 @@ export const CopilotView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
           </Button>
         </div>
       </div>
+      <CancelSubscriptionModal
+        open={cancelSubscriptionModalOpen}
+        setOpen={setCancelSubscriptionModalOpen}
+        copilotId={copilotId}
+      />
     </div>
   );
 };

@@ -3,14 +3,18 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { CopilotView } from "./CopilotView";
 import { fetchCopilot } from "../../../../loaders/copilot-loader";
+import { PlansView } from "./PlansView";
 
 export const CustomerCopilot: React.FC = () => {
   const { copilotId } = useParams<{ copilotId: string }>();
 
-  const { isPending, error, data } = useQuery({
+  const {
+    isPending,
+    error,
+    data: copilot,
+  } = useQuery({
     queryKey: ["copilot", copilotId],
     queryFn: () => fetchCopilot(copilotId!),
-    enabled: !!copilotId,
   });
 
   if (isPending) {
@@ -22,14 +26,15 @@ export const CustomerCopilot: React.FC = () => {
       <div className="flex items-center justify-center">{error.message}</div>
     );
   }
+  const subscription = copilot?.subscriptions[0];
 
   return (
     <div>
-      {/* {!copilot.subscriptions?.length ? (
-        <PlansPanels copilot={copilot} />
-      ) : ( */}
-      <CopilotView copilot={data} />
-      {/* )} */}
+      {!subscription || !subscription.active ? (
+        <PlansView copilot={copilot} />
+      ) : (
+        <CopilotView copilot={copilot} />
+      )}
     </div>
   );
 };

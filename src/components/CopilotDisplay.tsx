@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { SUPPORT_EMAIL } from "../helpers/constants";
+import { fetchCopilot } from "../loaders/copilot-loader";
 
 export const CopilotDisplay = () => {
   // We search both searchParams and regular params to handle both home and copilot pages.
@@ -18,12 +19,10 @@ export const CopilotDisplay = () => {
     data: copilot,
   } = useQuery({
     queryKey: ["copilot", copilotId],
-    queryFn: async () =>
-      await supabase.from("copilots").select("*").eq("id", copilotId!).single(),
-    enabled: !!copilotId,
+    queryFn: () => fetchCopilot(copilotId!),
   });
 
-  const resolvedCopilotId = copilot?.data?.id;
+  const resolvedCopilotId = copilot?.id;
   const copilotHostId = `${hostId}-${resolvedCopilotId}`;
 
   const {
