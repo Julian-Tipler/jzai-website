@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import supabase from "../clients/supabase";
 import { useQuery } from "@tanstack/react-query";
+import { SUPPORT_EMAIL } from "../helpers/constants";
 
 export const CopilotDisplay = () => {
   // We search both searchParams and regular params to handle both home and copilot pages.
@@ -32,10 +33,10 @@ export const CopilotDisplay = () => {
   } = useQuery({
     queryKey: ["copilot-bundle", resolvedCopilotId],
     queryFn: async () => {
-      // This id prevents the browser from caching the file.
       const uniqueId = new Date().getTime();
+      // This id prevents the browser from caching the file.
       const file = await supabase.storage
-        .from("bundles")
+        .from("public/bundles")
         .download(`${resolvedCopilotId!}.js?${uniqueId}`);
       const text = await file.data?.text();
 
@@ -79,9 +80,12 @@ export const CopilotDisplay = () => {
   if (error) {
     // TODO: Log error
     return (
-      <div className="flex justify-center items-center">
-        There was a problem loading the copilot. Our team has been notified.
-        Please try again later.
+      <div className="flex absolute justify-center items-center text-center h-full w-full font-light">
+        <span>
+          There was a problem loading your copilot. Our team has been notified.
+          Please try again later or contact us at{" "}
+          <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+        </span>
       </div>
     );
   }
