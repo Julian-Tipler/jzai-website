@@ -8,7 +8,7 @@ export const SideNav = () => {
         <Link to="/" className="flex items-center">
           <img
             src="/wisepilot-logo.svg"
-            className="mr-3 h-6 sm:h-9"
+            className="mr-3 h-6 w-6 sm:h-9 sm:w-9"
             alt="WisePilot Logo"
           />
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
