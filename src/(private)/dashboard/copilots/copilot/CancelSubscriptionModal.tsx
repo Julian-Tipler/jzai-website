@@ -17,21 +17,16 @@ export const CancelSubscriptionModal = ({
   const [loading, setLoading] = useState(false);
   const cancelSubscription = async () => {
     setLoading(true);
-    const { data } = await supabase.functions.invoke(
-      "stripe/cancel-subscription",
-      {
-        method: "POST",
-        body: {
-          copilotId: copilotId,
-        },
+    await supabase.functions.invoke("stripe/cancel-subscription", {
+      method: "POST",
+      body: {
+        copilotId: copilotId,
       },
-    );
+    });
 
-    if (data.ok) {
-      setLoading(false);
-    }
-
-    redirect(ROUTES.dashboard.copilots.path);
+    // setTimeout(() => {
+    window.location.reload();
+    // }, 1000);
   };
 
   return (

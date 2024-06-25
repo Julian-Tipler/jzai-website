@@ -21,6 +21,7 @@ export const PlansView = ({ copilot }: { copilot: Tables<"copilots"> }) => {
         .from("plans")
         .select("*")
         .order("pricePerMessage", { ascending: true }),
+    refetchOnMount: true,
   });
 
   const plans = data?.data ? data.data : [];
