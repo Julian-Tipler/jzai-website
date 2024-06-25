@@ -33,7 +33,7 @@ export const MessageBubble = ({
         })}
       >
         <div className="mb-1 text-xs text-slate-600">
-          {isUser ? "You" : "Bot"}
+          {isUser ? "You" : "AI Assistant"}
         </div>
         <div
           className={classNames(

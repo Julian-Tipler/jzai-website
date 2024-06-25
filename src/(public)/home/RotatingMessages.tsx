@@ -34,7 +34,7 @@ export const RotatingMessages = () => {
   return (
     <div className="flex flex-col w-full items-center gap-8">
       <MessageBubble
-        key={randomNum}
+        key={`user-${selected}`}
         className="animate-slide-in invisible"
         message={{
           role: "user",
@@ -42,7 +42,7 @@ export const RotatingMessages = () => {
         }}
       />
       <MessageBubble
-        key={randomNum + 1}
+        key={`assistant-${selected}`}
         className="animate-slide-in invisible"
         style={{ animationDelay: "1s" }}
         message={{
