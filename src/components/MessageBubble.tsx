@@ -22,8 +22,8 @@ export const MessageBubble = ({
       {!isUser && (
         <img
           src="/wisepilot-logo.svg"
-          className="mr-3 h-6 sm:h-9"
-          alt="Flowbite Logo"
+          className="mr-3 h-6 w-6 sm:h-9 sm:w-9"
+          alt="Chat Logo"
         />
       )}
       <div
@@ -33,7 +33,7 @@ export const MessageBubble = ({
         })}
       >
         <div className="mb-1 text-xs text-slate-600">
-          {isUser ? "You" : "Bot"}
+          {isUser ? "You" : "AI Assistant"}
         </div>
         <div
           className={classNames(

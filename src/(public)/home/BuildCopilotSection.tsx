@@ -192,7 +192,12 @@ export const BuildCopilotSection = ({ webUrl = "" }: { webUrl?: string }) => {
           {!copilotId && (
             <>
               <div className="absolute inset-[-5px] bg-white bg-opacity-20 backdrop-blur-sm rounded-lg"></div>
-              <img src="/copilot.png" alt="Picture of a copilot" width={470} />
+              <img
+                src="/copilot.png"
+                alt="Picture of a copilot"
+                width={470}
+                loading="lazy"
+              />
             </>
           )}
         </div>

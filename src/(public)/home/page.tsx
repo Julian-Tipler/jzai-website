@@ -168,12 +168,14 @@ export const Home = () => {
             <img
               className="w-full rounded-lg"
               src="https://gvewqhwcmnmdeyckkvlo.supabase.co/storage/v1/object/public/photos/priscilla-du-preez-nNMBa7Y1Ymk-unsplash.jpg"
-              alt=""
+              alt="Chatbot engineers"
+              loading="lazy"
             />
             <img
               className="mt-4 w-full h-full rounded-lg lg:mt-10"
               src="https://gvewqhwcmnmdeyckkvlo.supabase.co/storage/v1/object/public/photos/olena-bohovyk-dIMJWLx1YbE-unsplash.jpg"
-              alt=""
+              alt="Chatbot engineers 2"
+              loading="lazy"
             />
           </div>
         </div>
